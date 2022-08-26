@@ -6,9 +6,9 @@ import { BiBed } from "react-icons/bi"
 import { BiBath } from "react-icons/bi"
 import { MdSquareFoot } from "react-icons/md"
 
-export default function ListingCard({ link, image, address, city, state, zipCode, bedrooms, price, bathrooms, squareFootage, propType, shortTitle, status }) {
+export default function ListingCard({ link, image, address, city, state, zipCode, bedrooms, price, bathrooms, squareFootage, propType, shortTitle, key, status }) {
     return (
-        <Link href={link}>
+        <Link href={link} key={key}>
             <a>
                 <div>
                     <div className="relative w-full h-80">

@@ -98,7 +98,7 @@ export default function Home({ res }) {
         if (section._type === 'featured') {
           return (
             <>
-              <div style={{ backgroundImage: `url(${urlFor(section.image).url()})` }}>
+              <div style={{ backgroundImage: `url(${urlFor(section.image).url()})` }} key={i}>
                 <div className="section">
                   <div className="container text-center">
                     {section.heading && <h1 className="h2">{section.heading}</h1>}
@@ -176,7 +176,7 @@ export default function Home({ res }) {
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10 justify-center text-center">
                   {section.blocks.map((node) => {
                     return (
-                      <Link href="">
+                      <Link href="" key={node._id}>
                         <a>
                           <div className="relative overflow-hidden">
                             <Image
@@ -254,6 +254,7 @@ export default function Home({ res }) {
                         shortTitle={node.shortTitle}
                         propType={node.propType}
                         status={node.status}
+                        key={node._id}
                       />
                     )
                   })}

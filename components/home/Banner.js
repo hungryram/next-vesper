@@ -1,6 +1,6 @@
-export default function Banner({ link, heading, text }) {
+export default function Banner({ link, heading, text, key }) {
     return (
-        <div className="section bg-black text-white">
+        <div className="section bg-black text-white" key={key}>
             <div className="container">
                 <div className="md:flex">
                     <div className="md:w-1/2">
