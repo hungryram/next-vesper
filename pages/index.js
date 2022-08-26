@@ -72,7 +72,7 @@ export default function Home({ res }) {
       {homeSection.map((section, i) => {
         if (section._type === 'hero') {
           return (
-            <div id={section._key}>
+            <div key={section._key}>
               <Hero
                 heading={section.heading}
                 image={section.image}
@@ -133,7 +133,7 @@ export default function Home({ res }) {
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-4 mt-10">
                   {res.team.map((node) => {
                     return (
-                      <div _key={node._id}>
+                      <div key={node._key}>
                         <Cards
                           name={node.name}
                           image={node.image}
