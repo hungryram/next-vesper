@@ -8,9 +8,6 @@ import Image from "next/image"
 import { HiOutlineMenuAlt4 } from "react-icons/hi"
 import { GrClose } from "react-icons/gr"
 import { BiCaretDown } from "react-icons/bi"
-import { FaArrowAltCircleRight } from "react-icons/fa"
-import { HiPhone } from "react-icons/hi"
-import { FaEnvelope } from "react-icons/fa"
 import { IconContext } from "react-icons/lib/cjs/iconContext";
 import urlFor from "../../lib/sanity";
 
