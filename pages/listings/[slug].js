@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
     return {
         paths: paths.map((slug) => ({ params: { slug } })),
-        fallback: true
+        fallback: false
     }
 }
 
@@ -31,9 +31,7 @@ export async function getStaticProps(context) {
 
 
 export default function listingDetail({ listings }) {
-    if (router.isFallback) {
-        return <div>Loading...</div>
-      }
+
     return (
         <div className="section">
             <div className="container content">
