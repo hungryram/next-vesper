@@ -20,7 +20,7 @@ export default function ListingCard({ link, image, address, city, state, zipCode
                                 alt={address}
                             />
                             :
-                            <img src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" alt="photo coming soon" />
+                            <Image src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" alt="photo coming soon" />
                         }
                         <div className="absolute bottom-0 text-white p-6">
                             <div className="flex">

@@ -39,16 +39,16 @@ export default function Footer() {
                             Products
                         </h6>
                         <p className="mb-4">
-                            <a href="#!" className="text-gray-600">Angular</a>
+                            <a href="#!" rel="noreferrer" className="text-gray-600">Angular</a>
                         </p>
                         <p className="mb-4">
-                            <a href="#!" className="text-gray-600">React</a>
+                            <a href="#!" rel="noreferrer" className="text-gray-600">React</a>
                         </p>
                         <p className="mb-4">
-                            <a href="#!" className="text-gray-600">Vue</a>
+                            <a href="#!" rel="noreferrer" className="text-gray-600">Vue</a>
                         </p>
                         <p>
-                            <a href="#!" className="text-gray-600">Laravel</a>
+                            <a href="#!" rel="noreferrer" className="text-gray-600">Laravel</a>
                         </p>
                     </div>
                     <div>
@@ -56,16 +56,16 @@ export default function Footer() {
                             Useful links
                         </h6>
                         <p className="mb-4">
-                            <a href="#!" className="text-gray-600">Pricing</a>
+                            <a href="#!" rel="noreferrer" className="text-gray-600">Pricing</a>
                         </p>
                         <p className="mb-4">
-                            <a href="#!" className="text-gray-600">Settings</a>
+                            <a href="#!" rel="noreferrer" className="text-gray-600">Settings</a>
                         </p>
                         <p className="mb-4">
-                            <a href="#!" className="text-gray-600">Orders</a>
+                            <a href="#!" rel="noreferrer" className="text-gray-600">Orders</a>
                         </p>
                         <p>
-                            <a href="#!" className="text-gray-600">Help</a>
+                            <a href="#!" rel="noreferrer" className="text-gray-600">Help</a>
                         </p>
                     </div>
                     <div>
@@ -81,7 +81,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className="text-center p-6 bg-gray-200">
-            <p className="text-sm font-light pt-0">&copy; Copyright {new Date().getFullYear()} &middot; {data.company_name} &middot; Website built by <a href="https://www.hungryram.com/" className="font-bold" target="_blank">Hungry Ram</a></p>
+            <p className="text-sm font-light pt-0">&copy; Copyright {new Date().getFullYear()} &middot; {data.company_name} &middot; Website built by <a href="https://www.hungryram.com/" className="font-bold" target="_blank" rel="noreferrer">Hungry Ram</a></p>
             </div>
         </footer>
     )

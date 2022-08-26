@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function Banner({ link, heading, text, key }) {
     return (
         <div className="section bg-black text-white" key={key}>
@@ -9,7 +11,7 @@ export default function Banner({ link, heading, text, key }) {
                     </div>
                     <div className="md:w-1/2">
                         {link &&
-                            <Link href="">
+                            <Link href="/contact">
                                 <a>
 
                                 </a>

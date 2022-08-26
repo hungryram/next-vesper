@@ -10,9 +10,10 @@ export default function Hero({ image, heading, subtitle, key }) {
                     src={urlFor(image).url()}
                     layout="fill"
                     objectFit="cover"
+                    alt="Hero Image"
                 />
                 :
-                <img src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" alt="" />
+                <Image src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" alt="" />
             }
             <div className="overlay"></div>
             <div className="container absolute top-1/3 bottom-0 left-0 right-0 text-white text-center">
