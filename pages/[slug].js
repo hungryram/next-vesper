@@ -28,7 +28,6 @@ export async function getStaticProps(context) {
 }
 
 export default function Pages({ page }) {
-    console.log(page)
     return (
         <div className="section">
             <div className="container">

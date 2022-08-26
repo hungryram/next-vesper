@@ -75,7 +75,7 @@ export default function Home({ res }) {
             <Hero
               heading={section.heading}
               image={section.image}
-              key={i}
+              _key={i}
             />
           )
         }
@@ -136,7 +136,7 @@ export default function Home({ res }) {
                         name={node.name}
                         image={node.image}
                         link={'/team/' + node.slug}
-                        key={node._id}
+                        _key={node._id}
                       />
                     )
                   })}
