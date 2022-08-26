@@ -7,7 +7,9 @@ import Form from "../../components/templates/Form"
 import Image from "next/image"
 
 const queryLegal = groq`
-*[_type == 'legal' && slug.current == $slug][0]
+*[_type == 'legal' && slug.current == $slug][0]{
+    content
+}
 `
 
 export async function getStaticPaths() {
