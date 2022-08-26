@@ -3,7 +3,12 @@ import { groq } from "next-sanity"
 import Cards from "../../components/templates/Cards"
 
 const queryLocation = groq`
-*[_type == 'locations']
+*[_type == 'locations']{
+    title,
+    image,
+    'slug': slug.current,
+    _id
+}
 `
 
 export async function getStaticProps() {
@@ -26,7 +31,8 @@ export default function index({ res }) {
                     <Cards
                         name={node.name}
                         image={node.image}
-                        link={'/locations/' + node.slug.current}
+                        link={'/locations/' + node.slug}
+                        key={node._id}
                     />
                 )
             })}

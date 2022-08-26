@@ -3,7 +3,12 @@ import { groq } from "next-sanity"
 import Cards from "../../components/templates/Cards"
 
 const queryPartner = groq`
-*[_type == 'partners']
+*[_type == 'partners']{
+    name,
+    image,
+    'slug': slug.current,
+    _id
+}
 `
 
 export async function getStaticProps() {
@@ -27,6 +32,7 @@ export default function index({ res }) {
                         name={node.name}
                         image={node.image}
                         link={'/partners/' + node.slug.current}
+                        key={node._id}
                     />
                 )
             })}
