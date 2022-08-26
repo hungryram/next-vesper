@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.section {
+  @apply py-20
+}
+
+.primary-button {
+  @apply py-2 px-4 mx-2 rounded-md text-white;
+  background-color: black;
+}
+
+.accent {
+  color: #aa8453;
+}
+
+/* CONTENT */
+
+body {
+  background: #F7F8F9;
+  color: #6d7175;
+}
+
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  font-family: 'Jost', sans-serif;
+  color: #222;
+}
+
+.h1 {
+  @apply md:text-5xl text-4xl font-medium
+}
+
+.h2 {
+  @apply md:text-4xl text-3xl font-medium
+}
+
+.h3 {
+  @apply md:text-2xl text-2xl font-medium
+}
+
+.h4 {
+  @apply md:text-xl font-medium
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  @apply mt-4 mb-2 font-bold;
+}
+
+.content h1 {
+  @apply text-4xl;
+}
+
+.content h2 {
+  @apply text-3xl;
+}
+
+.content h3 {
+  @apply text-xl;
+}
+
+.content h4 {
+  @apply text-lg;
+}
+
+.content p {
+  @apply my-2;
+}
+
+.content ul, .content ol {
+  @apply my-2 list-disc ml-5;
+}
+
+.content li {
+  @apply my-1;
+}

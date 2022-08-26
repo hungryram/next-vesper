@@ -7,11 +7,15 @@ export default {
     title: 'Navigation Item',
     type: 'object',
     icon: BsLink,
+    options: {
+        collapsible: true,
+        collapsed: true,
+    },
     fields: [
         {
             name: "text",
             type: "string",
-            title: "Navigation Text",
+            title: "Text",
             validation: Rule => Rule.required().error('Name your menu item'),
           },
           {
@@ -32,21 +36,14 @@ export default {
             description: 'Select pages for navigation',
             type: 'reference',
             hidden: ({ parent }) => parent?.linkType !== "internal",
-            to: [{ type: 'post' }, { type: 'legal' }, {type: 'author'}],
+            to: [{ type: 'blog' }, { type: 'legal' }, {type: 'author'}],
         },
         {
             name: 'externalUrl',
             title: 'External URL',
             description: "Use this field to link to an external website",
             hidden: ({ parent }) => parent?.linkType !== "external", // hidden if link type is not external
-            type: 'url',
+            type: 'string',
         },
-          {
-            title: 'Sub Menu',
-            name: 'submenuChild',
-            description: 'Add another level dropdown',
-            type: 'array',
-            of: [{ type: 'subMenu' }]
-          }
     ]
 }

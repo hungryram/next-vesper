@@ -1,9 +1,8 @@
 import { MdOutlinePostAdd } from "react-icons/md"
-const parent = "/blog"
 
 export default {
-  name: 'post',
-  title: 'Post',
+  name: 'blog',
+  title: 'Blog',
   type: 'document',
   icon: MdOutlinePostAdd,
   fields: [
@@ -57,7 +56,16 @@ export default {
     {
       name: 'publishedAt',
       title: 'Published at',
-      type: 'datetime',
+      type: 'date',
+      options: {
+        dateFormat: 'MM-DD-YYYY'
+      }
+    },
+    {
+      title: 'Excerpt',
+      name: 'excerpt',
+      type: 'text',
+      description: 'Short description of your post'
     },
     {
       name: 'body',

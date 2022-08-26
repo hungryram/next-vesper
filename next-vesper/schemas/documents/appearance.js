@@ -17,6 +17,22 @@ export default {
             title: 'Colors',
             name: 'mainColors',
             type: 'mainColors'
+        },
+        {
+            title: 'Footer',
+            name: 'footer',
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: true
+            },
+            fields: [
+                {
+                    title: 'Footer Text',
+                    name: 'footerText',
+                    type: 'blockContent'
+                }
+            ]
         }
     ]
 }

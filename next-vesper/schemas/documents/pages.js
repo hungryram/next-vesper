@@ -1,8 +1,5 @@
 import { MdOutlineArticle } from "react-icons/md"
 
-const parent = "/legal"
-
-
 export default {
     title: 'Pages',
     name: 'pages',
@@ -21,18 +18,32 @@ export default {
             description: 'We recommend clicking generate. Changing URL may cause broken pages',
             options: {
               source: "title",
-              slugify: (input) =>
-              input.toLowerCase()
-              .replace(/\s+/g, "-").slice(0, 200)
-              //Remove special characters
-              .replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ""),
-            validation: (Rule) => Rule.required(),
             },
+        },
+        {
+            title: 'Page Type',
+            name: 'pageType',
+            type: 'string',
+            initialValue: 'plain',
+            options: {
+                list: [
+                    {title: 'Plain Page', value: 'plain'},
+                    {title: 'Contact', value: 'contact'},
+                ]
+            }
         },
         {
             title: 'Content',
             name: 'content',
-            type: 'blockContent'
+            type: 'plainPage',
+            hidden: ({ parent }) => parent?.pageType !== 'plain'
+        },
+        {
+            title: 'Contact Page',
+            name: 'contactPage',
+            type: 'contactPage',
+            hidden: ({ parent }) => parent?.pageType !== 'contact'
+
         },
         {
             title: 'Search Engine Optimization',

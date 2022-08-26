@@ -24,7 +24,7 @@ export default {
             description: 'Select pages for navigation',
             type: 'reference',
             hidden: ({ parent }) => parent?.linkType !== "internal",
-            to: [{ type: 'post' }, { type: 'legal' }],
+            to: [{ type: 'blog' }, { type: 'legal' }],
         },
         {
             name: 'externalUrl',
