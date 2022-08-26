@@ -130,7 +130,16 @@ export default function Home({ res }) {
                   />
                 }
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-4 mt-10">
-
+                  {res.team.map((node) => {
+                    return (
+                      <Cards
+                        name={node.name}
+                        image={node.image}
+                        link={'/team/' + node.slug}
+                        _key={node._id}
+                      />
+                    )
+                  })}
                 </div>
               </div>
             </div>
@@ -156,31 +165,31 @@ export default function Home({ res }) {
               <div className="container">
                 <div className="text-center md:flex justify-center">
                   <div className="md:w-1/2">
-                  {section.heading && <h1 className="h2 mb-8">{section.heading}</h1>}
-                  {section.text &&
-                    <PortableText
-                      value={section.text}
-                    />
-                  }
+                    {section.heading && <h1 className="h2 mb-8">{section.heading}</h1>}
+                    {section.text &&
+                      <PortableText
+                        value={section.text}
+                      />
+                    }
                   </div>
                 </div>
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10 justify-center text-center">
                   {section.blocks.map((node) => {
                     return (
-                          <div className="relative overflow-hidden" key={node._key}>
-                            <Image
-                              src={urlFor(node.image).url()}
-                              alt={node.value}
-                              layout="fixed"
-                              height="400"
-                              width="400"
-                              objectFit="cover"
-                            />
-                            <div className="overlay"></div>
-                            <div className="absolute bottom-6 left-0 right-0 text-white px-6 py-4 justify-center text-center">
-                              <h3 className="h3">{node.value}</h3>
-                            </div>
-                          </div>
+                      <div className="relative overflow-hidden" key={node._key}>
+                        <Image
+                          src={urlFor(node.image).url()}
+                          alt={node.value}
+                          layout="fixed"
+                          height="400"
+                          width="400"
+                          objectFit="cover"
+                        />
+                        <div className="overlay"></div>
+                        <div className="absolute bottom-6 left-0 right-0 text-white px-6 py-4 justify-center text-center">
+                          <h3 className="h3">{node.value}</h3>
+                        </div>
+                      </div>
                     )
                   })}
                 </div>
@@ -203,7 +212,18 @@ export default function Home({ res }) {
                   }
                 </div>
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-10">
-
+                  {res.blog.map((node, i) => {
+                    return (
+                      <div key={node._id}>
+                        <BlogCard
+                          title={node.title}
+                          image={node.mainImage}
+                          link={'/blog/' + node.slug}
+                          excerpt={node.excerpt}
+                        />
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>
@@ -211,7 +231,7 @@ export default function Home({ res }) {
         }
 
         // ACTIVE LISTINGS
-        if(section._type === 'activeListings') {
+        if (section._type === 'activeListings') {
           return (
             <div className="section" key={i}>
               <div className="container">

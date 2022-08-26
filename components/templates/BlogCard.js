@@ -2,9 +2,9 @@ import urlFor from "../../lib/sanity"
 import Link from "next/link"
 import Image from "next/image"
 
-export default function BlogCard({ image, title, date, excerpt, link, altTag, _key }) {
+export default function BlogCard({ image, title, date, excerpt, link, altTag }) {
     return (
-        <div key={_key}>
+        <div>
             <Link href={link}>
                 <a>
                     <div className="md:flex gap-10 items-center border hover:shadow-md transition-all ease-linear">
