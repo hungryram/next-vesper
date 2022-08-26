@@ -215,7 +215,7 @@ export default function Home({ res }) {
                   {res.blog.map((node, i) => {
                     return (
                       <BlogCard
-                        _key={node._id}
+                        _key={node._key}
                         title={node.title}
                         image={node.mainImage}
                         link={'/blog/' + node.slug}
