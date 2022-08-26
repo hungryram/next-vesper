@@ -32,11 +32,12 @@ export async function getStaticProps(context) {
     }
 }
 
-if (router.isFallback) {
-    return <div>Loading...</div>
-  }
+
 
 export default function locationDetail({ location }) {
+    if (router.isFallback) {
+        return <div>Loading...</div>
+      }
     return (
         <div className="section">
             <div className="container">

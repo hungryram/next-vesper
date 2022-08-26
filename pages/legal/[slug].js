@@ -34,11 +34,12 @@ export async function getStaticProps(context) {
     }
 }
 
-if (router.isFallback) {
-    return <div>Loading...</div>
-  }
+
 
 export default function legalDetail({ legal }) {
+    if (router.isFallback) {
+        return <div>Loading...</div>
+      }
     return (
         <div className="section">
             <div className="container content">

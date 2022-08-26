@@ -29,11 +29,12 @@ export async function getStaticProps(context) {
     }
 }
 
-if (router.isFallback) {
-    return <div>Loading...</div>
-  }
 
 export default function blogDetail({ blog }) {
+    if (router.isFallback) {
+        return <div>Loading...</div>
+      }
+    
     return (
         <div className="section">
             <div className="container">
