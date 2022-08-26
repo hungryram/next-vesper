@@ -18,9 +18,6 @@ export default function Hero({ image, heading, subtitle, _key }) {
             <div className="container absolute top-1/3 bottom-0 left-0 right-0 text-white text-center">
                 <h1 className="md:text-5xl text-3xl font-medium">{heading}</h1>
                 <p className="m-10">{subtitle}</p>
-                <div className="mt-10">
-
-                </div>
             </div>
         </div>
     )
