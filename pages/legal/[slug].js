@@ -38,9 +38,9 @@ export default function legalDetail({ legal }) {
     return (
         <div className="section">
             <div className="container content">
-                {legal.content &&
+                {legal?.content &&
                     <PortableText
-                        value={legal.content}
+                        value={legal?.content}
                     /> 
                 }
             </div>
