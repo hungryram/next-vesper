@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { groq } from "next-sanity"
@@ -9,7 +8,7 @@ import Cards from "../components/templates/Cards";
 import BlogCard from "../components/templates/BlogCard"
 
 // STYLES
-import FeaturedStyles from "../styles/featuredBlocks.module.css"
+import FeaturedStyles from "../styles/featuredblocks.module.css"
 import { PortableText } from "@portabletext/react";
 import Intro from "../components/home/Intro";
 import Banner from "../components/home/Banner";

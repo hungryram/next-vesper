@@ -50,6 +50,7 @@ export default function Navbar() {
                             width={300}
                             height="100%"
                             objectFit="contain"
+                            alt="logo"
                         />
                         </a>
                     </Link>
@@ -116,7 +117,7 @@ export default function Navbar() {
                         <div className="flex-1">
                             <Link href="/">
                                 {data.sanityAppearances?.branding?.logo?.asset.url ?
-                                    <img src={data.sanityAppearances.branding.logo.asset.url} width={data.sanityAppearances.branding.logoWidth} alt={data.sanityProfileSettings?.company_name} />
+                                    <Image src={data.sanityAppearances.branding.logo.asset.url} width={data.sanityAppearances.branding.logoWidth} alt={data.sanityProfileSettings?.company_name} />
                                     :
                                     <h2 className="text-2xl">{data.sanityProfileSettings?.company_name}</h2>
                                 }
