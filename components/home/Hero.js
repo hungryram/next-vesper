@@ -2,9 +2,9 @@ import Image from "next/image"
 import urlFor from "../../lib/sanity"
 import Link from "../../next-vesper/schemas/blocks/link"
 
-export default function Hero({ image, heading, subtitle }) {
+export default function Hero({ image, heading, subtitle, key }) {
     return (
-        <div className="flex items-center relative h-screen">
+        <div className="flex items-center relative h-screen" key={key}>
             {image ?
                 <Image
                     src={urlFor(image).url()}

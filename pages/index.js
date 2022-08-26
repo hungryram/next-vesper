@@ -21,12 +21,14 @@ const homeDesign = groq`
 	'homeDesign': *[_type == 'homeDesign'][0],
   'team': *[_type == 'team'][0..6]{
     name,
+    _id,
     image,
     'slug': slug.current
   },
   'blog': *[_type == 'blog'][0..4]{
     'slug': slug.current,
     title,
+    _id,
     excerpt,
     date,
     mainImage
@@ -34,6 +36,7 @@ const homeDesign = groq`
   'listings': *[_type == 'listings'][0..6]{
     'slug': slug.current,
     propType,
+    _id,
     shortTitle,
     status,
     price,
@@ -67,12 +70,13 @@ export default function Home({ res }) {
 
   return (
     <>
-      {homeSection.map((section) => {
+      {homeSection.map((section, i) => {
         if (section._type === 'hero') {
           return (
             <Hero
               heading={section.heading}
               image={section.image}
+              key={i}
             />
           )
         }
@@ -84,6 +88,8 @@ export default function Home({ res }) {
               heading={section.heading}
               image={section.image}
               altTag={section.altTag}
+              key={i}
+
             />
           )
         }
@@ -116,7 +122,7 @@ export default function Home({ res }) {
         // TEAM SLIDER
         if (section._type === 'teamSlider') {
           return (
-            <div className="section">
+            <div className="section" key={i}>
               <div className="container text-center">
                 {section.heading && <h1 className="h2">{section.heading}</h1>}
                 {section.text &&
@@ -146,6 +152,8 @@ export default function Home({ res }) {
             <Banner
               heading={section.heading}
               text={section.text}
+              key={i}
+
             />
           )
         }
@@ -153,7 +161,7 @@ export default function Home({ res }) {
         // IMAGE BLOCKS
         if (section._type === 'imageBlocks') {
           return (
-            <div className="section">
+            <div className="section" key={i}>
               <div className="container">
                 <div className="text-center md:flex justify-center">
                   <div className="md:w-1/2">
@@ -170,7 +178,7 @@ export default function Home({ res }) {
                     return (
                       <Link href="">
                         <a>
-                          <div class="relative overflow-hidden">
+                          <div className="relative overflow-hidden">
                             <Image
                               src={urlFor(node.image).url()}
                               alt={node.value}
@@ -180,7 +188,7 @@ export default function Home({ res }) {
                               objectFit="cover"
                             />
                             <div className="overlay"></div>
-                            <div class="absolute bottom-6 left-0 right-0 text-white px-6 py-4 justify-center text-center">
+                            <div className="absolute bottom-6 left-0 right-0 text-white px-6 py-4 justify-center text-center">
                               <h3 className="h3">{node.value}</h3>
                             </div>
                           </div>
@@ -197,7 +205,7 @@ export default function Home({ res }) {
         // BLOG SLIDER
         if (section._type === 'blogSlider') {
           return (
-            <div className="section">
+            <div className="section" key={i}>
               <div className="container">
                 <div className="text-center">
                   {section.heading && <h1 className="h2">{section.heading}</h1>}
@@ -227,7 +235,7 @@ export default function Home({ res }) {
         // ACTIVE LISTINGS
         if(section._type === 'activeListings') {
           return (
-            <div className="section">
+            <div className="section" key={i}>
               <div className="container">
                 <div className="grid grid-cols-3">
                   {res.listings.map((node) => {

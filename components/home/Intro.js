@@ -2,9 +2,9 @@ import { PortableText } from "@portabletext/react";
 import urlFor from "../../lib/sanity";
 import Image from "next/image"
 
-export default function Intro({ image, content, heading, altTag }) {
+export default function Intro({ image, content, heading, altTag, key }) {
     return (
-        <div className="section">
+        <div className="section" key={key}>
             <div className="container">
                 <div className="md:flex items-center">
                     {image &&
