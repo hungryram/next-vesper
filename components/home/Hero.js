@@ -1,6 +1,5 @@
 import Image from "next/image"
 import urlFor from "../../lib/sanity"
-import Link from "../../next-vesper/schemas/blocks/link"
 
 export default function Hero({ image, heading, subtitle, _key }) {
     return (
