@@ -130,16 +130,7 @@ export default function Home({ res }) {
                   />
                 }
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-4 mt-10">
-                  {res.team.map((node) => {
-                    return (
-                      <Cards
-                        name={node.name}
-                        image={node.image}
-                        link={'/team/' + node.slug}
-                        _key={node._id}
-                      />
-                    )
-                  })}
+
                 </div>
               </div>
             </div>
@@ -212,17 +203,7 @@ export default function Home({ res }) {
                   }
                 </div>
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-10">
-                  {res.blog.map((node, i) => {
-                    return (
-                      <BlogCard
-                        _key={node._key}
-                        title={node.title}
-                        image={node.mainImage}
-                        link={'/blog/' + node.slug}
-                        excerpt={node.excerpt}
-                        />
-                    )
-                  })}
+
                 </div>
               </div>
             </div>
