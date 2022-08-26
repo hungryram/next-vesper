@@ -75,7 +75,7 @@ export default function Home({ res }) {
             <Hero
               heading={section.heading}
               image={section.image}
-              _key={section._type}
+              _key={i}
             />
           )
         }
@@ -87,7 +87,7 @@ export default function Home({ res }) {
               heading={section.heading}
               image={section.image}
               altTag={section.altTag}
-              key={i}
+              _key={i}
 
             />
           )
@@ -176,9 +176,7 @@ export default function Home({ res }) {
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10 justify-center text-center">
                   {section.blocks.map((node) => {
                     return (
-                      <Link href="" key={node._id}>
-                        <a>
-                          <div className="relative overflow-hidden">
+                          <div className="relative overflow-hidden" key={node._key}>
                             <Image
                               src={urlFor(node.image).url()}
                               alt={node.value}
@@ -192,8 +190,6 @@ export default function Home({ res }) {
                               <h3 className="h3">{node.value}</h3>
                             </div>
                           </div>
-                        </a>
-                      </Link>
                     )
                   })}
                 </div>
