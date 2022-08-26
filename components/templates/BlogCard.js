@@ -4,8 +4,8 @@ import Image from "next/image"
 
 export default function BlogCard({ image, title, date, excerpt, link, altTag, _key }) {
     return (
-        <Link href={link}>
-            <a key={_key}>
+        <Link href={link} key={_key}>
+            <a>
                 <div className="md:flex gap-10 items-center border hover:shadow-md transition-all ease-linear">
                     <div className="md:w-2/5 relative h-64 w-full">
                         <Image
