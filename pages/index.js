@@ -215,12 +215,12 @@ export default function Home({ res }) {
                   {res.blog.map((node, i) => {
                     return (
                       <BlogCard
+                        _key={i}
                         title={node.title}
                         image={node.mainImage}
                         link={'/blog/' + node.slug}
                         excerpt={node.excerpt}
-                        _key={i}
-                      />
+                        />
                     )
                   })}
                 </div>
