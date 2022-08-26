@@ -31,7 +31,7 @@ export default function TeamIndex({ res }) {
                     <Cards
                         name={node.name}
                         image={node.image}
-                        link={'/team/' + node.slug.current}
+                        link={'/team/' + node.slug}
                         key={node._id}
                     />
                 )

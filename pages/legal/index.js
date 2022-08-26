@@ -29,7 +29,7 @@ export default function LegalIndex({ res }) {
                         {res.map((node) => {
                             return (
                                 <li key={node._id}>
-                                    <Link href={"/legal/" + node.slug.current}>
+                                    <Link href={"/legal/" + node.slug}>
                                         <a className="text-2xl">{node.title}</a>
                                     </Link>
                                 </li>

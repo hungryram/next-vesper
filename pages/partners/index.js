@@ -31,7 +31,7 @@ export default function ParterIndex({ res }) {
                     <Cards
                         name={node.name}
                         image={node.image}
-                        link={'/partners/' + node.slug.current}
+                        link={'/partners/' + node.slug}
                         key={node._id}
                     />
                 )
