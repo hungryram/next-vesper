@@ -75,7 +75,7 @@ export default function Home({ res }) {
             <Hero
               heading={section.heading}
               image={section.image}
-              _key={i}
+              _key={section._type}
             />
           )
         }
