@@ -1,10 +1,17 @@
 import { sanityRes } from "../../lib/sanity"
 import { groq } from "next-sanity"
-import Link from 'next/link'
 import BlogCard from "../../components/templates/BlogCard"
 
 const queryBlog = groq`
-*[_type == 'blog']
+*[_type == 'blog']{
+    title,
+    'slug': slug.current,
+    mainImage,
+    publishedAt,
+    excerpt,
+    alt_tag,
+    _id
+}
 `
 
 export async function getStaticProps() {
@@ -27,11 +34,12 @@ export default function index({ res }) {
                             return (
                                 <BlogCard
                                     title={node.title}
-                                    link={"/blog/" + node.slug.current}
+                                    link={"/blog/" + node.slug}
                                     image={node.mainImage}
                                     date={node.publishedAt}
                                     excerpt={node.excerpt}
                                     altTag={node.alt_tag}
+                                    key={node._id}
                                 />
                             )
                         })}

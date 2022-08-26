@@ -17,6 +17,7 @@ export default function ListingCard({ link, image, address, city, state, zipCode
                                 src={urlFor(image).url()}
                                 layout="fill"
                                 objectFit="cover"
+                                alt={address}
                             />
                             :
                             <img src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" alt="photo coming soon" />
