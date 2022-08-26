@@ -219,7 +219,7 @@ export default function Home({ res }) {
                         image={node.mainImage}
                         link={'/blog/' + node.slug}
                         excerpt={node.excerpt}
-                        _key={node._id}
+                        _key={`${node._id}-${node.slug}`}
                       />
                     )
                   })}
