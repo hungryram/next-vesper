@@ -212,14 +212,14 @@ export default function Home({ res }) {
                   }
                 </div>
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-10">
-                  {res.blog.map((node) => {
+                  {res.blog.map((node, i) => {
                     return (
                       <BlogCard
                         title={node.title}
                         image={node.mainImage}
                         link={'/blog/' + node.slug}
                         excerpt={node.excerpt}
-                        _key={`${node._id}-${node.slug}`}
+                        _key={i}
                       />
                     )
                   })}
