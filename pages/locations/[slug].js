@@ -32,7 +32,7 @@ export async function getStaticProps(context) {
     }
 }
 
-export default function TeamDetail({ location }) {
+export default function locationDetail({ location }) {
     return (
         <div className="section">
             <div className="container">
@@ -42,13 +42,15 @@ export default function TeamDetail({ location }) {
                             <div className="md:flex gap-10">
                                 <div className="md:w-1/2 relative w-full h-80">
                                     <div>
-                                        <Image
-                                            src={urlFor(location.image).url()}
-                                            layout="fill"
-                                            objectFit="cover"
-                                            quality={50}
-                                            alt={location.name}
-                                        />
+                                        {location.image &&
+                                            <Image
+                                                src={urlFor(location.image).url()}
+                                                layout="fill"
+                                                objectFit="cover"
+                                                quality={50}
+                                                alt={location.name}
+                                            />
+                                        }
                                     </div>
                                 </div>
                                 <div className="md:w-2/3">

@@ -32,7 +32,7 @@ export async function getStaticProps(context) {
     }
 }
 
-export default function TeamDetail({ legal }) {
+export default function legalDetail({ legal }) {
     return (
         <div className="section">
             <div className="container content">

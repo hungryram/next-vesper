@@ -28,7 +28,7 @@ export async function getStaticProps(context) {
     }
 }
 
-export default function TeamDetail({ listings }) {
+export default function listingDetail({ listings }) {
     return (
         <div className="section">
             <div className="container content">

@@ -21,7 +21,7 @@ export async function getStaticProps() {
     }
 }
 
-export default function index({ res }) {
+export default function TeamIndex({ res }) {
   return (
     <div className="section">
         <div className="container">

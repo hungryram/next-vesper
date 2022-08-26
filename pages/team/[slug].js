@@ -42,13 +42,15 @@ export default function TeamDetail({ team }) {
                             <div className="md:flex gap-20">
                                 <div className="md:w-1/2 relative w-full h-80">
                                     <div>
-                                        <Image
-                                            src={urlFor(team.image).url()}
-                                            layout="fill"
-                                            objectFit="cover"
-                                            quality={50}
-                                            alt={team.name}
-                                        />
+                                        {team.image &&
+                                            <Image
+                                                src={urlFor(team.image).url()}
+                                                layout="fill"
+                                                objectFit="cover"
+                                                quality={50}
+                                                alt={team.name}
+                                            />
+                                        }
                                     </div>
                                 </div>
                                 <div className="md:w-2/3">
