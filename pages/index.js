@@ -75,7 +75,7 @@ export default function Home({ res }) {
             <Hero
               heading={section.heading}
               image={section.image}
-              _key={i}
+              _key={section._key}
             />
           )
         }
@@ -219,7 +219,7 @@ export default function Home({ res }) {
                         image={node.mainImage}
                         link={'/blog/' + node.slug}
                         excerpt={node.excerpt}
-                        key={node._id}
+                        _key={node._id}
                       />
                     )
                   })}
