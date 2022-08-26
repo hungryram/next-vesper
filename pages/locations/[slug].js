@@ -42,9 +42,9 @@ export default function locationDetail({ location }) {
                             <div className="md:flex gap-10">
                                 <div className="md:w-1/2 relative w-full h-80">
                                     <div>
-                                        {location.image &&
+                                        {location?.image &&
                                             <Image
-                                                src={urlFor(location.image).url()}
+                                                src={urlFor(location?.image).url()}
                                                 layout="fill"
                                                 objectFit="cover"
                                                 quality={50}
@@ -69,11 +69,11 @@ export default function locationDetail({ location }) {
                                 </div>
                             </div>
                         </div>
-                        {location.about &&
+                        {location?.about &&
                             <div className="bg-white p-6 mt-4">
                                 <h3 className="h4 mb-4">About</h3>
                                 <PortableText
-                                    value={location.about}
+                                    value={location?.about}
                                 />
                             </div>
                         }

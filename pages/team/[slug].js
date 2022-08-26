@@ -42,9 +42,9 @@ export default function TeamDetail({ team }) {
                             <div className="md:flex gap-20">
                                 <div className="md:w-1/2 relative w-full h-80">
                                     <div>
-                                        {team.image &&
+                                        {team?.image &&
                                             <Image
-                                                src={urlFor(team.image).url()}
+                                                src={urlFor(team?.image).url()}
                                                 layout="fill"
                                                 objectFit="cover"
                                                 quality={50}
@@ -73,7 +73,7 @@ export default function TeamDetail({ team }) {
                         <div className="bg-white p-6 mt-4">
                             <h3 className="h4 mb-4">About {team.name}</h3>
                             <PortableText
-                                value={team.about}
+                                value={team?.about}
                             />
                         </div>
                     </div>

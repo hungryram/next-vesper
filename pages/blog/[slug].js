@@ -35,9 +35,9 @@ export default function blogDetail({ blog }) {
             <div className="container">
                 <div className="md:flex gap-10">
                     <div className="md:w-2/3">
-                        {blog.body &&
+                        {blog?.body &&
                             <PortableText
-                                value={blog.body}
+                                value={blog?.body}
                             />
                         }
                     </div>
