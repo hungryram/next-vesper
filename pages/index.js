@@ -72,24 +72,25 @@ export default function Home({ res }) {
       {homeSection.map((section, i) => {
         if (section._type === 'hero') {
           return (
-            <Hero
-              heading={section.heading}
-              image={section.image}
-              _key={section._key}
-            />
+            <div id={section._key}>
+              <Hero
+                heading={section.heading}
+                image={section.image}
+              />
+            </div>
           )
         }
 
         if (section._type === 'intro') {
           return (
-            <Intro
-              content={section.content}
-              heading={section.heading}
-              image={section.image}
-              altTag={section.altTag}
-              _key={i}
-
-            />
+            <div key={section._key}>
+              <Intro
+                content={section.content}
+                heading={section.heading}
+                image={section.image}
+                altTag={section.altTag}
+              />
+            </div>
           )
         }
 
@@ -132,12 +133,13 @@ export default function Home({ res }) {
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-4 mt-10">
                   {res.team.map((node) => {
                     return (
-                      <Cards
-                        name={node.name}
-                        image={node.image}
-                        link={'/team/' + node.slug}
-                        _key={node._id}
-                      />
+                      <div _key={node._id}>
+                        <Cards
+                          name={node.name}
+                          image={node.image}
+                          link={'/team/' + node.slug}
+                        />
+                      </div>
                     )
                   })}
                 </div>
