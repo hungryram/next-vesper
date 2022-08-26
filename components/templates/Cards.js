@@ -2,9 +2,9 @@ import Image from 'next/image'
 import urlFor from '../../lib/sanity'
 import Link from "next/link"
 
-export default function Cards({ name, image, link }) {
+export default function Cards({ name, image, link, key }) {
     return (
-        <Link href={link}>
+        <Link href={link} key={key}>
             <a>
                 <div>
                     <div className="relative w-full h-80">

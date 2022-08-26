@@ -105,7 +105,7 @@ export default function Home({ res }) {
                     <div className="md:grid-cols-3 grid-cols-1 grid mt-10 gap-1">
                       {section.blocks.map((node) => {
                         return (
-                          <div className={`p-16 ${FeaturedStyles.featuredGrid}`}>
+                          <div className={`p-16 ${FeaturedStyles.featuredGrid}`} key={node._key}>
                             <h3 className="h3 mb-6">{node.value}</h3>
                             <p>{node.text}</p>
                           </div>
@@ -137,6 +137,7 @@ export default function Home({ res }) {
                         name={node.name}
                         image={node.image}
                         link={'/team/' + node.slug}
+                        key={node._id}
                       />
                     )
                   })}
@@ -223,6 +224,7 @@ export default function Home({ res }) {
                         image={node.mainImage}
                         link={'/blog/' + node.slug}
                         excerpt={node.excerpt}
+                        key={node._id}
                       />
                     )
                   })}
