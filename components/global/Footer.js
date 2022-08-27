@@ -2,9 +2,6 @@ import { sanityRes } from "../../lib/sanity"
 import { groq } from 'next-sanity'
 import useSWR from 'swr'
 
-
-
-
 export default function Footer() {
 
     const profile = groq`
@@ -12,7 +9,7 @@ export default function Footer() {
     `
 
 
-    const { data, error } = useSWR(profile, sanityRes.fetch(profile)
+    const { data, error } = useSWR(profile, query => sanityRes.fetch(query)
   );
 
       if (error) return "An error has occurred.";
