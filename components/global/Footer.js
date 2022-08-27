@@ -2,7 +2,7 @@ import { sanityRes } from "../../lib/sanity"
 import { groq } from 'next-sanity'
 import useSWR from 'swr'
 
-export default function Footer() {
+export default async function Footer() {
 
     const profile = groq`
     *[_type == 'profileSettings'][0]
