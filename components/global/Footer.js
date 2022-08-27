@@ -2,15 +2,16 @@ import { sanityRes } from "../../lib/sanity"
 import { groq } from 'next-sanity'
 import useSWR from 'swr'
 
-export default async function Footer() {
+export default function Footer() {
+
+    const fetcher = async (url) => await sanityRes.fetch(url)
 
     const profile = groq`
     *[_type == 'profileSettings'][0]
     `
 
 
-    const { data, error } = useSWR(profile, query => sanityRes.fetch(query)
-  );
+    const { data, error } = useSWR(profile, fetcher);
 
       if (error) return "An error has occurred.";
       if (!data) return "Loading...";
