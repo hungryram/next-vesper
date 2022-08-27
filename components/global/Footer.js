@@ -15,7 +15,7 @@ export default function Footer() {
     }
     `
     
-    const { data, error } = useSWR(groq`*[_type == "profileSettings"][0]`, fetch);
+    const { data, error } = useSWR(`https://041e5s03.api.sanity.io/v2021-10-21/data/query/production?query=%20%20%20%20*%5B_type%20%3D%3D%20%27profileSettings%27%5D%5B0%5D`, fetch);
 
       if (error) return "An error has occurred.";
       if (!data) return "Loading...";
