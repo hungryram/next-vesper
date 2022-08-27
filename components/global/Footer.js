@@ -12,8 +12,7 @@ export default function Footer() {
     `
 
 
-    const { data, error } = useSWR(groq`*[_type == 'profileSettings'][0]`, query =>
-    sanityRes.fetch(query)
+    const { data, error } = useSWR(profile, sanityRes.fetch(profile)
   );
 
       if (error) return "An error has occurred.";
