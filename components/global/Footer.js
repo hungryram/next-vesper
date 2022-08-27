@@ -6,7 +6,7 @@ import React from 'react'
 
 export default function Footer() {
 
-    const fetcher = (...args) => sanityRes.fetch(...args)
+    const fetch = (...args) => sanityRes.fetch(...args)
 
 
     const profile = groq`
@@ -15,7 +15,7 @@ export default function Footer() {
     }
     `
     
-    const { data, error } = useSWR(groq`*[_type == "profileSettings"][0]`, fetcher);
+    const { data, error } = useSWR(groq`*[_type == "profileSettings"][0]`, fetch);
 
       if (error) return "An error has occurred.";
       if (!data) return "Loading...";
