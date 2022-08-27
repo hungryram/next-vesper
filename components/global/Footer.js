@@ -1,6 +1,7 @@
 import { sanityRes } from "../../lib/sanity"
 import { groq } from 'next-sanity'
 import useSWR from 'swr'
+import React from 'react'
 
 
 export default function Footer() {
