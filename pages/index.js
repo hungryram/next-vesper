@@ -76,6 +76,7 @@ export default function Home({ res }) {
               <Hero
                 heading={section.heading}
                 image={section.image}
+                blurData={section.image}
               />
             </div>
           )

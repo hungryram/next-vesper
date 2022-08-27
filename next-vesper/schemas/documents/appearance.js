@@ -28,10 +28,21 @@ export default {
             },
             fields: [
                 {
+                    title: 'Footer Logo',
+                    name: 'footerLogo',
+                    type: 'image'
+                },
+                {
                     title: 'Footer Text',
                     name: 'footerText',
                     type: 'blockContent'
-                }
+                },
+                {
+                    title: "Quick links",
+                    name: "quickLinks",
+                    type: "array",
+                    of: [{ type: "navigationItem" }]
+                  }
             ]
         }
     ]

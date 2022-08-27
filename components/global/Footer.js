@@ -1,27 +1,84 @@
-import { sanityRes } from "../../lib/sanity"
+import urlFor, { sanityRes } from "../../lib/sanity"
 import { groq } from 'next-sanity'
 import useSWR from 'swr'
-import React from 'react'
+import Image from "next/image"
+import { PortableText } from "@portabletext/react"
 
 
 export default function Footer() {
 
     const fetcher = (...args) => sanityRes.fetch(...args)
     const profile = groq`
-    *[_type == 'profileSettings'][0]{
-        company_name
+    {
+       'profileSettings': *[_type == 'profileSettings'][0],
+       'appearances': *[_type == 'appearances'][0]
     }
     `
-    
+
     const { data, error } = useSWR(profile, fetcher);
 
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
-
+    console.log(data.footer)
     return (
-        <footer className="text-center lg:text-left bg-gray-100 text-gray-600">
-            <div className="container text-center">
-                <h1 className="text-8xl">{data.company_name}</h1>
+        <footer className="">
+            <div className="section">
+                <div className="container">
+                    <div className="mx-6 py-10 text-left">
+                        <div className="grid grid-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <div className="relative">
+                                {data.appearances.footer.footerLogo ?
+                                    <div>
+                                        <Image
+                                            src={urlFor(data.appearances.footer.footerLogo).url()}
+                                            width="200"
+                                            height="50"
+                                            objectFit="contain"
+                                            alt={data.profileSettings.company_name}
+                                        />
+                                    </div>
+                                    :
+                                    <h3>{data.profileSettings.company_name}</h3>
+                                }
+                                <PortableText
+                                    value={data.appearances.footer.footerText}
+                                />
+                            </div>
+                            <div>
+                                <h3 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">Contact Info</h3>
+                                <ul>
+                                    {data.profileSettings.contact_information.phone_number && <li><a href={`tel:${data.profileSettings.contact_information.phone_number}`}>{data.profileSettings.contact_information.phone_number}</a></li>}
+                                    {data.profileSettings.contact_information.email && <li><a href={`tel:${data.profileSettings.contact_information.phone_number}`}>{data.profileSettings.contact_information.email}</a></li>}
+                                    {data.profileSettings.address.address && <li><a href="">{data.profileSettings.address.address}</a></li>}
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
+                                    Useful links
+                                </h3>
+                                <p className="mb-4">
+                                    <a href="#!" className="text-gray-600">Pricing</a>
+                                </p>
+                                <p className="mb-4">
+                                    <a href="#!" className="text-gray-600">Settings</a>
+                                </p>
+                                <p className="mb-4">
+                                    <a href="#!" className="text-gray-600">Orders</a>
+                                </p>
+                                <p>
+                                    <a href="#!" className="text-gray-600">Help</a>
+                                </p>
+                            </div>
+                            <div>
+                                <h3 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">Contact</h3>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="text-center p-6 bg-gray-200">
+                <p className="text-sm font-light pt-0">&copy; Copyright {new Date().getFullYear()} &middot; {data.company_name} &middot; Website built by <a href="https://www.hungryram.com/" className="font-bold" target="_blank">Hungry Ram</a></p>
             </div>
         </footer>
     )
