@@ -151,12 +151,12 @@ export default function Home({ res }) {
         // BANNER
         if (section._type === 'banner') {
           return (
-            <Banner
-              heading={section.heading}
-              text={section.text}
-              key={i}
-
-            />
+            <div key={section._id}>
+              <Banner
+                heading={section.heading}
+                text={section.text}
+              />
+            </div>
           )
         }
 
