@@ -56,18 +56,7 @@ export default function Footer() {
                                 <h3 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
                                     Useful links
                                 </h3>
-                                <p className="mb-4">
-                                    <a href="#!" className="text-gray-600">Pricing</a>
-                                </p>
-                                <p className="mb-4">
-                                    <a href="#!" className="text-gray-600">Settings</a>
-                                </p>
-                                <p className="mb-4">
-                                    <a href="#!" className="text-gray-600">Orders</a>
-                                </p>
-                                <p>
-                                    <a href="#!" className="text-gray-600">Help</a>
-                                </p>
+
                             </div>
                             <div>
                                 <h3 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">Contact</h3>
@@ -78,7 +67,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className="text-center p-6 bg-gray-200">
-                <p className="text-sm font-light pt-0">&copy; Copyright {new Date().getFullYear()} &middot; {data.company_name} &middot; Website built by <a href="https://www.hungryram.com/" className="font-bold" target="_blank">Hungry Ram</a></p>
+                <p className="text-sm font-light pt-0">&copy; Copyright {new Date().getFullYear()} &middot; {data.company_name} &middot; Website built by <a href="https://www.hungryram.com/" className="font-bold" target="_blank" rel="noreferrer">Hungry Ram</a></p>
             </div>
         </footer>
     )
