@@ -12,7 +12,7 @@ export default function Hero({ image, heading, subtitle, _key, blurData }) {
                     alt="Hero Image"
                     priority
                     placeholder="blur"
-                    blurDataURL={blurData}
+                    blurDataURL={urlFor(blurData).width(100).height(100).url()}
                 />
                 :
                 <Image src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" 
