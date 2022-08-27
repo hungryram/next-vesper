@@ -254,7 +254,7 @@ export default function Home({ res }) {
                         shortTitle={node.shortTitle}
                         propType={node.propType}
                         status={node.status}
-                        key={node._id}
+                        _key={node._id}
                       />
                     )
                   })}
