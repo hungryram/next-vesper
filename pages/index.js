@@ -240,22 +240,23 @@ export default function Home({ res }) {
                 <div className="grid grid-cols-3">
                   {res.listings.map((node) => {
                     return (
-                      <ListingCard
-                        address={node.address}
-                        city={node.city}
-                        state={node.state}
-                        zipCode={node.zipCode}
-                        link={'/listings/' + node.slug}
-                        image={node.thumbnail}
-                        bedrooms={node.details.bedrooms}
-                        bathrooms={node.details.bathrooms}
-                        squareFootage={node.details.squareFootage}
-                        price={node.price}
-                        shortTitle={node.shortTitle}
-                        propType={node.propType}
-                        status={node.status}
-                        _key={node._id}
-                      />
+                      <div key={node._id}>
+                        <ListingCard
+                          address={node.address}
+                          city={node.city}
+                          state={node.state}
+                          zipCode={node.zipCode}
+                          link={'/listings/' + node.slug}
+                          image={node.thumbnail}
+                          bedrooms={node.details.bedrooms}
+                          bathrooms={node.details.bathrooms}
+                          squareFootage={node.details.squareFootage}
+                          price={node.price}
+                          shortTitle={node.shortTitle}
+                          propType={node.propType}
+                          status={node.status}
+                        />
+                      </div>
                     )
                   })}
                 </div>
