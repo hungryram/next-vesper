@@ -2,9 +2,10 @@ import { sanityRes } from "../../lib/sanity"
 import { groq } from 'next-sanity'
 import useSWR from 'swr'
 
+const fetcher = async (url) => await sanityRes.fetch(url)
+
 export default function Footer() {
 
-    const fetcher = async (url) => await sanityRes.fetch(url)
 
     const profile = groq`
     *[_type == 'profileSettings'][0]
