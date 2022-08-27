@@ -8,7 +8,9 @@ export default function Footer() {
 
 
     const profile = groq`
-    *[_type == 'profileSettings'][0]
+    *[_type == 'profileSettings'][0]{
+        company_name
+    }
     `
 
 
