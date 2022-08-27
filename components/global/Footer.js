@@ -5,7 +5,7 @@ import useSWR from 'swr'
 
 export default function Footer() {
 
-    const fetcher = (...args) => fetch(...args).then((res) => res.json());
+    const fetcher = (...args) => sanityRes.fetch(...args)
 
 
     const profile = groq`
@@ -15,7 +15,7 @@ export default function Footer() {
     `
 
 
-    const { data, error } = useSWR(`https://jsonplaceholder.typicode.com/posts/1`, fetcher);
+    const { data, error } = useSWR(profile, fetcher);
 
       if (error) return "An error has occurred.";
       if (!data) return "Loading...";
@@ -23,7 +23,7 @@ export default function Footer() {
     return (
         <footer className="text-center lg:text-left bg-gray-100 text-gray-600">
             <div className="container text-center">
-                <h1 className="text-8xl">{data.title}</h1>
+                <h1 className="text-8xl">{data.company_name}</h1>
             </div>
         </footer>
     )
