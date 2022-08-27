@@ -13,8 +13,7 @@ export default function Footer() {
         company_name
     }
     `
-
-
+    
     const { data, error } = useSWR(profile, fetcher);
 
       if (error) return "An error has occurred.";
