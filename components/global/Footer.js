@@ -13,8 +13,10 @@ export default function Footer() {
         company_name
     }
     `
-    
-    const { data, error } = useSWR(profile, fetcher);
+
+    const { data, error } = useSWR(profile, fetcher, {
+        fallback: false
+    });
 
       if (error) return "An error has occurred.";
       if (!data) return "Loading...";
