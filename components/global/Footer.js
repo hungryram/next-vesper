@@ -13,10 +13,8 @@ export default function Footer() {
         company_name
     }
     `
-
-    const { data, error } = useSWR(profile, fetcher, {
-        fallback: false
-    });
+    
+    const { data, error } = useSWR(groq`*[_type == "profileSettings"][0]`, fetcher);
 
       if (error) return "An error has occurred.";
       if (!data) return "Loading...";
