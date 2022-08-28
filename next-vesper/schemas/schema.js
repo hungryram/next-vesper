@@ -22,6 +22,7 @@ import locations from "./documents/locations"
 import partners from "./documents/partners"
 import listings from "./documents/listing"
 
+// BLOCKS
 import social from "./blocks/social"
 import contact from "./blocks/contact"
 import location from "./blocks/location"
@@ -33,6 +34,7 @@ import headerMenu from "./blocks/headerMenu"
 import mainColors from "./blocks/mainColors"
 import imageColor from "./blocks/image-color"
 import imageGallery from "./blocks/imageGallery"
+import textColor from "./blocks/textColor"
 
 // HOME BLOCKS
 import hero from './homeSections/hero'
@@ -98,7 +100,7 @@ export default createSchema({
     // PAGE TEMPLATES
     plainPage,
     contactPage,
-
+    textColor,
     // HOME SECTIONS
     hero,
     featured,

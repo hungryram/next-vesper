@@ -2,6 +2,10 @@ export default {
     title: 'Image or Color',
     name: 'imageColor',
     type: 'object',
+    options: {
+        collapsible: true,
+        collapsed: true,
+    },
     fields: [
         {
             title: "Select background type",

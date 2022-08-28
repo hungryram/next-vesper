@@ -58,6 +58,7 @@ const homeDesign = groq`
 export async function getStaticProps() {
   const res = await sanityRes.fetch(homeDesign)
 
+
   return {
     props: {
       res
@@ -67,6 +68,9 @@ export async function getStaticProps() {
 
 export default function Home({ res }) {
   const homeSection = res.homeDesign.pageBuilder
+  const defaultText = '#e0e0e0'
+  const defaultHeader = '#ffffff'
+
 
 
   return (
@@ -153,12 +157,27 @@ export default function Home({ res }) {
 
         // BANNER
         if (section._type === 'banner') {
+          const headerColor = section.textColor?.headerColor.hex ? section.textColor?.headerColor.hex : defaultHeader
+          const textColor = section.textColor?.textColor.hex ? section.textColor?.textColor.hex : defaultText
           return (
-            <div key={section._id} className={Styles.homeBanner}>
-              <Banner
-                heading={section.heading}
-                text={section.text}
-              />
+            <div key={section._id} className={Styles.homeBanner} style={{
+              background: `${section.background.backgroundType === 'color' && section?.background?.color?.hex || section.background.backgroundType === 'image' && `url(${section.background.image ? urlFor(section?.background?.image).url() : undefined})`}`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover'
+            }}>
+              <div className="section">
+                <div className="container">
+                  <div className="md:flex">
+                    <div className="md:w-1/2">
+                      {section.heading && <h2 className="h3 mb-2" style={{color: headerColor}}>{section.heading}</h2>}
+                      {section.text && <p style={{color: textColor}}>{section.text}</p>}
+                    </div>
+                    <div className="md:w-1/2">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )
         }

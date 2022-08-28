@@ -17,7 +17,11 @@ export default {
             title: 'Background image or color',
             name: 'background',
             type: 'imageColor'
-        }
-
+        },
+        {
+            title: 'Text Color',
+            name: 'textColor',
+            type: 'textColor',
+        },
     ]
 }
