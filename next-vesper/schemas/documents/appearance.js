@@ -42,7 +42,22 @@ export default {
                     name: "quickLinks",
                     type: "array",
                     of: [{ type: "navigationItem" }]
-                  }
+                },
+                {
+                    title: 'Footer Background',
+                    name: 'footerBackground',
+                    type: 'imageColor'
+                },
+                {
+                    title: 'Header Color',
+                    name: 'headerColor',
+                    type: 'color',
+                },
+                {
+                    title: 'Text Color',
+                    name: 'textColor',
+                    type: 'color',
+                }
             ]
         }
     ]

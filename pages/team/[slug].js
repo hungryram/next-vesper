@@ -52,6 +52,8 @@ export default function TeamDetail({ team }) {
                                                 objectFit="cover"
                                                 quality={50}
                                                 alt={team.name}
+                                                placeholder="blur"
+                                                blurDataURL={urlFor(team?.image).width(50).height(50).quality(1).url()}
                                             />
                                         }
                                     </div>

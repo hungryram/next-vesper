@@ -3,6 +3,7 @@ import { groq } from 'next-sanity'
 import useSWR from 'swr'
 import Image from "next/image"
 import { PortableText } from "@portabletext/react"
+import Styles from "../../styles/footer.module.css"
 
 
 export default function Footer() {
@@ -19,9 +20,8 @@ export default function Footer() {
 
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
-    console.log(data.footer)
     return (
-        <footer className="">
+        <footer className={Styles.footer}>
             <div className="section">
                 <div className="container">
                     <div className="mx-6 py-10 text-left">
@@ -40,9 +40,7 @@ export default function Footer() {
                                     :
                                     <h3>{data.profileSettings.company_name}</h3>
                                 }
-                                <PortableText
-                                    value={data.appearances.footer.footerText}
-                                />
+
                             </div>
                             <div>
                                 <h3 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">Contact Info</h3>
@@ -59,15 +57,17 @@ export default function Footer() {
 
                             </div>
                             <div>
-                                <h3 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">Contact</h3>
-
+                                <h3 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">About</h3>
+                                <PortableText
+                                    value={data.appearances.footer.footerText}
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="text-center p-6 bg-gray-200">
-                <p className="text-sm font-light pt-0">&copy; Copyright {new Date().getFullYear()} &middot; {data.company_name} &middot; Website built by <a href="https://www.hungryram.com/" className="font-bold" target="_blank" rel="noreferrer">Hungry Ram</a></p>
+            <div className="text-center p-6">
+                <p className="text-sm font-light pt-0">&copy; Copyright {new Date().getFullYear()} &middot; {data.profileSettings.company_name} &middot; Website built by <a href="https://www.hungryram.com/" className="font-bold" target="_blank" rel="noreferrer">Hungry Ram</a></p>
             </div>
         </footer>
     )

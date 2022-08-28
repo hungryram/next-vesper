@@ -9,10 +9,12 @@ import BlogCard from "../components/templates/BlogCard"
 
 // STYLES
 import FeaturedStyles from "../styles/featuredblocks.module.css"
+import Styles from "../styles/Home.module.css"
 import { PortableText } from "@portabletext/react";
 import Intro from "../components/home/Intro";
 import Banner from "../components/home/Banner";
 import ListingCard from "../components/templates/ListingCard";
+
 
 
 const homeDesign = groq`
@@ -68,7 +70,7 @@ export default function Home({ res }) {
 
 
   return (
-    <>
+    <div className={Styles.homeSections}>
       {homeSection.map((section, i) => {
         if (section._type === 'hero') {
           return (
@@ -152,7 +154,7 @@ export default function Home({ res }) {
         // BANNER
         if (section._type === 'banner') {
           return (
-            <div key={section._id}>
+            <div key={section._id} className={Styles.homeBanner}>
               <Banner
                 heading={section.heading}
                 text={section.text}
@@ -187,6 +189,8 @@ export default function Home({ res }) {
                           height="400"
                           width="400"
                           objectFit="cover"
+                          placeholder="blur"
+                          blurDataURL={urlFor(node.image).width(50).height(50).quality(1).url()}
                         />
                         <div className="overlay"></div>
                         <div className="absolute bottom-6 left-0 right-0 text-white px-6 py-4 justify-center text-center">
@@ -267,6 +271,6 @@ export default function Home({ res }) {
         }
       })
       }
-    </>
+    </div>
   )
 }

@@ -18,7 +18,10 @@ export default function Navbar() {
     const [openMobileNav, setOpenMobileNav] = useState(false)
 
     const appearance = groq`
-    *[_type == 'appearances'][0]
+    {
+        'profileSettings': *[_type == 'profileSettings'][0],
+        'appearances': *[_type == 'appearances'][0]
+     }
     `
 
     const { data, error } = useSWR(appearance, query => sanityRes.fetch(query));
@@ -43,11 +46,11 @@ export default function Navbar() {
                     <Link href="/" className="relative cursor-pointer">
                         <a>
                         <Image
-                            src={urlFor(data.branding.logo).url()}
-                            width={300}
+                            src={urlFor(data.appearances.branding.logo).url()}
+                            width={data.appearances.branding.logoWidth}
                             height="100%"
                             objectFit="contain"
-                            alt="logo"
+                            alt={data.profileSettings.company_name}
                         />
                         </a>
                     </Link>

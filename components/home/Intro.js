@@ -2,9 +2,9 @@ import { PortableText } from "@portabletext/react";
 import urlFor from "../../lib/sanity";
 import Image from "next/image"
 
-export default function Intro({ image, content, heading, altTag, key }) {
+export default function Intro({ image, content, heading, altTag, _key }) {
     return (
-        <div className="section" key={key}>
+        <div className="section" key={_key}>
             <div className="container">
                 <div className="md:flex items-center">
                     {image &&
@@ -15,6 +15,8 @@ export default function Intro({ image, content, heading, altTag, key }) {
                                 height={500}
                                 objectFit="contain"
                                 alt={altTag}
+                                placeholder="blur"
+                                blurDataURL={urlFor(image).width(50).height(50).quality(1).url}
                             />
                         </div>
                     }

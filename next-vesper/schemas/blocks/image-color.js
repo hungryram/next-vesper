@@ -7,6 +7,7 @@ export default {
             title: "Select background type",
             name: "backgroundType",
             type: "string",
+            initialValue: 'color',
             options: {
                 list: [
                     { title: "Image", value: "image" },
@@ -24,12 +25,6 @@ export default {
         {
             title: 'Background Color',
             name: 'color',
-            type: 'color',
-            hidden: ({parent}) => parent.backgroundType !== 'color'
-        },
-        {
-            title: 'Text Color',
-            name: 'textColor',
             type: 'color',
             hidden: ({parent}) => parent.backgroundType !== 'color'
         }

@@ -14,6 +14,8 @@ export default function BlogCard({ image, title, date, excerpt, link, altTag }) 
                                 layout="fill"
                                 objectFit="cover"
                                 alt={altTag}
+                                placeholder="blur"
+                                blurDataURL={urlFor(image).width(50).height(50).quality(1).url()}
                             />
                         </div>
                         <div className="md:3/5">

@@ -52,6 +52,8 @@ export default function locationDetail({ location }) {
                                                 objectFit="cover"
                                                 quality={50}
                                                 alt={location.name}
+                                                placeholder="blur"
+                                                blurDataURL={urlFor(location?.image).width(50).height(50).quality(1).url()}
                                             />
                                         }
                                     </div>

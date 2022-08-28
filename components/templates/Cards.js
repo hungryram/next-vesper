@@ -14,6 +14,8 @@ export default function Cards({ name, image, link, _key }) {
                                 layout="fill"
                                 objectFit="cover"
                                 alt={name}
+                                placeholder="blur"
+                                blurDataURL={urlFor(image).width(50).height(50).quality(1).url()}
                             />
                             :
                             <Image src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" alt="photo coming soon" />

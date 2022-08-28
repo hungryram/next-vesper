@@ -52,6 +52,8 @@ export default function PartnerDetail({ partner }) {
                                                 objectFit="cover"
                                                 quality={50}
                                                 alt={partner.name}
+                                                placeholder="blur"
+                                                blurDataURL={urlFor(partner?.image).width(50).height(50).quality(1).url()}
                                             />
                                         }
                                     </div>
