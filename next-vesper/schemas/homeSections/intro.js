@@ -19,18 +19,46 @@ export default {
             type: 'image',
             options: {
                 hotspot: true
-            }
-        },
-        {
-            title: 'Image Alt Tag',
-            name: 'altTag',
-            type: 'string',
-            description: 'Describe your image'
+            },
+            fields: [
+                {
+                  title: 'Alternative text',
+                  name: 'alt',
+                  type: 'string',
+                  description: 'Describle your image'
+                },
+              ],
         },
         {
             title: 'Button',
             name: 'button',
-            type: 'navigationItem'
-        }
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: true
+            },
+            fields: [
+                {
+                    title: 'Button Text',
+                    name: 'buttonText',
+                    type: 'string',
+                },
+                {
+                    title: 'Button Link',
+                    name: 'buttonLink',
+                    type: 'string',
+                }
+            ]
+        },
+        {
+            title: 'Background image or color',
+            name: 'background',
+            type: 'imageColor'
+        },
+        {
+            title: 'Text Color',
+            name: 'textColor',
+            type: 'textColor',
+        },
     ]
 }

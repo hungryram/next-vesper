@@ -38,11 +38,21 @@ export default {
                         {
                             title: 'Link',
                             name: 'link',
-                            type: 'navigationItem'
+                            type: 'string'
                         }
                     ]
                 }
             ]
-        }
+        },
+        {
+            title: 'Background image or color',
+            name: 'background',
+            type: 'imageColor'
+        },
+        {
+            title: 'Text Color',
+            name: 'textColor',
+            type: 'textColor',
+        },
     ]
 }

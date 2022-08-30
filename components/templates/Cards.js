@@ -21,7 +21,7 @@ export default function Cards({ name, image, link, _key }) {
                             <Image src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" alt="photo coming soon" />
                         }
                     </div>
-                    <div className="px-2 py-4 text-left">
+                    <div className="px-2 py-4 text-left bg-white">
                         {name && <div className="text-xl mb-2 font-medium">{name}</div>}
                     </div>
                 </div>

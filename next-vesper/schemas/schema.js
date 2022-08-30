@@ -35,6 +35,7 @@ import mainColors from "./blocks/mainColors"
 import imageColor from "./blocks/image-color"
 import imageGallery from "./blocks/imageGallery"
 import textColor from "./blocks/textColor"
+import customUrl from "./blocks/customUrl"
 
 // HOME BLOCKS
 import hero from './homeSections/hero'
@@ -52,6 +53,8 @@ import subMenu from "./subBlocks/subMenu"
 // PAGE TEMPLATES
 import plainPage from './pageTypes/plain'
 import contactPage from './pageTypes/contact'
+import html from './pageTypes/html'
+import imageandText from './pageTypes/image-text'
 
 // ARRAY
 import internalLinks from "./blocks/internalLinks"
@@ -97,10 +100,13 @@ export default createSchema({
     internalLinks,
     imageColor,
     imageGallery,
+    customUrl,
     // PAGE TEMPLATES
     plainPage,
     contactPage,
     textColor,
+    html,
+    imageandText,
     // HOME SECTIONS
     hero,
     featured,

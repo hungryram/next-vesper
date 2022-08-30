@@ -19,6 +19,31 @@ export default {
             type: 'mainColors'
         },
         {
+            title: 'Sidebar',
+            name: 'sidebar',
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+            fields: [
+                {
+                    title: 'Sidebar Builder',
+                    name: 'pageBuilder',
+                    type: 'array',
+                    of: [
+                        {type: 'teamSlider'},
+                        {type: 'blogSlider'},
+                        {type: 'activeListings'},
+                        {type: 'plainPage'},
+                        {type: 'contactPage'},
+                        {type: 'codeBlock'},
+                        {type: 'imageandText'},
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Footer',
             name: 'footer',
             type: 'object',

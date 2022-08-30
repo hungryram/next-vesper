@@ -7,7 +7,7 @@ export default function BlogCard({ image, title, date, excerpt, link, altTag }) 
         <div>
             <Link href={link}>
                 <a>
-                    <div className="md:flex gap-10 items-center border hover:shadow-md transition-all ease-linear">
+                    <div className="md:flex gap-10 items-center border hover:shadow-md transition-all ease-linear bg-white">
                         <div className="md:w-2/5 relative h-64 w-full">
                             <Image
                                 src={urlFor(image).url()}

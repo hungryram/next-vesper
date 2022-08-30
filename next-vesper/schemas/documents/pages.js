@@ -21,29 +21,38 @@ export default {
             },
         },
         {
-            title: 'Page Type',
-            name: 'pageType',
+            title: 'Header Image',
+            name: 'headerImage',
+            type: 'image',
+        },
+        {
+            title: 'Page Layout',
+            name: 'pageLayout',
             type: 'string',
-            initialValue: 'plain',
+            initialValue: 'sidebar',
             options: {
                 list: [
-                    {title: 'Plain Page', value: 'plain'},
-                    {title: 'Contact', value: 'contact'},
+                    {title: 'Full Width', value: 'fullWidth'},
+                    {title: 'Sidebar', value: 'sidebar'}
                 ]
             }
         },
         {
-            title: 'Content',
-            name: 'content',
-            type: 'plainPage',
-            hidden: ({ parent }) => parent?.pageType !== 'plain'
-        },
-        {
-            title: 'Contact Page',
-            name: 'contactPage',
-            type: 'contactPage',
-            hidden: ({ parent }) => parent?.pageType !== 'contact'
-
+            title: 'Page Builder',
+            name: 'pageBuilder',
+            type: 'array',
+            of: [
+                {type: 'hero'},
+                {type: 'intro'},
+                {type: 'featured'},
+                {type: 'teamSlider'},
+                {type: 'blogSlider'},
+                {type: 'banner'},
+                {type: 'imageBlocks'},
+                {type: 'activeListings'},
+                {type: 'plainPage'},
+                {type: 'contactPage'},
+            ]
         },
         {
             title: 'Search Engine Optimization',

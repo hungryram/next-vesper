@@ -2,6 +2,7 @@ import { sanityRes } from "../../lib/sanity"
 import { groq } from 'next-sanity'
 import { PortableText } from "@portabletext/react"
 import Form from "../../components/templates/Form"
+import Sidebar from "../../components/templates/Sidebar"
 
 const blogQuery = groq`
 *[_type == 'blog' && slug.current == $slug][0]
@@ -44,10 +45,7 @@ export default function blogDetail({ blog }) {
                         }
                     </div>
                     <div className="md:w-1/3">
-                        <div className="bg-white p-4">
-                            <h3 className="h4">Send an email</h3>
-                            <Form />
-                        </div>
+                        <Sidebar />
                     </div>
                 </div>
             </div>

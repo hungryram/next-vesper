@@ -12,19 +12,13 @@ export default function Layout({ children }) {
     const appearances = groq`
     {
        'appearances': *[_type == 'appearances'][0],
-       'homeDesign': *[_type == 'homeDesign'][0]{
-        'banner': pageBuilder[@._type == 'banner'][]{
-            'headerHex': textColor.headerColor.hex,
-            'textHex': textColor.textColor.hex,
-          }
-       }
+       'homeDesign': *[_type == 'homeDesign'][0]
     }
     `
 
     const { data, error } = useSWR(appearances, fetcher)
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
-    console.log(data.homeDesign.banner)
     return (
         <>
             <Head>
@@ -34,6 +28,8 @@ export default function Layout({ children }) {
                             --footer-background-color: ${data.appearances.footer.footerBackground.color.hex};
                             --footer-header-color: ${data.appearances.footer.headerColor.hex};
                             --footer-text-color: ${data.appearances.footer.textColor.hex};
+                            --primary-button-background: ${data.appearances.mainColors.buttonBackgroundColor.hex};
+                            --primary-button-text: ${data.appearances.mainColors.buttonTextColor.hex};
                         
                         }
                     `}

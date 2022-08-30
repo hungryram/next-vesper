@@ -1,6 +1,7 @@
 import { sanityRes } from "../../lib/sanity"
 import { groq } from "next-sanity"
 import BlogCard from "../../components/templates/BlogCard"
+import Sidebar from "../../components/templates/Sidebar"
 
 const queryBlog = groq`
 *[_type == 'blog']{
@@ -45,7 +46,7 @@ export default function BlogIndex({ res }) {
                         })}
                     </div>
                     <div className="md:w-1/3">
-
+                        <Sidebar />
                     </div>
                 </div>
             </div>

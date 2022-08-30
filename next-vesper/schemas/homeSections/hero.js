@@ -22,6 +22,11 @@ export default {
             }
         },
         {
+            title: 'Text Color',
+            name: 'textColor',
+            type: 'textColor',
+        },
+        {
             title: 'Button',
             name: 'button',
             type: 'navigationItem'

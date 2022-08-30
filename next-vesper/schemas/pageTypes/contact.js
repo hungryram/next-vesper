@@ -11,7 +11,7 @@ export default {
         {
             title: 'Text',
             name: 'text',
-            type: 'text'
+            type: 'blockContent'
         }
     ]
 }

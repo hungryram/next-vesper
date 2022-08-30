@@ -9,14 +9,6 @@ export default {
             type: 'string'
         },
         {
-            title: 'Image',
-            name: 'image',
-            type: 'image',
-            options: {
-                hotspot: true
-            }
-        },
-        {
             title: 'Blocks',
             name: 'blocks',
             type: 'array',
@@ -38,6 +30,32 @@ export default {
                     ]
                 }
             ]
-        }
+        },
+        {
+            title: 'Number of Columns',
+            name: 'columns',
+            type: 'number',
+            validation: Rule => Rule.min(1).max(12)
+        },
+        {
+            title: 'Block Colors',
+            name: 'blockColors',
+            type: 'imageColor'
+        },
+        {
+            title: 'Block Text Color',
+            name: 'blockText',
+            type: 'textColor',
+        },
+        {
+            title: 'Background image or color',
+            name: 'background',
+            type: 'imageColor'
+        },
+        {
+            title: 'Text Color',
+            name: 'textColor',
+            type: 'textColor',
+        },
     ]
 }

@@ -7,12 +7,23 @@
 }
 
 .primary-button {
-  @apply py-2 px-4 mx-2 rounded-md text-white;
-  background-color: black;
+  @apply py-4 px-6 mx-2 rounded-md mx-0;
+  background-color: var(--primary-button-background);
+  color: var(--primary-button-text);
 }
 
 .accent {
   color: #aa8453;
+}
+
+div.overlay:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: hsl(0deg 0% 0% / 25%);
+  right: 0;
 }
 
 /* CONTENT */

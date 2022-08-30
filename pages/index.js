@@ -3,17 +3,20 @@ import Image from "next/image";
 import { groq } from "next-sanity"
 import urlFor from "../lib/sanity"
 import { sanityRes } from "../lib/sanity";
+
+
+// HOME TEMPLATES
+import Intro from "../components/home/Intro";
+import Banner from "../components/home/Banner";
+import ListingCard from "../components/templates/ListingCard";
+import Heading from "../components/home/Heading";
 import Hero from "../components/home/Hero";
 import Cards from "../components/templates/Cards";
 import BlogCard from "../components/templates/BlogCard"
 
 // STYLES
-import FeaturedStyles from "../styles/featuredblocks.module.css"
 import Styles from "../styles/Home.module.css"
-import { PortableText } from "@portabletext/react";
-import Intro from "../components/home/Intro";
-import Banner from "../components/home/Banner";
-import ListingCard from "../components/templates/ListingCard";
+
 
 
 
@@ -61,7 +64,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      res
+      res,
     }
   }
 }
@@ -71,11 +74,37 @@ export default function Home({ res }) {
   const defaultText = '#e0e0e0'
   const defaultHeader = '#ffffff'
 
-
-
   return (
     <div className={Styles.homeSections}>
       {homeSection.map((section, i) => {
+
+        const headerColor = {
+          color: section.textColor?.headerColor.hex ? section.textColor?.headerColor.hex : defaultHeader
+        }
+        const bodyColor = {
+          color: section.textColor?.textColor.hex ? section.textColor?.textColor.hex : defaultText
+        }
+
+        const backgroundStyles = {
+          background: `${section.background?.backgroundType === 'color' && section?.background?.color?.hex || section.background?.backgroundType === 'image' && `url(${section.background.image ? urlFor(section?.background?.image).url() : undefined})`}`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover'
+        };
+
+        const blockBackground = {
+          background: `${section.blockColors?.backgroundType === 'color' && section?.blockColors?.color?.hex || section.background?.backgroundType === 'image' && `url(${section.background.image ? urlFor(section?.background?.image).url() : undefined})`}`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover'
+        }
+
+        const blockHeaderColor = {
+          color: section.blockText?.headerColor.hex ? section.blockText?.headerColor.hex : defaultHeader
+        }
+        const blockBodyColor = {
+          color: section.blockText?.textColor.hex ? section.blockText?.textColor.hex : defaultText
+        }
+
+
         if (section._type === 'hero') {
           return (
             <div key={section._key}>
@@ -83,6 +112,7 @@ export default function Home({ res }) {
                 heading={section.heading}
                 image={section.image}
                 blurData={section.image}
+                headerColor={headerColor}
               />
             </div>
           )
@@ -90,12 +120,16 @@ export default function Home({ res }) {
 
         if (section._type === 'intro') {
           return (
-            <div key={section._key}>
+            <div key={section._key} style={backgroundStyles}>
               <Intro
                 content={section.content}
                 heading={section.heading}
                 image={section.image}
                 altTag={section.altTag}
+                headerStyle={headerColor}
+                textColor={bodyColor}
+                buttonLink={section.button.buttonLink}
+                buttonText={section.button.buttonText}
               />
             </div>
           )
@@ -105,16 +139,21 @@ export default function Home({ res }) {
         if (section._type === 'featured') {
           return (
             <>
-              <div style={{ backgroundImage: `url(${urlFor(section.image).url()})` }} key={i}>
+              <div key={i} style={backgroundStyles}>
                 <div className="section">
                   <div className="container text-center">
-                    {section.heading && <h1 className="h2">{section.heading}</h1>}
-                    <div className="md:grid-cols-3 grid-cols-1 grid mt-10 gap-1">
+                    <Heading
+                      heading={section.heading}
+                      body={section.text}
+                      headerStyle={headerColor}
+                      bodyStyle={bodyColor}
+                    />
+                    <div className={`md:grid-cols-6 grid-cols-1 grid mt-10 gap-3 justify-items-center`}>
                       {section.blocks.map((node) => {
                         return (
-                          <div className={`p-16 ${FeaturedStyles.featuredGrid}`} key={node._key}>
-                            <h3 className="h3 mb-6">{node.value}</h3>
-                            <p>{node.text}</p>
+                          <div className="p-6" key={node._key} style={blockBackground}>
+                            {node.value && <h3 className="h3 mb-6" style={blockHeaderColor}>{node.value}</h3>}
+                            {node.text && <p style={blockBodyColor}>{node.text}</p>}
                           </div>
                         )
                       })}
@@ -129,14 +168,14 @@ export default function Home({ res }) {
         // TEAM SLIDER
         if (section._type === 'teamSlider') {
           return (
-            <div className="section" key={i}>
-              <div className="container text-center">
-                {section.heading && <h1 className="h2">{section.heading}</h1>}
-                {section.text &&
-                  <PortableText
-                    value={section.text}
-                  />
-                }
+            <div className="section" key={i} style={backgroundStyles}>
+              <div className="container">
+                <Heading
+                  heading={section.heading}
+                  body={section.text}
+                  headerStyle={headerColor}
+                  bodyStyle={bodyColor}
+                />
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-4 mt-10">
                   {res.team.map((node) => {
                     return (
@@ -157,27 +196,16 @@ export default function Home({ res }) {
 
         // BANNER
         if (section._type === 'banner') {
-          const headerColor = section.textColor?.headerColor.hex ? section.textColor?.headerColor.hex : defaultHeader
-          const textColor = section.textColor?.textColor.hex ? section.textColor?.textColor.hex : defaultText
           return (
-            <div key={section._id} className={Styles.homeBanner} style={{
-              background: `${section.background.backgroundType === 'color' && section?.background?.color?.hex || section.background.backgroundType === 'image' && `url(${section.background.image ? urlFor(section?.background?.image).url() : undefined})`}`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover'
-            }}>
-              <div className="section">
-                <div className="container">
-                  <div className="md:flex">
-                    <div className="md:w-1/2">
-                      {section.heading && <h2 className="h3 mb-2" style={{color: headerColor}}>{section.heading}</h2>}
-                      {section.text && <p style={{color: textColor}}>{section.text}</p>}
-                    </div>
-                    <div className="md:w-1/2">
-
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div key={section._id} className={Styles.homeBanner} style={backgroundStyles}>
+              <Banner
+                heading={section.heading}
+                text={section.text}
+                textStyle={bodyColor}
+                headerStyle={headerColor}
+                buttonLink={section.button?.buttonLink}
+                buttonText={section.button?.buttonText}
+              />
             </div>
           )
         }
@@ -185,37 +213,37 @@ export default function Home({ res }) {
         // IMAGE BLOCKS
         if (section._type === 'imageBlocks') {
           return (
-            <div className="section" key={i}>
+            <div className="section" key={i} style={backgroundStyles}>
               <div className="container">
-                <div className="text-center md:flex justify-center">
-                  <div className="md:w-1/2">
-                    {section.heading && <h1 className="h2 mb-8">{section.heading}</h1>}
-                    {section.text &&
-                      <PortableText
-                        value={section.text}
-                      />
-                    }
-                  </div>
-                </div>
+                <Heading
+                  heading={section.heading}
+                  body={section.text}
+                  headerStyle={headerColor}
+                  bodyStyle={bodyColor}
+                />
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10 justify-center text-center">
                   {section.blocks.map((node) => {
                     return (
-                      <div className="relative overflow-hidden" key={node._key}>
-                        <Image
-                          src={urlFor(node.image).url()}
-                          alt={node.value}
-                          layout="fixed"
-                          height="400"
-                          width="400"
-                          objectFit="cover"
-                          placeholder="blur"
-                          blurDataURL={urlFor(node.image).width(50).height(50).quality(1).url()}
-                        />
-                        <div className="overlay"></div>
-                        <div className="absolute bottom-6 left-0 right-0 text-white px-6 py-4 justify-center text-center">
-                          <h3 className="h3">{node.value}</h3>
-                        </div>
-                      </div>
+                      <Link href={node.link ? node.link : ''}>
+                        <a>
+                          <div className="relative overflow-hidden" key={node._key}>
+                            <Image
+                              src={urlFor(node.image).url()}
+                              alt={node.value}
+                              layout="fixed"
+                              height="490"
+                              width="450"
+                              objectFit="cover"
+                              placeholder="blur"
+                              blurDataURL={urlFor(node.image).width(50).height(50).quality(1).url()}
+                            />
+                            <div className="overlay"></div>
+                            <div className="absolute bottom-6 left-0 right-0 text-white px-6 py-4 justify-center text-center">
+                              <h3 className="h3 text-white">{node.value}</h3>
+                            </div>
+                          </div>
+                        </a>
+                      </Link>
                     )
                   })}
                 </div>
@@ -227,16 +255,14 @@ export default function Home({ res }) {
         // BLOG SLIDER
         if (section._type === 'blogSlider') {
           return (
-            <div className="section" key={i}>
+            <div className="section" key={i} style={backgroundStyles}>
               <div className="container">
-                <div className="text-center">
-                  {section.heading && <h1 className="h2">{section.heading}</h1>}
-                  {section.text &&
-                    <PortableText
-                      value={section.text}
-                    />
-                  }
-                </div>
+                <Heading
+                  heading={section.heading}
+                  body={section.text}
+                  headerStyle={headerColor}
+                  bodyStyle={bodyColor}
+                />
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-10">
                   {res.blog.map((node, i) => {
                     return (
@@ -259,8 +285,14 @@ export default function Home({ res }) {
         // ACTIVE LISTINGS
         if (section._type === 'activeListings') {
           return (
-            <div className="section" key={i}>
+            <div className="section" key={i} style={backgroundStyles}>
               <div className="container">
+                <Heading
+                  heading={section.heading}
+                  body={section.text}
+                  headerStyle={headerColor}
+                  bodyStyle={bodyColor}
+                />
                 <div className="grid grid-cols-3">
                   {res.listings.map((node) => {
                     return (
