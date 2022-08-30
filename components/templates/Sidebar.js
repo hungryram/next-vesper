@@ -93,16 +93,17 @@ export default function Sidebar() {
                             <div className="container">
                                 <Link href={section?.link ? section?.link : ''}>
                                     <a>
-                                        <div class="relative w-full overflow-hidden">
+                                        <div className="relative w-full overflow-hidden">
                                             <Image
                                                 src={urlFor(section.image).url()}
                                                 layout="fixed"
                                                 height={400}
                                                 width={500}
                                                 objectFit="cover"
+                                                alt={section.image.altTag}
                                             />
                                             <div className="overlay"></div>
-                                            <div class="absolute w-full bottom-1/2 text-white text-center leading-4">
+                                            <div className="absolute w-full bottom-1/2 text-white text-center leading-4">
                                                 {section?.heading && <h3 className="h3 text-white">{section.heading}</h3>}
                                                 {section?.text && <p>{section.text}</p>}
                                             </div>

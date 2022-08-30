@@ -127,15 +127,17 @@ export default function Pages({ page }) {
 
                                     if (section._type === 'plainPage') {
                                         return (
-                                            <PlainPage
-                                                content={section.content}
-                                            />
+                                            <div key={i}>
+                                                <PlainPage
+                                                    content={section.content}
+                                                />
+                                            </div>
                                         )
                                     }
 
                                     if (section._type === 'contactPage') {
                                         return (
-                                            <div className="section">
+                                            <div className="section" key={i}>
                                                 <div className="container">
                                                     <Form />
                                                 </div>
@@ -217,7 +219,7 @@ export default function Pages({ page }) {
                                                     <div className="grid md:grid-cols-4 grid-cols-1 gap-4 mt-10">
                                                         {res.team.map((node) => {
                                                             return (
-                                                                <div key={node._key}>
+                                                                <div key={node._id}>
                                                                     <Cards
                                                                         name={node.name}
                                                                         image={node.image}
@@ -262,7 +264,7 @@ export default function Pages({ page }) {
                                                     <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10 justify-center text-center">
                                                         {section.blocks.map((node) => {
                                                             return (
-                                                                <Link href={node.link ? node.link : ''}>
+                                                                <Link href={node.link ? node.link : ''} key={node._id}>
                                                                     <a>
                                                                         <div className="relative overflow-hidden" key={node._key}>
                                                                             <Image

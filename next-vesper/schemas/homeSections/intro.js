@@ -47,7 +47,7 @@ export default {
                     title: 'Button Link',
                     name: 'buttonLink',
                     type: 'string',
-                }
+                },
             ]
         },
         {
