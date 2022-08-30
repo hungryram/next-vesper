@@ -224,7 +224,7 @@ export default function Home({ res }) {
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10 justify-center text-center">
                   {section.blocks.map((node) => {
                     return (
-                      <Link href={node.link ? node.link : ''}>
+                      <Link href={node.link ? node.link : ''} key={node._id}>
                         <a>
                           <div className="relative overflow-hidden" key={node._key}>
                             <Image
