@@ -39,6 +39,7 @@ export default {
                         {type: 'contactPage'},
                         {type: 'codeBlock'},
                         {type: 'imageandText'},
+                        {type: 'socialComponent'},
                     ]
                 },
             ]

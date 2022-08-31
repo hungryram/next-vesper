@@ -1,0 +1,7 @@
+.socialParent li {
+   @apply inline-block mx-1
+}
+
+.socialParent li a svg {
+    color: var(--primary-accent);
+}

@@ -25,6 +25,9 @@ export default function Layout({ children }) {
                 <style>
                     {`
                         :root {
+
+                            --primary-accent: ${data.appearances.mainColors?.primaryColor.hex};
+
                             --footer-background-color: ${data.appearances.footer.footerBackground.color.hex};
                             --footer-header-color: ${data.appearances.footer.headerColor.hex};
                             --footer-text-color: ${data.appearances.footer.textColor.hex};

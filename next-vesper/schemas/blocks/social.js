@@ -1,10 +1,7 @@
-import { MdLocalMovies } from 'react-icons/md'
-
 export default {
     title: 'Social',
     name: 'social',
     type: 'object',
-    icon: MdLocalMovies,
     options: {
         collapsible: true,
         collapsed: true
@@ -13,47 +10,52 @@ export default {
         {
             title: 'Instagram',
             name: 'instagram',
-            type: 'string',
+            type: 'url',
         },
         {
             title: 'Youtube',
             name: 'youtube',
-            type: 'string'
+            type: 'url'
         },
         {
             title: 'Facebook',
             name: 'facebook',
-            type: 'string',
+            type: 'url',
         },
         {
             title: 'Twitter',
             name: 'twitter',
-            type: 'string',
+            type: 'url',
         },
         {
             title: 'Linkedin',
             name: 'linkedin',
-            type: 'string',
+            type: 'url',
         },
         {
             title: 'Yelp',
             name: 'yelp',
-            type: 'string',
+            type: 'url',
         },
         {
             title: 'Pinterest',
             name: 'pinterest',
-            type: 'string',
+            type: 'url',
         },
         {
             title: 'Tiktok',
             name: 'tiktok',
-            type: 'string',
+            type: 'url',
         },
         {
             title: 'Reddit',
             name: 'reddit',
-            type: 'string',
+            type: 'url',
+        },
+        {
+            title: 'Zillow',
+            name: 'zillow',
+            type: 'url',
         }
     ]
 }

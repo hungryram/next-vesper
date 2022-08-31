@@ -11,6 +11,7 @@ import BlogCard from "./BlogCard"
 import Cards from "./Cards"
 import Form from "./Form"
 import Heading from "../home/Heading"
+import Social from "./Social"
 
 export default function Sidebar() {
 
@@ -82,6 +83,21 @@ export default function Sidebar() {
                                 />
                                 <Form />
 
+                            </div>
+                        </div>
+                    )
+                }
+
+                if (section._type === 'socialComponent') {
+                    return (
+                        <div className="py-6"  key={i}>
+                            <div className="container">
+                                <Heading
+                                    heading={section.heading}
+                                    body={section.text}
+                                    textAlign="text-left"
+                                />
+                                <Social />
                             </div>
                         </div>
                     )

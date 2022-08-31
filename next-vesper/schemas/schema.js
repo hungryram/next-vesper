@@ -36,6 +36,7 @@ import imageColor from "./blocks/image-color"
 import imageGallery from "./blocks/imageGallery"
 import textColor from "./blocks/textColor"
 import customUrl from "./blocks/customUrl"
+import socialComponent from "./blocks/socialComponent"
 
 // HOME BLOCKS
 import hero from './homeSections/hero'
@@ -101,6 +102,7 @@ export default createSchema({
     imageColor,
     imageGallery,
     customUrl,
+    socialComponent,
     // PAGE TEMPLATES
     plainPage,
     contactPage,

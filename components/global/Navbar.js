@@ -20,7 +20,38 @@ export default function Navbar() {
     const appearance = groq`
     {
         'profileSettings': *[_type == 'profileSettings'][0],
-        'appearances': *[_type == 'appearances'][0]
+        'appearances': *[_type == 'appearances'][0]{
+            'branding': branding {
+                logo,
+                logoWidth
+            },
+            'header': header {
+                '': mainNav->{
+                'navItems':items[]{
+                  'subMenu':subMenu[]{
+                  newTab,
+                  linkType,
+                  externalUrl,
+                  text,
+                  internalLink->{
+                  title,
+                  'slug': slug.current,
+                  _type
+            }
+            },
+                  linkType,
+                  externalUrl,
+                  text,
+                  newTab,
+                  internalLink->{
+                  title,
+                  'slug': slug.current,
+                  _type
+                }
+                }
+              }
+              }
+        }
      }
     `
 
@@ -28,6 +59,8 @@ export default function Navbar() {
 
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
+
+    const desktopMenuParentItems = `relative inline-block m-2 text-md`
 
     return (
         <>
@@ -45,63 +78,69 @@ export default function Navbar() {
                 <div className="flex-1">
                     <Link href="/" className="relative cursor-pointer">
                         <a>
-                        <Image
-                            src={urlFor(data.appearances.branding.logo).url()}
-                            width={data.appearances.branding.logoWidth}
-                            height="100%"
-                            objectFit="contain"
-                            alt={data.profileSettings.company_name}
-                        />
+                            <Image
+                                src={urlFor(data.appearances.branding.logo).url()}
+                                width={data.appearances.branding.logoWidth}
+                                height="100%"
+                                objectFit="contain"
+                                alt={data.profileSettings.company_name}
+                            />
                         </a>
                     </Link>
                 </div>
-                <ul className="flex-1 items-center text-right md:mr-10 font-bold">
-                    {data.sanityAppearances?.header?.mainNav?.items.map((link, i) => {
-                        if (link.submenuChild.length > 0) {
-                            return (
-                                <>
-                                    <li className="relative m-2"
-                                        onMouseEnter={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
-                                        <Link
-                                            aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}
-                                            target={link?.externalUrl && "_blank"}
-                                            key={i}
-                                            className="cursor-pointer flex flex-row items-center"
-                                        >
-                                            <a>{link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className={`ml-1 text-lg ${dropdownActive === link ? "rotate-180" : "rotate-0"}`} /></a>
-                                        </Link>
+                <ul className="flex-1 items-center text-right md:mr-10">
+                    {data.appearances?.header?.navItems.map((link, i) => {
 
-                                        <ul className={`absolute bottom-0 left-0 translate-y-full bg-white p-2 border text-left w-fit ${dropdownActive === link ? "visible" : "hidden"}`}>
-                                            {link.submenuChild.map((sub) => {
-                                                return (
-                                                    <>
-                                                        <li className="whitespace-nowrap">
-                                                            <Link
-                                                                onClick={() => setDropdownActive(null)}
-                                                                href={(sub.internalLink?._type === "post" && `/blog/${sub.internalLink.slug.current}`) || (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug.current}`) || (sub.internalLink?._type === "author" && `/authors/${sub.internalLink.slug.current}`) || (sub.internalLink?._type === "pages" && `/${sub.internalLink.slug.current}`) || (sub.externalUrl && `${sub.externalUrl}`)}
-                                                                aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
-                                                                target={sub?.externalUrl && "_blank"}
-                                                            >{sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}</Link>
-                                                        </li>
-                                                    </>
-                                                )
-                                            })}
-                                        </ul>
-                                    </li>
-                                </>
+                        const menuLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) || (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) || (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) || (link.internalLink?._type === "author" && `/authors/${link.internalLink.slug}`) || (link.externalUrl && `${link.externalUrl}`)
+
+
+                        if (link.subMenu?.length > 0) {
+
+                            return (
+                                <li className={desktopMenuParentItems}
+                                    onMouseEnter={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
+                                    <Link
+                                        href="/"
+                                        target={link?.externalUrl && "_blank"}
+                                        aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}
+                                    >
+                                        <a className="cursor-pointer flex flex-row items-center">
+                                            {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className={`ml-1 text-lg ${dropdownActive === link ? "rotate-180" : "rotate-0"}`} />
+                                        </a>
+                                    </Link>
+
+                                    <ul className={`absolute bottom-0 left-0 translate-y-full bg-white p-2 border text-left w-fit z-50 ${dropdownActive === link ? "visible" : "hidden"}`}>
+                                        {link.subMenu.map((sub) => {
+
+                                            const subMenuLinks = (sub.internalLink?._type === "blog" && `/blog/${sub.internalLink.slug}`) || (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug}`) || (sub.internalLink?._type === "author" && `/authors/${sub.internalLink.slug}`) || (sub.externalUrl && `${sub.externalUrl}`)
+
+                                            return (
+                                                <>
+                                                    <li className="whitespace-nowrap">
+                                                        <Link
+                                                            onClick={() => setDropdownActive(null)}
+                                                            href={subMenuLinks}
+                                                        >
+                                                            <a target={sub.newTab && '_blank'} aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}>
+                                                                {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
+                                                            </a>
+                                                        </Link>
+                                                    </li>
+                                                </>
+                                            )
+                                        })}
+                                    </ul>
+                                </li>
                             )
                         }
                         else {
                             return (
                                 <>
-                                    <li className="inline mx-5">
-                                        <Link
-                                            href={(link.internalLink?._type === "post" && `/blog/${link.internalLink.slug.current}`) || (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug.current}`) || (link.internalLink?._type === "author" && `/authors/${link.internalLink.slug.current}`) || (link.internalLink?._type === "pages" && `/${link.internalLink.slug.current}`) || (link.externalUrl && `${link.externalUrl}`)}
-                                            aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}
-                                            target={link?.externalUrl && "_blank"}
-                                        >
-                                            {link.internalLink?.name ?? link.internalLink?.title ?? link.text}
-
+                                    <li className={desktopMenuParentItems}>
+                                        <Link href={menuLinks}>
+                                            <a target={link.newTab && '_blank'} aria-label={link?.name ?? link?.title ?? link.text}>
+                                                {link.text}
+                                            </a>
                                         </Link>
                                     </li>
                                 </>
@@ -115,12 +154,16 @@ export default function Navbar() {
                 <div className="nav p-4">
                     <div className="flex items-center">
                         <div className="flex-1">
-                            <Link href="/">
-                                {data.sanityAppearances?.branding?.logo?.asset.url ?
-                                    <Image src={data.sanityAppearances.branding.logo.asset.url} width={data.sanityAppearances.branding.logoWidth} alt={data.sanityProfileSettings?.company_name} />
-                                    :
-                                    <h2 className="text-2xl">{data.sanityProfileSettings?.company_name}</h2>
-                                }
+                            <Link href="/" className="relative cursor-pointer">
+                                <a>
+                                    <Image
+                                        src={urlFor(data.appearances.branding.logo).url()}
+                                        width={data.appearances.branding.logoWidth}
+                                        height="100%"
+                                        objectFit="contain"
+                                        alt={data.profileSettings.company_name}
+                                    />
+                                </a>
                             </Link>
                         </div>
                         <div className="flex-1 text-right">
@@ -146,32 +189,41 @@ export default function Navbar() {
                 <div>
                     <div className={`absolute bg-white w-full py-4 ${openMobileNav ? "visible" : "hidden"}`}>
                         <ul style={{ listStyle: "none", padding: "0" }} className="mt-5 flex flex-col">
-                            {data.sanityAppearances?.header?.mainNav?.items.map((link, i) => {
-                                if (link.submenuChild.length > 0) {
+                            {data.appearances?.header?.navItems.map((link, i) => {
+
+                                const mobileMenuLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) || (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) || (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) || (link.internalLink?._type === "author" && `/authors/${link.internalLink.slug}`) || (link.externalUrl && `${link.externalUrl}`)
+
+
+                                if (link.subMenu?.length > 0) {
                                     return (
                                         <>
-                                            <li className="relative mx-2 my-1" onClick={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
+                                            <li className="relative my-1" onClick={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
                                                 <Link
-                                                    aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}
-                                                    target={link?.externalUrl && "_blank"}
-                                                    key={i}
-                                                    className="cursor-pointer flex flex-row items-center"
+                                                    href="/"
                                                     onClick={() => setOpenMobileNav(false)}
                                                 >
+                                                    <a className="cursor-pointer flex flex-row items-center">
                                                     {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className={`ml-1 text-lg ${dropdownActive === link ? "rotate-180" : "rotate-0"}`} />
+                                                    </a>
                                                 </Link>
 
-                                                <ul className={`relative w-full bg-white p-2 border text-left w-fit ${dropdownActive === link ? "visible" : "hidden"}`}>
-                                                    {link.submenuChild.map((sub) => {
+                                                <ul className={`relative w-full p-2 text-left ${dropdownActive === link ? "visible" : "hidden"}`}>
+                                                    {link.subMenu.map((sub) => {
+
+                                                        const subMenuLinks = (sub.internalLink?._type === "blog" && `/blog/${sub.internalLink.slug}`) || (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug}`) || (sub.internalLink?._type === "author" && `/authors/${sub.internalLink.slug}`) || (sub.externalUrl && `${sub.externalUrl}`)
+
                                                         return (
                                                             <>
-                                                                <li className="block mx-2 my-1">
+                                                                <li className="block my-1">
                                                                     <Link
                                                                         onClick={() => setOpenMobileNav(false)}
-                                                                        href={(sub.internalLink?._type === "post" && `/blog/${sub.internalLink.slug.current}`) || (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug.current}`) || (sub.internalLink?._type === "author" && `/authors/${sub.internalLink.slug.current}`) || (sub.externalUrl && `${sub.externalUrl}`)}
-                                                                        aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
-                                                                        target={sub?.externalUrl && "_blank"}
-                                                                    >{sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}</Link>
+                                                                        href={subMenuLinks}
+
+                                                                    >
+                                                                        <a aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} target={sub?.newTab && "_blank"}>
+                                                                        {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
+                                                                        </a>
+                                                                    </Link>
                                                                 </li>
                                                             </>
                                                         )
@@ -183,18 +235,18 @@ export default function Navbar() {
                                 }
                                 else {
                                     return (
-                                        <>
+                                        <li>
                                             <Link
                                                 onClick={() => setOpenMobileNav(false)}
-                                                className="mx-2 my-1 block"
-                                                href={(link.internalLink?._type === "post" && `/blog/${link.internalLink.slug.current}`) || (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug.current}`) || (link.internalLink?._type === "author" && `/authors/${link.internalLink.slug.current}`) || (link.externalUrl && `${link.externalUrl}`)}
-                                                aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}
-                                                target={link?.externalUrl && "_blank"}
+                                                className="my-1 block"
+                                                href={mobileMenuLinks}
                                             >
-                                                {link.internalLink?.name ?? link.internalLink?.title ?? link.text}
+                                                <a>
+                                                    {link?.text}
+                                                </a>
 
                                             </Link>
-                                        </>
+                                        </li>
                                     )
                                 }
                             })}

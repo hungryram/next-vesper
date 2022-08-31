@@ -139,6 +139,11 @@ export default function Pages({ page }) {
                                         return (
                                             <div className="section" key={i}>
                                                 <div className="container">
+                                                    <Heading 
+                                                        heading={section.heading}
+                                                        body={section.text}
+                                                        textAlign="text-left"
+                                                    />
                                                     <Form />
                                                 </div>
                                             </div>

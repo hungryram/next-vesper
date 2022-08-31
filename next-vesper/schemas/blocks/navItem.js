@@ -36,7 +36,7 @@ export default {
             description: 'Select pages for navigation',
             type: 'reference',
             hidden: ({ parent }) => parent?.linkType !== "internal",
-            to: [{ type: 'blog' }, { type: 'legal' }, {type: 'author'}],
+            to: [{ type: 'blog' }, { type: 'legal' }, {type: 'author'}, {type: 'pages'}],
         },
         {
             name: 'externalUrl',
@@ -45,5 +45,17 @@ export default {
             hidden: ({ parent }) => parent?.linkType !== "external", // hidden if link type is not external
             type: 'string',
         },
+        {
+            name: 'newTab',
+            title: 'Open in new tab',
+            hidden: ({ parent }) => parent?.linkType !== "external", // hidden if link type is not external
+            type: 'boolean',
+        },
+        {
+            title: 'Sub Menu',
+            name: 'subMenu',
+            type: 'array',
+            of: [{type: 'subMenu'}]
+        }
     ]
 }
