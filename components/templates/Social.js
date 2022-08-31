@@ -29,16 +29,16 @@ export default function Social() {
     return (
         <div className="py-4">
             <ul className={Styles.socialParent}>
-                {socialProfile?.facebook && <li><a href={socialProfile?.facebook} target="_blank"><AiFillFacebook className={size}/></a></li>}
-                {socialProfile?.youtube && <li><a href={socialProfile?.youtube} target="_blank"><AiFillYoutube className={size}/></a></li>}
-                {socialProfile?.instagram && <li><a href={socialProfile?.instagram} target="_blank"><AiFillInstagram className={size}/></a></li>}
-                {socialProfile?.twitter && <li><a href={socialProfile?.twitter} target="_blank"><AiFillTwitterCircle className={size}/></a></li>}
-                {socialProfile?.reddit && <li><a href={socialProfile?.reddit} target="_blank"><AiFillRedditCircle className={size}/></a></li>}
-                {socialProfile?.linkedin && <li><a href={socialProfile?.linkedin} target="_blank"><AiFillLinkedin className={size}/></a></li>}
-                {socialProfile?.yelp && <li><a href={socialProfile?.yelp} target="_blank"><FaYelp className={size}/></a></li>}
-                {socialProfile?.pinterest && <li><a href={socialProfile?.pinterest} target="_blank"><BsPinterest className={size}/></a></li>}
-                {socialProfile?.tiktok && <li><a href={socialProfile?.tiktok} target="_blank"><FaTiktok className={size}/></a></li>}
-                {socialProfile?.zillow && <li><a href={socialProfile?.zillow} target="_blank"><SiZillow className={size}/></a></li>}
+                {socialProfile?.facebook && <li><a href={socialProfile?.facebook} target="_blank" rel="noreferrer"><AiFillFacebook className={size}/></a></li>}
+                {socialProfile?.youtube && <li><a href={socialProfile?.youtube} target="_blank" rel="noreferrer"><AiFillYoutube className={size}/></a></li>}
+                {socialProfile?.instagram && <li><a href={socialProfile?.instagram} target="_blank" rel="noreferrer"><AiFillInstagram className={size}/></a></li>}
+                {socialProfile?.twitter && <li><a href={socialProfile?.twitter} target="_blank" rel="noreferrer"><AiFillTwitterCircle className={size}/></a></li>}
+                {socialProfile?.reddit && <li><a href={socialProfile?.reddit} target="_blank" rel="noreferrer"><AiFillRedditCircle className={size}/></a></li>}
+                {socialProfile?.linkedin && <li><a href={socialProfile?.linkedin} target="_blank" rel="noreferrer"><AiFillLinkedin className={size}/></a></li>}
+                {socialProfile?.yelp && <li><a href={socialProfile?.yelp} target="_blank" rel="noreferrer"><FaYelp className={size}/></a></li>}
+                {socialProfile?.pinterest && <li><a href={socialProfile?.pinterest} target="_blank" rel="noreferrer"><BsPinterest className={size}/></a></li>}
+                {socialProfile?.tiktok && <li><a href={socialProfile?.tiktok} target="_blank" rel="noreferrer"><FaTiktok className={size}/></a></li>}
+                {socialProfile?.zillow && <li><a href={socialProfile?.zillow} target="_blank" rel="noreferrer"><SiZillow className={size}/></a></li>}
             </ul>
         </div>
     )

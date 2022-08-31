@@ -104,9 +104,10 @@ export default function Navbar() {
                                     <Link
                                         href="/"
                                         target={link?.externalUrl && "_blank"}
+                                        rel={link?.externalUrl && "noreferrer"}
                                         aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}
                                     >
-                                        <a className="cursor-pointer flex flex-row items-center">
+                                        <a className="cursor-pointer flex flex-row items-center" >
                                             {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className={`ml-1 text-lg ${dropdownActive === link ? "rotate-180" : "rotate-0"}`} />
                                         </a>
                                     </Link>
@@ -123,7 +124,7 @@ export default function Navbar() {
                                                             onClick={() => setDropdownActive(null)}
                                                             href={subMenuLinks}
                                                         >
-                                                            <a target={sub.newTab && '_blank'} aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}>
+                                                            <a target={sub.newTab && '_blank'} aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} rel={sub?.externalUrl && "noreferrer"}>
                                                                 {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
                                                             </a>
                                                         </Link>
@@ -140,7 +141,7 @@ export default function Navbar() {
                                 <>
                                     <li className={desktopMenuParentItems} key={i}>
                                         <Link href={menuLinks}>
-                                            <a target={link.newTab && '_blank'} aria-label={link?.name ?? link?.title ?? link.text}>
+                                            <a target={link.newTab && '_blank'} aria-label={link?.name ?? link?.title ?? link.text} rel={link?.externalUrl && "noreferrer"}>
                                                 {link.text}
                                             </a>
                                         </Link>
@@ -222,7 +223,7 @@ export default function Navbar() {
                                                                         href={subMenuLinks}
 
                                                                     >
-                                                                        <a aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} target={sub?.newTab && "_blank"}>
+                                                                        <a aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} target={sub?.newTab && "_blank"} rel={sub?.externalUrl && "noreferrer"}>
                                                                         {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
                                                                         </a>
                                                                     </Link>
@@ -243,8 +244,8 @@ export default function Navbar() {
                                                 className="my-1 block"
                                                 href={mobileMenuLinks}
                                             >
-                                                <a>
-                                                    {link?.text}
+                                                <a rel={link?.externalUrl && "noreferrer"} aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}>
+                                                {link.internalLink?.name ?? link.internalLink?.title ?? link.text}
                                                 </a>
 
                                             </Link>
