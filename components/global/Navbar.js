@@ -97,7 +97,9 @@ export default function Navbar() {
                         if (link.subMenu?.length > 0) {
 
                             return (
-                                <li className={desktopMenuParentItems}
+                                <li 
+                                    key={i}
+                                    className={desktopMenuParentItems}
                                     onMouseEnter={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
                                     <Link
                                         href="/"
@@ -136,7 +138,7 @@ export default function Navbar() {
                         else {
                             return (
                                 <>
-                                    <li className={desktopMenuParentItems}>
+                                    <li className={desktopMenuParentItems} key={i}>
                                         <Link href={menuLinks}>
                                             <a target={link.newTab && '_blank'} aria-label={link?.name ?? link?.title ?? link.text}>
                                                 {link.text}
@@ -197,7 +199,7 @@ export default function Navbar() {
                                 if (link.subMenu?.length > 0) {
                                     return (
                                         <>
-                                            <li className="relative my-1" onClick={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
+                                            <li key={i} className="relative my-1" onClick={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
                                                 <Link
                                                     href="/"
                                                     onClick={() => setOpenMobileNav(false)}

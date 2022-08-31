@@ -79,10 +79,10 @@ export default function Home({ res }) {
       {homeSection.map((section, i) => {
 
         const headerColor = {
-          color: section.textColor?.headerColor.hex ? section.textColor?.headerColor.hex : defaultHeader
+          color: section.textColor?.headerColor?.hex ? section.textColor?.headerColor.hex : defaultHeader
         }
         const bodyColor = {
-          color: section.textColor?.textColor.hex ? section.textColor?.textColor.hex : defaultText
+          color: section.textColor?.textColor?.hex ? section.textColor?.textColor.hex : defaultText
         }
 
         const backgroundStyles = {

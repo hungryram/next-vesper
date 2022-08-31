@@ -13,6 +13,11 @@ export default {
             type: 'string'
         },
         {
+            title: 'Office Number',
+            name: 'office_number',
+            type: 'string'
+        },
+        {
             title: 'Email',
             name: 'email',
             type: 'string'

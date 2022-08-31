@@ -11,3 +11,7 @@
 .footer li {
     color: var(--footer-text-color);
 }
+
+.footer ul li {
+    @apply my-3
+}
