@@ -238,7 +238,7 @@ export default function Navbar() {
                                 }
                                 else {
                                     return (
-                                        <li>
+                                        <li key={i}>
                                             <Link
                                                 onClick={() => setOpenMobileNav(false)}
                                                 className="my-1 block"
