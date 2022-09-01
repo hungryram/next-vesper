@@ -1,7 +1,7 @@
 import urlFor from "../../lib/sanity";
 import Image from "next/image"
 
-export default function Header({ image, title }) {
+export default function Header({ image, title, altTag }) {
     return (
         <div className={`flex items-center relative h-[20em]${image ? `` : ` bg-black`}`}>
             {image &&
@@ -9,7 +9,9 @@ export default function Header({ image, title }) {
                     src={urlFor(image).url()}
                     layout="fill"
                     objectFit="cover"
-                    alt="Hero Image"
+                    alt={altTag}
+                    placeholder="blur"
+                    blurDataURL={urlFor(image).width(50).height(50).url()}
                     priority
                 />
             }

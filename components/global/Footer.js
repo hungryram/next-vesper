@@ -49,7 +49,6 @@ export default function Footer() {
 
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
-    console.log(data.appearances.footer.quickLinks)
     return (
         <footer className={Styles.footer}>
             <div className="section">

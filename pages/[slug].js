@@ -85,7 +85,6 @@ export default function Pages({ page }) {
     const pageSection = page.pageDesign.pageBuilder
     const defaultText = '#e2e2e2'
     const defaultHeader = '#222222'
-    console.log(page.pageDesign.headerImage)
     return (
         <>
             <Header

@@ -6,12 +6,12 @@ import { BiBed } from "react-icons/bi"
 import { BiBath } from "react-icons/bi"
 import { MdSquareFoot } from "react-icons/md"
 
-export default function ListingCard({ link, image, address, city, state, zipCode, bedrooms, price, bathrooms, squareFootage, propType, shortTitle, _key, status }) {
+export default function ListingCard({ link, image, address, idxAddress, city, state, zipCode, bedrooms, price, bathrooms, squareFootage, propType, shortTitle, _key, status }) {
     return (
-        <Link href={link} key={_key}>
+        <Link href={link ? link : '/'} key={_key}>
             <a>
                 <div>
-                    <div className="relative w-full h-80">
+                    <div className="relative w-full h-96">
                         {image ?
                             <Image
                                 src={urlFor(image).url()}
@@ -22,7 +22,11 @@ export default function ListingCard({ link, image, address, city, state, zipCode
                                 blurDataURL={urlFor(image).width(50).height(50).quality(1).url()}
                             />
                             :
-                            <Image src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" alt="photo coming soon" />
+                            <Image src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg"
+                                alt="photo coming soon"
+                                layout="fill"
+                                objectFit="cover"
+                            />
                         }
                         <div className="absolute bottom-0 text-white p-6">
                             <div className="flex">
@@ -31,17 +35,19 @@ export default function ListingCard({ link, image, address, city, state, zipCode
                                 </div>
                             </div>
                         </div>
-                        <div className="absolute top-0 p-6">
-                            <div className="bg-black px-4 py-1">
-                                <span className="text-sm text-white block capitalize">{status}</span>
+                        {status &&
+                            <div className="absolute top-0 p-6">
+                                <div className="bg-black px-4 py-1">
+                                    <span className="text-sm text-white block capitalize">{status}</span>
+                                </div>
                             </div>
-                            
-                        </div>
+                        }
                     </div>
                     <div className="px-6 py-4 text-left bg-white border-b">
                         {price && <span className="accent font-bold text-xl">{price}</span>}
-                        {shortTitle && <span className="text-xl block text-black my-3">{shortTitle}</span> }
+                        {shortTitle && <span className="text-xl block text-black my-3">{shortTitle}</span>}
                         {address && <div className="flex items-center mb-3"><MdLocationPin className="accent" /><h3 className="text-sm font-light">{address}, {city} {state} {zipCode}</h3></div>}
+                        {idxAddress && <div className="flex items-center mb-3"><MdLocationPin className="accent" /><h3 className="text-sm font-light">{idxAddress}</h3></div>}
                         <div className="grid grid-cols-6 gap-0">
                             {bedrooms && <div className="flex items-center"><BiBed className="mr-1" /><span className="font-light">{bedrooms}</span></div>}
                             {bathrooms && <div className="flex items-center"><BiBath className="mr-1" /><span className="font-light">{bathrooms}</span></div>}

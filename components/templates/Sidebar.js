@@ -115,6 +115,8 @@ export default function Sidebar() {
                                                 layout="fixed"
                                                 height={400}
                                                 width={500}
+                                                placeholder="blur"
+                                                blurDataURL={urlFor(section.image).width(50).height(50).url()}
                                                 objectFit="cover"
                                                 alt={section.image.altTag}
                                             />
