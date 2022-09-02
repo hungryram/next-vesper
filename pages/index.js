@@ -17,9 +17,6 @@ import BlogCard from "../components/templates/BlogCard"
 // STYLES
 import Styles from "../styles/Home.module.css"
 
-
-
-
 const homeDesign = groq`
 {
 	'homeDesign': *[_type == 'homeDesign'][0],
@@ -107,7 +104,7 @@ export default function Home({ res }) {
 
         if (section._type === 'hero') {
           return (
-            <div key={section._key}>
+            <div key={i}>
               <Hero
                 heading={section.heading}
                 image={section.image}
@@ -120,7 +117,7 @@ export default function Home({ res }) {
 
         if (section._type === 'intro') {
           return (
-            <div key={section._key} style={backgroundStyles}>
+            <div key={i} style={backgroundStyles}>
               <Intro
                 content={section.content}
                 heading={section.heading}
@@ -177,9 +174,9 @@ export default function Home({ res }) {
                   bodyStyle={bodyColor}
                 />
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-4 mt-10">
-                  {res.team.map((node) => {
+                  {res.team.map((node, i) => {
                     return (
-                      <div key={node._key}>
+                      <div key={i}>
                         <Cards
                           name={node.name}
                           image={node.image}
@@ -197,7 +194,7 @@ export default function Home({ res }) {
         // BANNER
         if (section._type === 'banner') {
           return (
-            <div key={section._id} className={Styles.homeBanner} style={backgroundStyles}>
+            <div key={i} className={Styles.homeBanner} style={backgroundStyles}>
               <Banner
                 heading={section.heading}
                 text={section.text}
@@ -222,9 +219,9 @@ export default function Home({ res }) {
                   bodyStyle={bodyColor}
                 />
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10 justify-center text-center">
-                  {section.blocks.map((node) => {
+                  {section.blocks.map((node, i) => {
                     return (
-                      <Link href={node.link ? node.link : ''} key={node._id}>
+                      <Link href={node.link ? node.link : ''} key={i}>
                         <a>
                           <div className="relative overflow-hidden" key={node._key}>
                             <Image
@@ -266,7 +263,7 @@ export default function Home({ res }) {
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-10">
                   {res.blog.map((node, i) => {
                     return (
-                      <div key={node._id}>
+                      <div key={i}>
                         <BlogCard
                           title={node.title}
                           image={node.mainImage}
@@ -294,9 +291,9 @@ export default function Home({ res }) {
                   bodyStyle={bodyColor}
                 />
                 <div className="grid grid-cols-3">
-                  {res.listings.map((node) => {
+                  {res.listings.map((node, i) => {
                     return (
-                      <div key={node._id}>
+                      <div key={i}>
                         <ListingCard
                           address={node.address}
                           city={node.city}
