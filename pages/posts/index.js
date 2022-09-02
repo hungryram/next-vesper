@@ -17,9 +17,9 @@ export async function getStaticProps() {
 export default function index({ posts }) {
   return (
     <div>
-        {posts.map((node) => {
+        {posts.map((node, i) => {
             return (
-                <Link href={`posts/` + slugify(node.title, {lower: true})}>
+                <Link href={`posts/` + slugify(node.title, {lower: true})} key={i}>
                 <a>
                     <h1>{node.title}</h1>
                 </a>
