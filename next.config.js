@@ -8,7 +8,7 @@ module.exports = nextConfig
 
 module.exports = {
   images: {
-    domains: ['cdn.sanity.io', 'res.cloudinary.com'],
+    domains: ['cdn.sanity.io', 'res.cloudinary.com', 'mediarem.metrolist.net'],
   },
   async headers() {
     return [

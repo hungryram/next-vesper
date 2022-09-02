@@ -6,7 +6,7 @@ import { BiBed } from "react-icons/bi"
 import { BiBath } from "react-icons/bi"
 import { MdSquareFoot } from "react-icons/md"
 
-export default function ListingCard({ link, image, address, idxAddress, city, state, zipCode, bedrooms, price, bathrooms, squareFootage, propType, shortTitle, _key, status }) {
+export default function ListingCard({ link, image, idxImage, address, idxAddress, city, state, zipCode, bedrooms, price, bathrooms, squareFootage, propType, shortTitle, _key, status }) {
     return (
         <Link href={link ? link : '/'} key={_key}>
             <a>
@@ -20,6 +20,22 @@ export default function ListingCard({ link, image, address, idxAddress, city, st
                                 alt={address}
                                 placeholder="blur"
                                 blurDataURL={urlFor(image).width(50).height(50).quality(1).url()}
+                            />
+                            :
+                            <Image src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg"
+                                alt="photo coming soon"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                        }
+                        {idxImage ?
+                            <Image
+                                src={idxImage}
+                                layout="fill"
+                                objectFit="cover"
+                                alt={address ? address : idxAddress}
+                                placeholder="blur"
+                                blurDataURL={idxImage}
                             />
                             :
                             <Image src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg"
