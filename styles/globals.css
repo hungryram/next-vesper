@@ -26,6 +26,16 @@ div.overlay:after {
   right: 0;
 }
 
+div.home-image-overlay:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 5px;
+  left: 0;
+  background: hsl(0deg 0% 0% / 25%);
+  right: 0;
+}
+
 /* CONTENT */
 
 body {

@@ -145,7 +145,7 @@ export default function Home({ res }) {
                       headerStyle={headerColor}
                       bodyStyle={bodyColor}
                     />
-                    <div className={`md:grid-cols-6 grid-cols-1 grid mt-10 gap-3 justify-items-center`}>
+                    <div className={`grid md:grid-cols-${section.columns} grid-cols-1 mt-10 gap-3`}>
                       {section.blocks.map((node) => {
                         return (
                           <div className="p-6" key={node._key} style={blockBackground}>
@@ -218,7 +218,7 @@ export default function Home({ res }) {
                   headerStyle={headerColor}
                   bodyStyle={bodyColor}
                 />
-                <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10 justify-center text-center">
+                <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10">
                   {section.blocks.map((node, i) => {
                     return (
                       <Link href={node.link ? node.link : ''} key={i}>
@@ -234,7 +234,7 @@ export default function Home({ res }) {
                               placeholder="blur"
                               blurDataURL={urlFor(node.image).width(50).height(50).quality(1).url()}
                             />
-                            <div className="overlay"></div>
+                            <div className="home-image-overlay"></div>
                             <div className="absolute bottom-6 left-0 right-0 text-white px-6 py-4 justify-center text-center">
                               <h3 className="h3 text-white">{node.value}</h3>
                             </div>

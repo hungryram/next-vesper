@@ -1,3 +1,5 @@
+import Header from '../../components/templates/Header'
+
 const slugify = require('slugify')
 export async function getStaticPaths() {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts`)
@@ -35,9 +37,13 @@ export async function getStaticProps(context) {
 
 export default function PostDetail({ post }) {
   return (
-    <div>
+    <>
+    <Header
+        title={post.title}
+    />
+        <div>
         <h1 className="text-4xl">{post.title}</h1>
         <div>{post.body}</div>
-    </div>
+    </div></>
   )
 }

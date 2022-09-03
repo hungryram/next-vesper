@@ -90,13 +90,14 @@ export default function Pages({ page }) {
             <Header
                 title={page.pageDesign.title}
                 image={page.pageDesign.headerImage}
+                altTag={page.pageDesign.headerImage.altTag}
             />
             <div className="section">
                 <div className="container">
                     <div className="md:flex gap-10">
                         <div className={page.pageDesign.pageLayout === 'sidebar' ? 'md:w-2/3' : 'w-full'}>
                             <div className={Styles.homeSections}>
-                                {pageSection.map((section, i) => {
+                                {pageSection.map((section) => {
 
                                     const headerColor = {
                                         color: section.textColor?.headerColor.hex ? section.textColor?.headerColor.hex : defaultHeader
@@ -126,17 +127,27 @@ export default function Pages({ page }) {
 
                                     if (section._type === 'plainPage') {
                                         return (
-                                            <div key={i}>
                                                 <PlainPage
                                                     content={section.content}
+                                                    key={section._key}
                                                 />
+                                        )
+                                    }
+
+                                    if (section._type === 'testimonialBlock') {
+                                        return (
+                                            <div key={section._key}>
+                                                <div className="border p-4 my-2">
+                                                    <div className="mb-6">{section.testimonial && <p>{section.testimonial}</p>}</div>
+                                                    {section.name && <em className="font-medium">— {section.name}</em>}
+                                                </div>
                                             </div>
                                         )
                                     }
 
                                     if (section._type === 'contactPage') {
                                         return (
-                                            <div className="section" key={i}>
+                                            <div className="section" key={section._key}>
                                                 <div className="container">
                                                     <Heading 
                                                         heading={section.heading}
@@ -182,8 +193,7 @@ export default function Pages({ page }) {
                                     // FEATURED BLOCKS
                                     if (section._type === 'featured') {
                                         return (
-                                            <>
-                                                <div key={i} style={backgroundStyles}>
+                                                <div style={backgroundStyles} key={section._key}>
                                                     <div className="section">
                                                         <div className="container text-center">
                                                             <Heading
@@ -205,14 +215,13 @@ export default function Pages({ page }) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </>
                                         )
                                     }
 
                                     // TEAM SLIDER
                                     if (section._type === 'teamSlider') {
                                         return (
-                                            <div className="section" key={i} style={backgroundStyles}>
+                                            <div className="section" style={backgroundStyles} key={section._key}>
                                                 <div className="container">
                                                     <Heading
                                                         heading={section.heading}
@@ -241,7 +250,7 @@ export default function Pages({ page }) {
                                     // BANNER
                                     if (section._type === 'banner') {
                                         return (
-                                            <div key={section._id} className={Styles.homeBanner} style={backgroundStyles}>
+                                            <div key={section._key} className={Styles.homeBanner} style={backgroundStyles}>
                                                 <Banner
                                                     heading={section.heading}
                                                     text={section.text}
@@ -257,7 +266,7 @@ export default function Pages({ page }) {
                                     // IMAGE BLOCKS
                                     if (section._type === 'imageBlocks') {
                                         return (
-                                            <div className="section" key={i} style={backgroundStyles}>
+                                            <div className="section" style={backgroundStyles} key={section._key}>
                                                 <div className="container">
                                                     <Heading
                                                         heading={section.heading}
@@ -299,7 +308,7 @@ export default function Pages({ page }) {
                                     // BLOG SLIDER
                                     if (section._type === 'blogSlider') {
                                         return (
-                                            <div className="section" key={i} style={backgroundStyles}>
+                                            <div className="section" style={backgroundStyles} key={section._key}>
                                                 <div className="container">
                                                     <Heading
                                                         heading={section.heading}
@@ -329,7 +338,7 @@ export default function Pages({ page }) {
                                     // ACTIVE LISTINGS
                                     if (section._type === 'activeListings') {
                                         return (
-                                            <div className="section" key={i} style={backgroundStyles}>
+                                            <div className="section" style={backgroundStyles} key={section._key}>
                                                 <div className="container">
                                                     <Heading
                                                         heading={section.heading}

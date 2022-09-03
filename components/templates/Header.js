@@ -16,7 +16,7 @@ export default function Header({ image, title, altTag }) {
                 />
             }
             <div className="overlay"></div>
-            <div className="container absolute top-1/3 bottom-0 left-0 right-0 text-white text-center">
+            <div className="container absolute top-2/3 bottom-0 left-0 right-0 text-white text-center">
                 {title && <h1 className="md:text-5xl text-3xl font-medium text-white">{title}</h1>}
             </div>
         </div>

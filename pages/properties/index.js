@@ -54,7 +54,6 @@ export async function getServerSideProps() {
 }
 
 export default function PropertyIndex({ listingInfo }) {
-    console.log(listingInfo)
   return (
     <div className="section">
         <div className="container">

@@ -18,6 +18,7 @@ export default function Footer() {
     const profile = groq`
     {
         'profileSettings': *[_type == 'profileSettings'][0]{
+            company_name,
             contact_information {
                 ...
             },

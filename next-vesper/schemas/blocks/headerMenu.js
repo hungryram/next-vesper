@@ -17,8 +17,13 @@ export default {
         },
         {
             name: 'headerColor',
-            title: 'Header color',
+            title: 'Header Color',
             type: 'color'
-          }
+        },
+        {
+            name: 'navColor',
+            title: 'Navigation Text Color',
+            type: 'color'
+        }
     ]
 }

@@ -24,6 +24,17 @@ export default {
             title: 'Header Image',
             name: 'headerImage',
             type: 'image',
+            options: {
+                hotspot: true
+            },
+            fields: [
+                {
+                    title: 'Alt Tag',
+                    name: 'altTag',
+                    type: 'string',
+                    description: 'Describe your image'
+                }
+            ]
         },
         {
             title: 'Page Layout',
@@ -45,6 +56,7 @@ export default {
                 {type: 'hero'},
                 {type: 'intro'},
                 {type: 'featured'},
+                {type: 'testimonialBlock'},
                 {type: 'teamSlider'},
                 {type: 'blogSlider'},
                 {type: 'banner'},

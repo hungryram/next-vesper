@@ -60,6 +60,9 @@ import imageandText from './pageTypes/image-text'
 // ARRAY
 import internalLinks from "./blocks/internalLinks"
 
+// PAGEBUILDER
+import testimonialblocks from './pagebuilder/testimonialblocks'
+
 
 
 
@@ -109,6 +112,8 @@ export default createSchema({
     textColor,
     html,
     imageandText,
+    // PAGEBUILDER
+    testimonialblocks,
     // HOME SECTIONS
     hero,
     featured,

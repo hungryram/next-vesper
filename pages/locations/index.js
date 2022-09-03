@@ -1,6 +1,7 @@
 import { sanityRes } from "../../lib/sanity"
 import { groq } from "next-sanity"
 import Cards from "../../components/templates/Cards"
+import Header from "../../components/templates/Header"
 
 const queryLocation = groq`
 *[_type == 'locations']{
@@ -23,7 +24,11 @@ export async function getStaticProps() {
 
 export default function LocationIndex({ res }) {
   return (
-    <div className="section">
+    <>
+    <Header
+        title={`Location${res.length < 1 ? 's' : ''}`}
+    />
+        <div className="section">
         <div className="container">
             <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
             {res.map((node) => {
@@ -39,5 +44,6 @@ export default function LocationIndex({ res }) {
             </div>
         </div>
     </div>
+    </>
   )
 }

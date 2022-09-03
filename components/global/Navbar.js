@@ -11,6 +11,8 @@ import { BiCaretDown } from "react-icons/bi"
 import { IconContext } from "react-icons/lib/cjs/iconContext";
 import urlFor from "../../lib/sanity";
 
+import Styles from "../../styles/header.module.css"
+
 export default function Navbar() {
     const [active, setActive] = useState(true);
 
@@ -60,21 +62,15 @@ export default function Navbar() {
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
 
-    const desktopMenuParentItems = `relative inline-block m-2 text-md`
+    const desktopMenuParentItems = `relative inline-block mx-4 text-md`
 
     return (
         <>
-            <div className="text-gray-300 py-4 text-sm font-light" style={{ backgroundColor: '#1b1a1a' }}>
-                <div className="md:px-10">
-                    <ul>
-                    </ul>
-                </div>
-            </div>
             <nav
-                className="md:flex items-center justify-center md:px-10 md:visible hidden h-22"
-                style={{ borderBottom: '1px solid #eee' }}
+                className={Styles.navbar}
                 onMouseLeave={() => setDropdownActive(null)}
             >
+                <div className="container md:flex items-center justify-center md:px-10 md:visible hidden">
                 <div className="flex-1">
                     <Link href="/" className="relative cursor-pointer">
                         <a>
@@ -88,7 +84,7 @@ export default function Navbar() {
                         </a>
                     </Link>
                 </div>
-                <ul className="flex-1 items-center text-right md:mr-10">
+                <ul className="items-center text-right md:mr-10 flex justify-end">
                     {data.appearances?.header?.navItems.map((link, i) => {
 
                         const menuLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) || (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) || (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) || (link.internalLink?._type === "author" && `/authors/${link.internalLink.slug}`) || (link.externalUrl && `${link.externalUrl}`)
@@ -97,7 +93,7 @@ export default function Navbar() {
                         if (link.subMenu?.length > 0) {
 
                             return (
-                                <li 
+                                <li
                                     key={i}
                                     className={desktopMenuParentItems}
                                     onMouseEnter={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
@@ -107,12 +103,12 @@ export default function Navbar() {
                                         rel={link?.externalUrl && "noreferrer"}
                                         aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}
                                     >
-                                        <a className="cursor-pointer flex flex-row items-center" >
-                                            {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className={`ml-1 text-lg ${dropdownActive === link ? "rotate-180" : "rotate-0"}`} />
+                                        <a className={`cursor-pointer flex flex-row items-center py-10 ${Styles.navItems}`}>
+                                            {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className="ml-1 text-lg" />
                                         </a>
                                     </Link>
 
-                                    <ul className={`absolute bottom-0 left-0 translate-y-full bg-white p-2 border text-left w-fit z-50 ${dropdownActive === link ? "visible" : "hidden"}`}>
+                                    <ul className={`absolute bottom-0 left-0 translate-y-full bg-white p-2 border text-left min-w-[200px] z-50 ${dropdownActive === link ? "visible" : "hidden"}`}>
                                         {link.subMenu.map((sub, i) => {
 
                                             const subMenuLinks = (sub.internalLink?._type === "blog" && `/blog/${sub.internalLink.slug}`) || (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug}`) || (sub.internalLink?._type === "author" && `/authors/${sub.internalLink.slug}`) || (sub.externalUrl && `${sub.externalUrl}`)
@@ -121,7 +117,7 @@ export default function Navbar() {
                                                 <>
                                                     <li className="whitespace-nowrap" key={i}>
                                                         <Link href={subMenuLinks}>
-                                                            <a target={sub.newTab && '_blank'} aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} rel={sub?.externalUrl && "noreferrer"} onClick={() => setDropdownActive(null)}>
+                                                            <a target={sub.newTab && '_blank'} aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} rel={sub?.externalUrl && "noreferrer"} onClick={() => setDropdownActive(null)} className="py-1 block">
                                                                 {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
                                                             </a>
                                                         </Link>
@@ -138,7 +134,7 @@ export default function Navbar() {
                                 <>
                                     <li className={desktopMenuParentItems} key={i}>
                                         <Link href={menuLinks}>
-                                            <a target={link.newTab && '_blank'} aria-label={link?.name ?? link?.title ?? link.text} rel={link?.externalUrl && "noreferrer"}>
+                                            <a target={link.newTab && '_blank'} aria-label={link?.name ?? link?.title ?? link.text} rel={link?.externalUrl && "noreferrer"} className={`md:py-12 ${Styles.navItems}`}>
                                                 {link.text}
                                             </a>
                                         </Link>
@@ -147,7 +143,15 @@ export default function Navbar() {
                             )
                         }
                     })}
+                    <li className={desktopMenuParentItems}>
+                        <Link href="/contact">
+                            <a aria-label="" rel="" className="primary-button">
+                                <span>Call to Action</span>
+                            </a>
+                        </Link>
+                    </li>
                 </ul>
+                </div>
             </nav>
 
             <div className="z-50 relative md:hidden">
@@ -200,7 +204,7 @@ export default function Navbar() {
                                             <li key={i} className="relative my-1" onClick={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
                                                 <Link href="/">
                                                     <a className="cursor-pointer flex flex-row items-center" onClick={() => setOpenMobileNav(false)}>
-                                                    {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className={`ml-1 text-lg ${dropdownActive === link ? "rotate-180" : "rotate-0"}`} />
+                                                        {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className="ml-1 text-lg" />
                                                     </a>
                                                 </Link>
 
@@ -214,7 +218,7 @@ export default function Navbar() {
                                                                 <li className="block my-1">
                                                                     <Link href={subMenuLinks}>
                                                                         <a aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} target={sub?.newTab && "_blank"} rel={sub?.externalUrl && "noreferrer"} onClick={() => setOpenMobileNav(false)}>
-                                                                        {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
+                                                                            {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
                                                                         </a>
                                                                     </Link>
                                                                 </li>
@@ -231,7 +235,7 @@ export default function Navbar() {
                                         <li key={i}>
                                             <Link className="my-1 block" href={mobileMenuLinks}>
                                                 <a rel={link?.externalUrl && "noreferrer"} aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text} onClick={() => setOpenMobileNav(false)}>
-                                                {link.internalLink?.name ?? link.internalLink?.title ?? link.text}
+                                                    {link.internalLink?.name ?? link.internalLink?.title ?? link.text}
                                                 </a>
 
                                             </Link>

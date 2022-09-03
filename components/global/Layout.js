@@ -33,6 +33,9 @@ export default function Layout({ children }) {
                             --footer-text-color: ${data.appearances.footer.textColor.hex};
                             --primary-button-background: ${data.appearances.mainColors.buttonBackgroundColor.hex};
                             --primary-button-text: ${data.appearances.mainColors.buttonTextColor.hex};
+
+                            --header-background-color: ${data.appearances.header?.headerColor?.hex ? data.appearances.header?.headerColor?.hex : 'transparent'};
+                            --header-navigation-color: ${data.appearances.header.navColor.hex};
                         
                         }
                     `}

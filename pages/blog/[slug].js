@@ -3,6 +3,7 @@ import { groq } from 'next-sanity'
 import { PortableText } from "@portabletext/react"
 import Form from "../../components/templates/Form"
 import Sidebar from "../../components/templates/Sidebar"
+import Header from "../../components/templates/Header"
 
 const blogQuery = groq`
 *[_type == 'blog' && slug.current == $slug][0]
@@ -34,7 +35,12 @@ export async function getStaticProps(context) {
 export default function blogDetail({ blog }) {
 
     return (
-        <div className="section">
+        <>
+        <Header
+            title={blog.title}
+            image={blog.mainImage}
+        />
+                <div className="section">
             <div className="container">
                 <div className="md:flex gap-10">
                     <div className="md:w-2/3">
@@ -50,5 +56,6 @@ export default function blogDetail({ blog }) {
                 </div>
             </div>
         </div>
+        </>
     )
 }

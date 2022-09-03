@@ -22,7 +22,7 @@ export default function Hero({ image, heading, subtitle, _key, blurData, bodyCol
                 />
             }
             <div className="overlay"></div>
-            <div className="container absolute top-1/3 bottom-0 left-0 right-0 text-white text-center">
+            <div className="container absolute top-1/2 bottom-0 left-0 right-0 text-white text-center">
                 <h1 className="md:text-5xl text-3xl font-medium" style={headerColor}>{heading}</h1>
                 <div style={bodyColor}>
                     <PortableText
