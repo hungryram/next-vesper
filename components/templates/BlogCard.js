@@ -19,9 +19,11 @@ export default function BlogCard({ image, title, date, excerpt, link, altTag }) 
                             />
                         </div>
                         <div className="md:3/5">
+                            <div className="p-4">
                             <h2 className="h3">{title}</h2>
                             {date && <span>{date}</span>}
                             {excerpt && <p className="mt-6">{excerpt}</p>}
+                            </div>
                         </div>
                     </div>
                 </a>

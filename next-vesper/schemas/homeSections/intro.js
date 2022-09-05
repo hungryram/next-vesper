@@ -25,7 +25,7 @@ export default {
                   title: 'Alternative text',
                   name: 'alt',
                   type: 'string',
-                  description: 'Describle your image'
+                  description: 'Describe your image'
                 },
               ],
         },

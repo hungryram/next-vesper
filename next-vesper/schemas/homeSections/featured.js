@@ -35,6 +35,7 @@ export default {
             title: 'Number of Columns',
             name: 'columns',
             type: 'number',
+            description: 'Only applies to large screens',
             validation: Rule => Rule.min(1).max(12)
         },
         {

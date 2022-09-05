@@ -5,6 +5,8 @@ import urlFor from "../../lib/sanity"
 import { BiMobileAlt, BiEnvelope, BiGlobe } from "react-icons/bi"
 import Form from "../../components/templates/Form"
 import Image from "next/image"
+import Header from "../../components/templates/Header"
+import Seo from "../../components/global/Seo"
 
 const partnerQuery = groq`
 *[_type == 'partners' && slug.current == $slug][0]
@@ -37,7 +39,16 @@ export async function getStaticProps(context) {
 export default function PartnerDetail({ partner }) {
 
     return (
-        <div className="section">
+        <>
+        <Seo
+            title={partner.seo.title_tag}
+            description={partner.seo.meta_description}
+            image={urlFor(partner?.image).quality(50).url()}
+        />
+        <Header
+            title={partner.name}
+        />
+                <div className="section">
             <div className="container">
                 <div className="md:flex gap-10">
                     <div className="md:w-2/3">
@@ -69,7 +80,7 @@ export default function PartnerDetail({ partner }) {
                                     </div>
                                     <div className="mt-14">
                                         <a href={`mailto:${partner.contactInformation.email}`} className="primary-button text-white">Send an Email</a>
-                                        <a href={`tel:${partner.contactInformation.phoneNumber}`} className="bg-transparent text-black border py-2 px-4 rounded-md border-black">Call</a>
+                                        <a href={`tel:${partner.contactInformation.phoneNumber}`} className="secondary-button">Call</a>
                                     </div>
                                 </div>
                             </div>
@@ -92,5 +103,6 @@ export default function PartnerDetail({ partner }) {
                 </div>
             </div>
         </div>
+        </>
     )
 }

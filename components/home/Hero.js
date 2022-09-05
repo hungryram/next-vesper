@@ -1,8 +1,9 @@
 import { PortableText } from "@portabletext/react"
 import Image from "next/image"
 import urlFor from "../../lib/sanity"
+import PrimaryLink from "../templates/PrimaryLink"
 
-export default function Hero({ image, heading, subtitle, _key, blurData, bodyColor, headerColor }) {
+export default function Hero({ image, heading, subtitle, _key, blurData, bodyColor, headerColor, buttonLink, buttonText }) {
     return (
         <div className="flex items-center relative h-screen" key={_key}>
             {image ?
@@ -22,11 +23,18 @@ export default function Hero({ image, heading, subtitle, _key, blurData, bodyCol
                 />
             }
             <div className="overlay"></div>
-            <div className="container absolute top-1/2 bottom-0 left-0 right-0 text-white text-center">
+            <div className="container absolute top-1/2 left-0 right-0 text-center -mt-20">
                 <h1 className="md:text-5xl text-3xl font-medium" style={headerColor}>{heading}</h1>
-                <div style={bodyColor}>
-                    <PortableText
-                        value={subtitle}
+                {subtitle &&
+                    <div className="mt-4 text-lg" style={bodyColor}>
+                        <p>{subtitle}</p>
+                    </div>
+                }
+                <div className="mt-16">
+                    <PrimaryLink
+                        buttonType="primary-button"
+                        buttonLink={buttonLink}
+                        buttonText={buttonText}
                     />
                 </div>
             </div>

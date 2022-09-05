@@ -19,6 +19,7 @@ import PlainPage from "../components/templates/PlainPage";
 import Form from "../components/templates/Form";
 import Sidebar from "../components/templates/Sidebar";
 import Header from "../components/templates/Header";
+import Seo from "../components/global/Seo";
 
 const pageQuery = groq`
 {
@@ -87,6 +88,11 @@ export default function Pages({ page }) {
     const defaultHeader = '#222222'
     return (
         <>
+        <Seo
+            title={page.pageDesign.seo?.title_tag}
+            description={page.pageDesign.seo?.meta_description}
+            image={urlFor(page.pageDesign?.headerImage).quality(50).url()}
+        />
             <Header
                 title={page.pageDesign.title}
                 image={page.pageDesign.headerImage}

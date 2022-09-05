@@ -2,14 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 25%;
+  @apply mx-4
+}
+
+@media (max-width:768px) {
+  div.embla__slide {
+    flex: 0 0 100%;
+  }
+}
+
 .section {
   @apply py-20
 }
 
 .primary-button {
-  @apply py-4 px-6 mx-2 rounded-md mx-0;
+  @apply py-4 px-6 mx-2 rounded-md;
   background-color: var(--primary-button-background);
   color: var(--primary-button-text);
+}
+
+.secondary-button {
+  @apply py-4 px-6 mx-2 rounded-md border-black border text-black bg-transparent;
 }
 
 .accent {

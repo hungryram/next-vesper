@@ -1,4 +1,5 @@
 import React from 'react'
+import Header from '../../components/templates/Header'
 import ListingCard from '../../components/templates/ListingCard'
 import { idxConnection } from '../../lib/client'
 import { formatPrice } from '../../lib/client'
@@ -55,7 +56,11 @@ export async function getServerSideProps() {
 
 export default function PropertyIndex({ listingInfo }) {
   return (
-    <div className="section">
+    <>
+    <Header
+        title="Properties"
+    />
+        <div className="section">
         <div className="container">
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
                 {listingInfo.map((listing) => {
@@ -68,12 +73,13 @@ export default function PropertyIndex({ listingInfo }) {
                             squareFootage={listing.details.squareFeet}
                             price={formatPrice.format(listing.price)}
                             idxImage={listing.photos.featuredImage}
-                            link={'/properties/' + listing._id}
+                            link={`/properties/${listing._id}/${listing.slug}`}
                         />
                     )
                 })}
             </div>
         </div>
     </div>
+    </>
   )
 }

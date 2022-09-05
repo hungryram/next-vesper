@@ -60,12 +60,12 @@ export default function Form({ formName, subject, source }) {
                         </div>
                     </div>
                     <div>
-                        <p className="m-1 text-sm text-black text-center">By submitting the form with your information above you are agreeing to our <Link href="/legal/terms-and-conditions" className="accent font-bold">Terms and Conditions</Link> and <Link href="/legal/privacy-policy/" className="accent font-bold">Privacy Policy</Link></p>
+                        <p className="m-1 text-sm text-black">By submitting the form with your information above you are agreeing to our <Link href="/legal/terms-and-conditions" className="accent font-bold">Terms and Conditions</Link> and <Link href="/legal/privacy-policy/" className="accent font-bold">Privacy Policy</Link></p>
                     </div>
-                    <div className="py-2 text-center sm:px-6">
+                    <div className="mt-6">
                         <button
                             type="submit"
-                            className="primary-button px-20 w-full hover:bg-black hover:text-white transition-all ease-in"
+                            className="primary-button px-20 w-1/2 hover:bg-black hover:text-white transition-all ease-in"
                         >
                             Submit
                         </button>

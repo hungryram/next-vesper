@@ -24,6 +24,16 @@ export default {
             name: 'navColor',
             title: 'Navigation Text Color',
             type: 'color'
+        },
+        {
+            title: 'Call to Action Button Text',
+            name: 'ctaText',
+            type: 'string',
+        },
+        {
+            title: 'Call to Action Button Link',
+            name: 'ctaLink',
+            type: 'string'
         }
     ]
 }

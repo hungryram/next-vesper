@@ -42,7 +42,12 @@ export default function Footer() {
        }
        }
      }
-     }
+     },
+'legal': *[_type == 'legal']{
+  title,
+  'slug': slug.current,
+  _id
+}
      }
     `
 
@@ -110,6 +115,17 @@ export default function Footer() {
             </div>
             <div className="text-center p-6">
                 <p className="text-sm font-light pt-0">&copy; Copyright {new Date().getFullYear()} &middot; {data.profileSettings.company_name} &middot; Website built by <a href="https://www.hungryram.com/" className="font-bold" target="_blank" rel="noreferrer">Hungry Ram</a></p>
+                <ul>
+                    {data.legal.map((node) => {
+                        return (
+                            <li className="inline text-sm mx-2" key={node._id}>
+                                <Link href={`/legal/${node.slug}`}>
+                                    <a>{node.title}</a>
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
             </div>
         </footer>
     )

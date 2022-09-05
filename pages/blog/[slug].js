@@ -1,9 +1,11 @@
-import { sanityRes } from "../../lib/sanity"
+import urlFor, { sanityRes } from "../../lib/sanity"
 import { groq } from 'next-sanity'
 import { PortableText } from "@portabletext/react"
 import Form from "../../components/templates/Form"
 import Sidebar from "../../components/templates/Sidebar"
 import Header from "../../components/templates/Header"
+import Seo from "../../components/global/Seo"
+
 
 const blogQuery = groq`
 *[_type == 'blog' && slug.current == $slug][0]
@@ -36,9 +38,15 @@ export default function blogDetail({ blog }) {
 
     return (
         <>
+        <Seo
+            title={blog.seo?.title_tag}
+            description={blog.seo?.meta_description}
+            image={urlFor(blog?.mainImage).quality(50).url()}
+            ogType="article"
+        />
         <Header
-            title={blog.title}
-            image={blog.mainImage}
+            title={blog?.title}
+            image={blog?.mainImage}
         />
                 <div className="section">
             <div className="container">

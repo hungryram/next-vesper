@@ -17,6 +17,10 @@ import BlogCard from "../components/templates/BlogCard"
 // STYLES
 import Styles from "../styles/Home.module.css"
 
+// SLIDER
+import useEmblaCarousel from 'embla-carousel-react'
+
+
 const homeDesign = groq`
 {
 	'homeDesign': *[_type == 'homeDesign'][0],
@@ -70,7 +74,7 @@ export default function Home({ res }) {
   const homeSection = res.homeDesign.pageBuilder
   const defaultText = '#e0e0e0'
   const defaultHeader = '#ffffff'
-
+  const [emblaRef] = useEmblaCarousel()
   return (
     <div className={Styles.homeSections}>
       {homeSection.map((section, i) => {
@@ -101,19 +105,30 @@ export default function Home({ res }) {
           color: section.blockText?.textColor.hex ? section.blockText?.textColor.hex : defaultText
         }
 
+        const bannerButton = {
+          backgroundColor: section.button?.buttonBackground?.hex,
+          color: section.button?.buttonTextColor?.hex
+        }
+
+
 
         if (section._type === 'hero') {
           return (
             <div key={i}>
               <Hero
                 heading={section.heading}
+                subtitle={section.subtitle}
                 image={section.image}
                 blurData={section.image}
                 headerColor={headerColor}
+                bodyColor={bodyColor}
+                buttonLink={section.button.buttonLink}
+                buttonText={section.button.buttonText}
               />
             </div>
           )
         }
+
 
         if (section._type === 'intro') {
           return (
@@ -145,7 +160,7 @@ export default function Home({ res }) {
                       headerStyle={headerColor}
                       bodyStyle={bodyColor}
                     />
-                    <div className={`grid md:grid-cols-${section.columns} grid-cols-1 mt-10 gap-3`}>
+                    <div className={`grid lg:grid-cols-${section.columns} md:grid-cols-2 grid-cols-1 mt-10 gap-3 inline-flex justify-center`}>
                       {section.blocks.map((node) => {
                         return (
                           <div className="p-6" key={node._key} style={blockBackground}>
@@ -173,18 +188,22 @@ export default function Home({ res }) {
                   headerStyle={headerColor}
                   bodyStyle={bodyColor}
                 />
-                <div className="grid md:grid-cols-4 grid-cols-1 gap-4 mt-10">
-                  {res.team.map((node, i) => {
-                    return (
-                      <div key={i}>
-                        <Cards
-                          name={node.name}
-                          image={node.image}
-                          link={'/team/' + node.slug}
-                        />
-                      </div>
-                    )
-                  })}
+                <div>
+                  <div className="embla mt-16" ref={emblaRef}>
+                    <div className="embla__container">
+                      {res.team.map((node, i) => {
+                        return (
+                          <div key={i} className="embla__slide">
+                            <Cards
+                              name={node.name}
+                              image={node.image}
+                              link={'/team/' + node.slug}
+                            />
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -202,6 +221,7 @@ export default function Home({ res }) {
                 headerStyle={headerColor}
                 buttonLink={section.button?.buttonLink}
                 buttonText={section.button?.buttonText}
+                buttonStyle={bannerButton}
               />
             </div>
           )
@@ -266,9 +286,10 @@ export default function Home({ res }) {
                       <div key={i}>
                         <BlogCard
                           title={node.title}
-                          image={node.mainImage}
+                          image={node?.mainImage}
                           link={'/blog/' + node.slug}
-                          excerpt={node.excerpt}
+                          excerpt={node?.excerpt}
+                          altTag={node?.mainImage?.altTag}
                         />
                       </div>
                     )

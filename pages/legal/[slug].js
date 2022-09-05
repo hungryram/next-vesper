@@ -1,15 +1,11 @@
 import { sanityRes } from "../../lib/sanity"
 import { groq } from 'next-sanity'
 import { PortableText } from "@portabletext/react"
-import urlFor from "../../lib/sanity"
-import { BiMobileAlt, BiEnvelope, BiGlobe } from "react-icons/bi"
-import Form from "../../components/templates/Form"
-import Image from "next/image"
+import Seo from "../../components/global/Seo"
+import Header from "../../components/templates/Header"
 
 const queryLegal = groq`
-*[_type == 'legal' && slug.current == $slug][0]{
-    content
-}
+*[_type == 'legal' && slug.current == $slug][0]
 `
 
 export async function getStaticPaths() {
@@ -39,14 +35,23 @@ export async function getStaticProps(context) {
 export default function legalDetail({ legal }) {
 
     return (
-        <div className="section">
-            <div className="container content">
-                {legal?.content &&
-                    <PortableText
-                        value={legal?.content}
-                    /> 
-                }
+        <>
+        <Seo
+            title={legal.seo?.title_tag}
+            description={legal.seo?.meta_description}
+        />
+        <Header
+            title={legal?.title}
+        />
+            <div className="section">
+                <div className="container content">
+                    {legal?.content &&
+                        <PortableText
+                            value={legal?.content}
+                        />
+                    }
+                </div>
             </div>
-        </div>
+        </>
     )
 }

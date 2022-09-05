@@ -24,11 +24,43 @@ export default {
             type: 'social'
         },
         {
-            title: 'Search Engine Optimization',
             name: 'seo',
-            type: 'seo',
-            description: 'Update your title tags and descriptions for search engines',
-            validation: Rule => Rule.required().error('Needed to improve website rankings')
+            title: 'Search Engine Optimization',
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+            fields: [
+                {
+                    title: 'Title Tag',
+                    name: 'title_tag',
+                    type: 'string'
+                },
+                {
+                    title: 'Meta Description',
+                    name: 'meta_description',
+                    type: 'text'
+                },
+                {
+                    title: 'Twitter Username',
+                    name: 'twitterHandle',
+                    type: 'string'
+                },
+                {
+                    title: 'Default Image Banner',
+                    name: 'defaultImageBanner',
+                    type: 'image',
+                    description: 'Banner used when sharing your website link'
+                },
+                {
+                    title: 'Website domain',
+                    name: 'websiteName',
+                    type: 'url',
+                    description: 'Must include the full URL',
+                    validation: Rule => Rule.required().error('Needed for website configuration')
+                },
+            ]
         }
     ]
 }

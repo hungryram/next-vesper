@@ -32,6 +32,16 @@ export default {
                     name: 'buttonLink',
                     type: 'string',
                 },
+                {
+                    title: 'Button Background Color',
+                    name: 'buttonBackground',
+                    type: 'color',
+                },
+                {
+                    title: 'Button Text Color',
+                    name: 'buttonTextColor',
+                    type: 'color',
+                }
             ]
         },
         {

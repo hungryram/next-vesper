@@ -39,13 +39,14 @@ export default {
       options: {
         hotspot: true,
       },
-    },
-    {
-      title: 'Image Alt Tag',
-      name: 'alt_tag',
-      type: 'string',
-      description: 'Describe your main image',
-      validation: Rule => Rule.required().warning('Describing images will help with ADA compliance and SEO')
+      fields: [
+        {
+          title: 'Image Alt Tag',
+          name: 'altTag',
+          type: 'string',
+          description: 'Describe your image'
+        }
+      ]
     },
     {
       name: 'categories',
@@ -72,6 +73,11 @@ export default {
       title: 'Body',
       type: 'blockContent',
     },
+    {
+      title: 'Search Engine Optimization',
+      name: 'seo',
+      type: 'seo'
+    }
   ],
 
   preview: {

@@ -28,6 +28,8 @@ export default function Navbar() {
                 logoWidth
             },
             'header': header {
+                ctaLink,
+                ctaText,
                 '': mainNav->{
                 'navItems':items[]{
                   'subMenu':subMenu[]{
@@ -70,101 +72,99 @@ export default function Navbar() {
                 className={Styles.navbar}
                 onMouseLeave={() => setDropdownActive(null)}
             >
-                <div className="container md:flex items-center justify-center md:px-10 md:visible hidden">
-                <div className="flex-1">
-                    <Link href="/" className="relative cursor-pointer">
-                        <a>
-                            <Image
-                                src={urlFor(data.appearances.branding.logo).url()}
-                                width={data.appearances.branding.logoWidth}
-                                height="100%"
-                                objectFit="contain"
-                                alt={data.profileSettings.company_name}
-                            />
-                        </a>
-                    </Link>
-                </div>
-                <ul className="items-center text-right md:mr-10 flex justify-end">
-                    {data.appearances?.header?.navItems.map((link, i) => {
-
-                        const menuLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) || (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) || (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) || (link.internalLink?._type === "author" && `/authors/${link.internalLink.slug}`) || (link.externalUrl && `${link.externalUrl}`)
-
-
-                        if (link.subMenu?.length > 0) {
-
-                            return (
-                                <li
-                                    key={i}
-                                    className={desktopMenuParentItems}
-                                    onMouseEnter={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
-                                    <Link
-                                        href="/"
-                                        target={link?.externalUrl && "_blank"}
-                                        rel={link?.externalUrl && "noreferrer"}
-                                        aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}
-                                    >
-                                        <a className={`cursor-pointer flex flex-row items-center py-10 ${Styles.navItems}`}>
-                                            {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className="ml-1 text-lg" />
-                                        </a>
-                                    </Link>
-
-                                    <ul className={`absolute bottom-0 left-0 translate-y-full bg-white p-2 border text-left min-w-[200px] z-50 ${dropdownActive === link ? "visible" : "hidden"}`}>
-                                        {link.subMenu.map((sub, i) => {
-
-                                            const subMenuLinks = (sub.internalLink?._type === "blog" && `/blog/${sub.internalLink.slug}`) || (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug}`) || (sub.internalLink?._type === "author" && `/authors/${sub.internalLink.slug}`) || (sub.externalUrl && `${sub.externalUrl}`)
-
-                                            return (
-                                                <>
-                                                    <li className="whitespace-nowrap" key={i}>
-                                                        <Link href={subMenuLinks}>
-                                                            <a target={sub.newTab && '_blank'} aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} rel={sub?.externalUrl && "noreferrer"} onClick={() => setDropdownActive(null)} className="py-1 block">
-                                                                {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
-                                                            </a>
-                                                        </Link>
-                                                    </li>
-                                                </>
-                                            )
-                                        })}
-                                    </ul>
-                                </li>
-                            )
-                        }
-                        else {
-                            return (
-                                <>
-                                    <li className={desktopMenuParentItems} key={i}>
-                                        <Link href={menuLinks}>
-                                            <a target={link.newTab && '_blank'} aria-label={link?.name ?? link?.title ?? link.text} rel={link?.externalUrl && "noreferrer"} className={`md:py-12 ${Styles.navItems}`}>
-                                                {link.text}
-                                            </a>
-                                        </Link>
-                                    </li>
-                                </>
-                            )
-                        }
-                    })}
-                    <li className={desktopMenuParentItems}>
-                        <Link href="/contact">
-                            <a aria-label="" rel="" className="primary-button">
-                                <span>Call to Action</span>
+                <div className="lg:container md:flex items-center justify-center md:px-2 md:visible hidden">
+                    <div className="flex-1">
+                        <Link href="/" className="relative cursor-pointer">
+                            <a>
+                                <img
+                                    src={urlFor(data.appearances.branding.logo).url()}
+                                    width={data.appearances.branding.logoWidth}
+                                    alt={data.profileSettings.company_name}
+                                />
                             </a>
                         </Link>
-                    </li>
-                </ul>
+                    </div>
+                    <ul className="items-center text-right md:mr-10 justify-end">
+                        {data.appearances?.header?.navItems.map((link, i) => {
+
+                            const menuLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) || (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) || (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) || (link.internalLink?._type === "author" && `/authors/${link.internalLink.slug}`) || (link.externalUrl && `${link.externalUrl}`)
+
+
+                            if (link.subMenu?.length > 0) {
+
+                                return (
+                                    <li
+                                        key={i}
+                                        className={desktopMenuParentItems}
+                                        onMouseEnter={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
+                                        <Link
+                                            href="/"
+                                            target={link?.externalUrl && "_blank"}
+                                            rel={link?.externalUrl && "noreferrer"}
+                                            aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}
+                                        >
+                                            <a className={`cursor-pointer flex flex-row items-center py-10 ${Styles.navItems}`}>
+                                                {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className="ml-1 text-lg" />
+                                            </a>
+                                        </Link>
+
+                                        <ul className={`absolute bottom-0 left-0 translate-y-full bg-white p-2 border text-left min-w-[200px] z-50 ${dropdownActive === link ? "visible" : "hidden"}`}>
+                                            {link.subMenu.map((sub, i) => {
+
+                                                const subMenuLinks = (sub.internalLink?._type === "blog" && `/blog/${sub.internalLink.slug}`) || (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug}`) || (sub.internalLink?._type === "author" && `/authors/${sub.internalLink.slug}`) || (sub.externalUrl && `${sub.externalUrl}`)
+
+                                                return (
+                                                    <>
+                                                        <li className="whitespace-nowrap" key={i}>
+                                                            <Link href={subMenuLinks}>
+                                                                <a target={sub.newTab && '_blank'} aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} rel={sub?.externalUrl && "noreferrer"} onClick={() => setDropdownActive(null)} className="py-1 block">
+                                                                    {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
+                                                                </a>
+                                                            </Link>
+                                                        </li>
+                                                    </>
+                                                )
+                                            })}
+                                        </ul>
+                                    </li>
+                                )
+                            }
+                            else {
+                                return (
+                                    <>
+                                        <li className={desktopMenuParentItems} key={i}>
+                                            <Link href={menuLinks}>
+                                                <a target={link.newTab && '_blank'} aria-label={link?.name ?? link?.title ?? link.text} rel={link?.externalUrl && "noreferrer"} className={`md:py-12 ${Styles.navItems}`}>
+                                                    {link.text}
+                                                </a>
+                                            </Link>
+                                        </li>
+                                    </>
+                                )
+                            }
+                        })}
+                        {data.appearances.header.ctaText &&
+                            <li className={desktopMenuParentItems}>
+                                <Link href={data.appearances.header?.ctaLink}>
+                                    <a className="primary-button">
+                                        <span>{data.appearances.header?.ctaText}</span>
+                                    </a>
+                                </Link>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </nav>
 
-            <div className="z-50 relative md:hidden">
-                <div className="nav p-4">
+            <div className="z-50 absolute left-0 right-0 md:hidden bg-white">
+                <div className="nav px-4 py-6">
                     <div className="flex items-center">
                         <div className="flex-1">
                             <Link href="/" className="relative cursor-pointer">
                                 <a>
-                                    <Image
+                                    <img
                                         src={urlFor(data.appearances.branding.logo).url()}
                                         width={data.appearances.branding.logoWidth}
-                                        height="100%"
-                                        objectFit="contain"
                                         alt={data.profileSettings.company_name}
                                     />
                                 </a>
