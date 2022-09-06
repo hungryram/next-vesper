@@ -160,7 +160,7 @@ export default function Home({ res }) {
                       headerStyle={headerColor}
                       bodyStyle={bodyColor}
                     />
-                    <div className={`grid lg:grid-cols-${section.columns} md:grid-cols-2 grid-cols-1 mt-10 gap-3 inline-flex justify-center`}>
+                    <div className={`grid lg:grid-cols-${section.columns} md:grid-cols-2 grid-cols-1 mt-10 gap-3 justify-center`}>
                       {section.blocks.map((node) => {
                         return (
                           <div className="p-6" key={node._key} style={blockBackground}>

@@ -34,7 +34,7 @@
 }
 
 .accent {
-  color: #aa8453;
+  color: var(--primary-accent);
 }
 
 div.overlay:after {
@@ -120,4 +120,13 @@ body h6 {
 
 .content li {
   @apply my-1;
+}
+
+
+
+
+/* LISTING GALLERY */
+
+.swiper-button-next, .swiper-button-prev {
+  color: #fff!important;
 }

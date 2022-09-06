@@ -44,7 +44,7 @@ export default {
         {
             title: 'Price',
             name: 'price',
-            type: 'string'
+            type: 'number'
         },
         {
             title: 'Status',
@@ -55,8 +55,8 @@ export default {
                     {title: 'Active', value: 'active'},
                     {title: 'Auction', value: 'auction'},
                     {title: 'Available', value: 'available'},
-                    {title: 'Coming Soon', value: 'comingSoon'},
-                    {title: 'In Contract', value: 'inContract'},
+                    {title: 'Coming Soon', value: 'coming soon'},
+                    {title: 'In Contract', value: 'in contract'},
                     {title: 'Negotiating', value: 'negotiating'},
                     {title: 'Pending', value: 'pending'},
                     {title: 'Rental', value: 'rental'},
@@ -70,25 +70,37 @@ export default {
             type: 'string',
             options: {
                 list: [
-                    {title: 'Acreage and Land', value: 'acreageLand'},
+                    {title: 'Acreage and Land', value: 'acreage and land'},
                     {title: 'Apartment', value: 'apartment'},
                     {title: 'Cabin', value: 'cabin'},
-                    {title: 'Co-Op', value: 'coOp'},
+                    {title: 'Co-Op', value: 'co-op'},
                     {title: 'Commercial', value: 'commercial'},
                     {title: 'Condo', value: 'condo'},
                     {title: 'Duplex', value: 'duplex'},
                     {title: 'Farm Land', value: 'farmLand'},
-                    {title: 'Farm Ranch', value: 'farmRanch'},
-                    {title: 'Mobile Home', value: 'mobileHome'},
-                    {title: 'Multi Family', value: 'multiFamily'},
-                    {title: 'New Construction', value: 'newConstruction'},
+                    {title: 'Farm Ranch', value: 'farm ranch'},
+                    {title: 'Mobile Home', value: 'mobile home'},
+                    {title: 'Multi Family', value: 'multifamily'},
+                    {title: 'New Construction', value: 'new construction'},
                     {title: 'Rental', value: 'rental'},
-                    {title: 'Single Family', value: 'singleFamily'},
-                    {title: 'Timeshare', value: 'timeShare'},
-                    {title: 'Townhome', value: 'townHome'},
-                    {title: 'Vacation Home', value: 'vacationHome'},
+                    {title: 'Single Family', value: 'single family'},
+                    {title: 'Timeshare', value: 'time share'},
+                    {title: 'Townhome', value: 'town home'},
+                    {title: 'Vacation Home', value: 'vacation home'},
                 ]
             }
+        },
+        {
+            title: 'Listing Agent',
+            name: 'listingAgent',
+            type: 'reference',
+            to: [{type: 'team'}]
+        },
+        {
+            title: 'Listing Office',
+            name: 'listingOffice',
+            type: 'reference',
+            to: [{type: 'locations'}]
         },
         {
             title: 'Details',
@@ -169,6 +181,11 @@ export default {
             title: 'Gallery',
             name: 'gallery',
             type: 'gallery'
+        },
+        {
+            title: 'Description',
+            name: 'description',
+            type: 'blockContent'
         },
         {
             title: 'Search Engine Optimization',
