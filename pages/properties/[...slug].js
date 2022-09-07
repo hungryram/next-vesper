@@ -11,7 +11,7 @@ import 'swiper/css';
 
 // ICONS
 import ListingSidebar from "../../components/templates/ListingSidebar"
-import ListingDetail from "../../components/templates/listingDetail"
+import ListingDetail from "../../components/templates/ListingDetail"
 
 export async function getStaticPaths() {
 
