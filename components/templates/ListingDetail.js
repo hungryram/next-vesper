@@ -11,7 +11,7 @@ import Form from "./Form"
 
 
 export default function ListingDetail({ propType, address, city, state, zipCode, status, price, description, mlsNumber, beds, baths, squareFeet, partialBaths, garage, shortTitle, hoa, lotSize, yearBuilt, name, mlsDescription, mlsBaths }) {
-    let [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     function closeModal() {
         setIsOpen(false)
