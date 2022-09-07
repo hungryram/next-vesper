@@ -33,6 +33,9 @@ const queryListings = groq`
     bedrooms,
     bathrooms,
   },
+  tools {
+    'fileUrl': fileAttachment[].asset->url
+  },
     gallery,
   listingAgent->{
     name,
@@ -83,7 +86,7 @@ export default function listingDetail({ listings }) {
                             thumbs={{ swiper: thumbsSwiper }}
                             navigation={true}
                         >
-                            {listings.gallery.images.map((image) => {
+                            {listings.gallery?.images.map((image) => {
                                 return (
                                     <SwiperSlide>
                                         <div className="relative w-full md:h-[50rem] h-96">
@@ -107,7 +110,7 @@ export default function listingDetail({ listings }) {
                             spaceBetween={10}
 
                         >
-                            {listings.gallery.images.map((image) => {
+                            {listings.gallery?.images.map((image) => {
                                 return (
                                     <SwiperSlide>
                                         <Image
@@ -156,6 +159,8 @@ export default function listingDetail({ listings }) {
                                 position={listings.listingAgent.position}
                                 email={listings.listingAgent.contactInformation.email}
                                 phone={listings.listingAgent.contactInformation.phoneNumber}
+                                file={listings.tools.fileUrl}
+
                             />
                         </div>
                     </div>

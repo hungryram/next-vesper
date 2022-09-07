@@ -34,6 +34,7 @@ export default function Navbar() {
                 'navItems':items[]{
                   'subMenu':subMenu[]{
                   newTab,
+                  _key,
                   linkType,
                   externalUrl,
                   text,
@@ -46,6 +47,7 @@ export default function Navbar() {
                   linkType,
                   externalUrl,
                   text,
+                  _key,
                   newTab,
                   internalLink->{
                   title,
@@ -76,16 +78,19 @@ export default function Navbar() {
                     <div className="flex-1">
                         <Link href="/" className="relative cursor-pointer">
                             <a>
-                                <img
-                                    src={urlFor(data.appearances.branding.logo).url()}
-                                    width={data.appearances.branding.logoWidth}
-                                    alt={data.profileSettings.company_name}
-                                />
+                                <picture>
+                                    <source srcSet={urlFor(data.appearances.branding.logo)} type="image" />
+                                    <img
+                                        src={urlFor(data.appearances.branding.logo).url()}
+                                        width={data.appearances.branding.logoWidth}
+                                        alt={data.profileSettings.company_name}
+                                    />
+                                </picture>
                             </a>
                         </Link>
                     </div>
                     <ul className="items-center text-right md:mr-10 justify-end">
-                        {data.appearances?.header?.navItems.map((link, i) => {
+                        {data.appearances?.header?.navItems.map((link) => {
 
                             const menuLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) || (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) || (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) || (link.internalLink?._type === "author" && `/authors/${link.internalLink.slug}`) || (link.externalUrl && `${link.externalUrl}`)
 
@@ -94,7 +99,7 @@ export default function Navbar() {
 
                                 return (
                                     <li
-                                        key={i}
+                                        key={link._key}
                                         className={desktopMenuParentItems}
                                         onMouseEnter={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
                                         <Link
@@ -109,13 +114,13 @@ export default function Navbar() {
                                         </Link>
 
                                         <ul className={`absolute bottom-0 left-0 translate-y-full bg-white p-2 border text-left min-w-[200px] z-50 ${dropdownActive === link ? "visible" : "hidden"}`}>
-                                            {link.subMenu.map((sub, i) => {
+                                            {link.subMenu.map((sub) => {
 
                                                 const subMenuLinks = (sub.internalLink?._type === "blog" && `/blog/${sub.internalLink.slug}`) || (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug}`) || (sub.internalLink?._type === "author" && `/authors/${sub.internalLink.slug}`) || (sub.externalUrl && `${sub.externalUrl}`)
 
                                                 return (
                                                     <>
-                                                        <li className="whitespace-nowrap" key={i}>
+                                                        <li className="whitespace-nowrap" key={sub._key}>
                                                             <Link href={subMenuLinks}>
                                                                 <a target={sub.newTab && '_blank'} aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} rel={sub?.externalUrl && "noreferrer"} onClick={() => setDropdownActive(null)} className="py-1 block">
                                                                     {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
@@ -132,7 +137,7 @@ export default function Navbar() {
                             else {
                                 return (
                                     <>
-                                        <li className={desktopMenuParentItems} key={i}>
+                                        <li className={desktopMenuParentItems} key={link._key}>
                                             <Link href={menuLinks}>
                                                 <a target={link.newTab && '_blank'} aria-label={link?.name ?? link?.title ?? link.text} rel={link?.externalUrl && "noreferrer"} className={`md:py-12 ${Styles.navItems}`}>
                                                     {link.text}
@@ -162,11 +167,14 @@ export default function Navbar() {
                         <div className="flex-1">
                             <Link href="/" className="relative cursor-pointer">
                                 <a>
-                                    <img
-                                        src={urlFor(data.appearances.branding.logo).url()}
-                                        width={data.appearances.branding.logoWidth}
-                                        alt={data.profileSettings.company_name}
-                                    />
+                                    <picture>
+                                        <source srcSet={urlFor(data.appearances.branding.logo).url()} type="image" />
+                                        <img
+                                            src={urlFor(data.appearances.branding.logo).url()}
+                                            width={data.appearances.branding.logoWidth}
+                                            alt={data.profileSettings.company_name}
+                                        />
+                                    </picture>
                                 </a>
                             </Link>
                         </div>

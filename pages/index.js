@@ -3,6 +3,7 @@ import Image from "next/image";
 import { groq } from "next-sanity"
 import urlFor from "../lib/sanity"
 import { sanityRes } from "../lib/sanity";
+import { Thumbs, Pagination, Navigation } from 'swiper'
 
 
 // HOME TEMPLATES
@@ -16,9 +17,12 @@ import BlogCard from "../components/templates/BlogCard"
 
 // STYLES
 import Styles from "../styles/Home.module.css"
-
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+// Import Swiper styles
+import 'swiper/css';
 // SLIDER
-import useEmblaCarousel from 'embla-carousel-react'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 
 const homeDesign = groq`
@@ -74,7 +78,6 @@ export default function Home({ res }) {
   const homeSection = res.homeDesign.pageBuilder
   const defaultText = '#e0e0e0'
   const defaultHeader = '#ffffff'
-  const [emblaRef] = useEmblaCarousel()
   return (
     <div className={Styles.homeSections}>
       {homeSection.map((section, i) => {
@@ -114,7 +117,7 @@ export default function Home({ res }) {
 
         if (section._type === 'hero') {
           return (
-            <div key={i}>
+            <div key={section._key}>
               <Hero
                 heading={section.heading}
                 subtitle={section.subtitle}
@@ -132,7 +135,7 @@ export default function Home({ res }) {
 
         if (section._type === 'intro') {
           return (
-            <div key={i} style={backgroundStyles}>
+            <div key={section._key} style={backgroundStyles}>
               <Intro
                 content={section.content}
                 heading={section.heading}
@@ -151,7 +154,7 @@ export default function Home({ res }) {
         if (section._type === 'featured') {
           return (
             <>
-              <div key={i} style={backgroundStyles}>
+              <div key={section._key} style={backgroundStyles}>
                 <div className="section">
                   <div className="container text-center">
                     <Heading
@@ -180,7 +183,7 @@ export default function Home({ res }) {
         // TEAM SLIDER
         if (section._type === 'teamSlider') {
           return (
-            <div className="section" key={i} style={backgroundStyles}>
+            <div className="section" key={section._key} style={backgroundStyles}>
               <div className="container">
                 <Heading
                   heading={section.heading}
@@ -188,22 +191,27 @@ export default function Home({ res }) {
                   headerStyle={headerColor}
                   bodyStyle={bodyColor}
                 />
-                <div>
-                  <div className="embla mt-16" ref={emblaRef}>
-                    <div className="embla__container">
-                      {res.team.map((node, i) => {
-                        return (
-                          <div key={i} className="embla__slide">
+                <div className="mt-10">
+                  <Swiper
+                    navigation={true}
+                    slidesPerView={4}
+                    spaceBetween={30}
+                    modules={[Pagination]}
+                  >
+                    {res.team.map((node) => {
+                      return (
+                        <SwiperSlide>
+                          <div key={node._id}>
                             <Cards
                               name={node.name}
                               image={node.image}
                               link={'/team/' + node.slug}
                             />
                           </div>
-                        )
-                      })}
-                    </div>
-                  </div>
+                        </SwiperSlide>
+                      )
+                    })}
+                  </Swiper>
                 </div>
               </div>
             </div>
@@ -213,7 +221,7 @@ export default function Home({ res }) {
         // BANNER
         if (section._type === 'banner') {
           return (
-            <div key={i} className={Styles.homeBanner} style={backgroundStyles}>
+            <div key={section._key} className={Styles.homeBanner} style={backgroundStyles}>
               <Banner
                 heading={section.heading}
                 text={section.text}
@@ -230,7 +238,7 @@ export default function Home({ res }) {
         // IMAGE BLOCKS
         if (section._type === 'imageBlocks') {
           return (
-            <div className="section" key={i} style={backgroundStyles}>
+            <div className="section" key={section._key} style={backgroundStyles}>
               <div className="container">
                 <Heading
                   heading={section.heading}
@@ -239,9 +247,9 @@ export default function Home({ res }) {
                   bodyStyle={bodyColor}
                 />
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10">
-                  {section.blocks.map((node, i) => {
+                  {section.blocks.map((node) => {
                     return (
-                      <Link href={node.link ? node.link : ''} key={i}>
+                      <Link href={node.link ? node.link : ''} key={node._key}>
                         <a>
                           <div className="relative overflow-hidden" key={node._key}>
                             <Image
@@ -281,9 +289,9 @@ export default function Home({ res }) {
                   bodyStyle={bodyColor}
                 />
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-10">
-                  {res.blog.map((node, i) => {
+                  {res.blog.map((node) => {
                     return (
-                      <div key={i}>
+                      <div key={node._id}>
                         <BlogCard
                           title={node.title}
                           image={node?.mainImage}
@@ -303,7 +311,7 @@ export default function Home({ res }) {
         // ACTIVE LISTINGS
         if (section._type === 'activeListings') {
           return (
-            <div className="section" key={i} style={backgroundStyles}>
+            <div className="section" key={section._key} style={backgroundStyles}>
               <div className="container">
                 <Heading
                   heading={section.heading}
@@ -312,9 +320,9 @@ export default function Home({ res }) {
                   bodyStyle={bodyColor}
                 />
                 <div className="grid grid-cols-3">
-                  {res.listings.map((node, i) => {
+                  {res.listings.map((node) => {
                     return (
-                      <div key={i}>
+                      <div key={node._id}>
                         <ListingCard
                           address={node.address}
                           city={node.city}
