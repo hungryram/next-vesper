@@ -68,7 +68,7 @@ export async function getStaticProps(context) {
 
 
 
-export default function listingDetail({ listings }) {
+export default function SupplementalDetail({ listings }) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     return (
         <>
