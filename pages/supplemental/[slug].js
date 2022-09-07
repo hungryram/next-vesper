@@ -9,13 +9,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 // Import Swiper styles
 import 'swiper/css';
-import Styles from "../../styles/listing.module.css"
-import { formatPrice } from "../../lib/client"
 
 // ICONS
-import { ImLocation2 } from "react-icons/im"
-import { AiOutlinePrinter, AiOutlineShareAlt, AiOutlineHeart } from "react-icons/ai"
-import { PortableText } from "@portabletext/react"
 import ListingDetail from "../../components/templates/listingDetail"
 import listing from "../../next-vesper/schemas/documents/listing"
 import ListingSidebar from "../../components/templates/ListingSidebar"
@@ -88,7 +83,7 @@ export default function listingDetail({ listings }) {
                         >
                             {listings.gallery?.images.map((image) => {
                                 return (
-                                    <SwiperSlide>
+                                    <SwiperSlide key={image._key}>
                                         <div className="relative w-full md:h-[50rem] h-96">
                                             <Image
                                                 src={urlFor(image).url()}
@@ -112,7 +107,7 @@ export default function listingDetail({ listings }) {
                         >
                             {listings.gallery?.images.map((image) => {
                                 return (
-                                    <SwiperSlide>
+                                    <SwiperSlide key={image._key}>
                                         <Image
                                             src={urlFor(image).url()}
                                             alt=""

@@ -24,6 +24,7 @@ export default function ListingSidebar({ image, name, position, phone, email, fi
                                     objectFit="cover"
                                     className="rounded-full"
                                     placeholder="blur"
+                                    alt={name}
                                     blurDataURL={urlFor(image).width(1).height(1).url()}
                                 />
 
@@ -48,9 +49,9 @@ export default function ListingSidebar({ image, name, position, phone, email, fi
                 <h2>Additional Details</h2>
                 <div>
                     <ul>
-                        {file.map((node) => {
+                        {file.map((node, i) => {
                             return (
-                                <li>
+                                <li key={i}>
                                     <a href={node} target="_blank" rel="noreferrer" className="flex items-center accent">File Attachment <AiOutlineDownload className="ml-2 text-xl" /></a>
                                 </li>
                             )

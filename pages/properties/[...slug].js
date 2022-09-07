@@ -64,9 +64,9 @@ export default function PropertiesDetail({ listingInfo, listGallery, listProp, l
                             thumbs={{ swiper: thumbsSwiper }}
                             navigation={true}
                         >
-                            {listGallery?.results.map((node) => {
+                            {listGallery?.results.map((node, i) => {
                                 return (
-                                    <SwiperSlide>
+                                    <SwiperSlide key={i}>
                                         <div className="relative w-full md:h-[50rem] h-96">
                                             <Image
                                                 src={node.largeImageUrl}
@@ -88,9 +88,9 @@ export default function PropertiesDetail({ listingInfo, listGallery, listProp, l
                             spaceBetween={10}
 
                         >
-                            {listGallery?.results.map((node) => {
+                            {listGallery?.results.map((node, i) => {
                                 return (
-                                    <SwiperSlide>
+                                    <SwiperSlide key={i}>
                                         <Image 
                                             src={node.smallImageUrl} 
                                             alt=""
