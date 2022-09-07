@@ -10,8 +10,8 @@ import "swiper/css/navigation";
 import 'swiper/css';
 
 // ICONS
-import ListingDetail from "../../components/templates/listingDetail"
 import ListingSidebar from "../../components/templates/ListingSidebar"
+import ListingDetail from "../../components/templates/listingDetail"
 
 export async function getStaticPaths() {
 

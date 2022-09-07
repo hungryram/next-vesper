@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import 'swiper/css';
 
 // ICONS
-import ListingDetail from "../../components/templates/listingDetail"
+import ListingDetail from "../../components/templates/ListingDetail"
 import ListingSidebar from "../../components/templates/ListingSidebar"
 
 
