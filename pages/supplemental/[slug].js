@@ -1,6 +1,5 @@
 import urlFor, { sanityRes } from "../../lib/sanity"
 import { groq } from 'next-sanity'
-import Sidebar from "../../components/templates/Sidebar"
 import Image from "next/image"
 import { useState } from "react"
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -12,7 +11,6 @@ import 'swiper/css';
 
 // ICONS
 import ListingDetail from "../../components/templates/listingDetail"
-import listing from "../../next-vesper/schemas/documents/listing"
 import ListingSidebar from "../../components/templates/ListingSidebar"
 
 

@@ -3,7 +3,6 @@ import { groq } from "next-sanity"
 import Link from 'next/link'
 import Header from "../../components/templates/Header"
 import Seo from "../../components/global/Seo"
-import { EmblaCarousel } from "../../components/templates/Carousel"
 
 const queryLegal = groq`
 *[_type == 'legal']{
