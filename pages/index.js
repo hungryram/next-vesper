@@ -200,8 +200,8 @@ export default function Home({ res }) {
                   >
                     {res.team.map((node) => {
                       return (
-                        <SwiperSlide>
-                          <div key={node._id}>
+                        <SwiperSlide key={node._id}>
+                          <div>
                             <Cards
                               name={node.name}
                               image={node.image}
