@@ -23,7 +23,6 @@ export async function getStaticProps() {
 }
 
 export default function LegalIndex({ res }) {
-    const array = ['1', '2', '4']
 
     return (
         <>
@@ -49,11 +48,6 @@ export default function LegalIndex({ res }) {
                         })}
                     </ul>
                 </div>
-            </div>
-        </div>
-        <div className="section">
-            <div className="container">
-            <EmblaCarousel slides={array}/>
             </div>
         </div>
 
