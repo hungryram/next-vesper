@@ -6,7 +6,7 @@ import { AiOutlinePrinter, AiOutlineShareAlt, AiOutlineHeart } from "react-icons
 import { PortableText } from "@portabletext/react"
 
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import Form from "./Form"
 
 
