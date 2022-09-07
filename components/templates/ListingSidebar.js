@@ -47,17 +47,19 @@ export default function ListingSidebar({ image, name, position, phone, email, fi
             </div>
             <div className="p-4 my-4 bg-white">
                 <h2>Additional Details</h2>
-                <div>
-                    <ul>
-                        {file.map((node, i) => {
-                            return (
-                                <li key={i}>
-                                    <a href={node} target="_blank" rel="noreferrer" className="flex items-center accent">File Attachment <AiOutlineDownload className="ml-2 text-xl" /></a>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
+                {file &&
+                    <div>
+                        <ul>
+                            {file.map((node, i) => {
+                                return (
+                                    <li key={i}>
+                                        <a href={node} target="_blank" rel="noreferrer" className="flex items-center accent">File Attachment <AiOutlineDownload className="ml-2 text-xl" /></a>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                }
             </div>
         </>
     )
