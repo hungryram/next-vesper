@@ -71,6 +71,7 @@ export default function PropertiesDetail({ listingInfo, listGallery, listProp, l
                                             <Image
                                                 src={node.largeImageUrl}
                                                 layout="fill"
+                                                alt={listingInfo.address.externalDisplay}
                                                 objectFit="cover"
                                                 placeholder="blur"
                                                 blurDataURL={node.smallImageUrl}
@@ -92,11 +93,13 @@ export default function PropertiesDetail({ listingInfo, listGallery, listProp, l
                                 return (
                                     <SwiperSlide key={i}>
                                         <Image 
-                                            src={node.smallImageUrl} 
-                                            alt=""
+                                            src={node.smallImageUrl}
+                                            alt={listingInfo.address.externalDisplay}
                                             width={150}
                                             height={100}
                                             objectFit="cover"
+                                            placeholder="blur"
+                                            blurDataURL={node.smallImageUrl}
                                         />
                                     </SwiperSlide>
                                 )

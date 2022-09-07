@@ -50,7 +50,7 @@ export default function ListingSidebar({ image, name, position, phone, email, fi
                 {file &&
                     <div>
                         <ul>
-                            {file.map((node, i) => {
+                            {file?.map((node, i) => {
                                 return (
                                     <li key={i}>
                                         <a href={node} target="_blank" rel="noreferrer" className="flex items-center accent">File Attachment <AiOutlineDownload className="ml-2 text-xl" /></a>

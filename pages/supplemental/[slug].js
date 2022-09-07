@@ -86,6 +86,7 @@ export default function SupplementalDetail({ listings }) {
                                             <Image
                                                 src={urlFor(image).url()}
                                                 layout="fill"
+                                                alt={listings.address}
                                                 objectFit="cover"
                                                 placeholder="blur"
                                                 blurDataURL={urlFor(image).width(50).height(50).url()}
@@ -108,10 +109,12 @@ export default function SupplementalDetail({ listings }) {
                                     <SwiperSlide key={image._key}>
                                         <Image
                                             src={urlFor(image).url()}
-                                            alt=""
+                                            alt={listings.address}
                                             width={150}
                                             height={100}
                                             objectFit="cover"
+                                            placeholder="blur"
+                                            blurDataURL={urlFor(image).width(1).height(1).url()}
                                         />
                                     </SwiperSlide>
                                 )
