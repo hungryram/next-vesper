@@ -91,12 +91,11 @@ export default function Pages({ page }) {
         <Seo
             title={page.pageDesign.seo?.title_tag}
             description={page.pageDesign.seo?.meta_description}
-            image={urlFor(page.pageDesign?.headerImage).quality(50).url()}
         />
             <Header
-                title={page.pageDesign.title}
-                image={page.pageDesign.headerImage}
-                altTag={page.pageDesign.headerImage.altTag}
+                title={page.pageDesign?.title}
+                image={page.pageDesign?.headerImage}
+                altTag={page.pageDesign?.headerImage?.altTag}
             />
             <div className="section">
                 <div className="container">
