@@ -2,6 +2,7 @@ import { PortableText } from "@portabletext/react"
 import Image from "next/image"
 import urlFor from "../../lib/sanity"
 import PrimaryLink from "../templates/PrimaryLink"
+import Script from "next/script"
 
 export default function Hero({ image, heading, subtitle, _key, blurData, bodyColor, headerColor, buttonLink, buttonText, idxSubdomain = 'search', idxId = '132970' }) {
     return (
@@ -38,8 +39,11 @@ export default function Hero({ image, heading, subtitle, _key, blurData, bodyCol
                     />
                 </div>
             </div>
-            <div className="absolute bottom-0 left-0 right-0 text-center">
-                <div dangerouslySetInnerHTML={{ __html: `<script type="text/javascript" src=${`https://${idxSubdomain}.idxhome.com/site/listing/search/widget/${idxId}?style=horizontal`}></script>` }}/>
+            <div className="absolute bottom-0 left-0 right-0 text-center bg-black py-10">
+                test
+                <Script 
+                    src={`https://search.idxhome.com/site/listing/search/widget/132970?style=horizontal`}
+                />
             </div>
         </div>
     )
