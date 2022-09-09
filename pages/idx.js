@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function idx() {
   return (
-    <div>{idx}</div>
+    <div>{idx_body}</div>
   )
 }
