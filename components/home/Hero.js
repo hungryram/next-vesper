@@ -3,7 +3,7 @@ import Image from "next/image"
 import urlFor from "../../lib/sanity"
 import PrimaryLink from "../templates/PrimaryLink"
 
-export default function Hero({ image, heading, subtitle, _key, blurData, bodyColor, headerColor, buttonLink, buttonText }) {
+export default function Hero({ image, heading, subtitle, _key, blurData, bodyColor, headerColor, buttonLink, buttonText, idxSubdomain = 'search', idxId = '132970' }) {
     return (
         <div className="flex items-center relative h-screen" key={_key}>
             {image ?
@@ -37,6 +37,9 @@ export default function Hero({ image, heading, subtitle, _key, blurData, bodyCol
                         buttonText={buttonText}
                     />
                 </div>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 text-center">
+                <div dangerouslySetInnerHTML={{ __html: `<script type="text/javascript" src=${`https://${idxSubdomain}.idxhome.com/site/listing/search/widget/${idxId}?style=horizontal`}></script>` }}/>
             </div>
         </div>
     )

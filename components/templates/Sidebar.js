@@ -14,8 +14,6 @@ import 'swiper/css';
 // TEMPLATES
 import PlainPage from "./PlainPage"
 import ListingCard from "./ListingCard"
-import BlogCard from "./BlogCard"
-import Cards from "./Cards"
 import Form from "./Form"
 import Heading from "../home/Heading"
 import Social from "./Social"
@@ -283,11 +281,18 @@ export default function Sidebar() {
                                     bodyStyle={bodyColor}
                                 />
                                 <div className="mt-10">
-                                    <Swiper>
+                                    <Swiper
+                                        navigation={true}
+                                        slidesPerView={1}
+                                        modules={[Pagination, Navigation]}
+                                        style={{
+                                            "--swiper-navigation-size": "25px",
+                                        }}
+                                    >
                                         {data?.listings.map((node) => {
                                             return (
                                                 <SwiperSlide key={node._id}>
-                                                    <div key={node?._id}>
+                                                    <div>
                                                         <ListingCard
                                                             address={node?.address}
                                                             city={node?.city}

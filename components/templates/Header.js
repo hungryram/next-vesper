@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function Header({ image, title, altTag }) {
     return (
-        <div className={`flex items-center relative lg:h-[20em] h-[10rem]${image ? `` : ` bg-black`}`}>
+        <div className={`flex items-center relative lg:h-[20em] h-[15rem]${image ? `` : ` bg-black`}`}>
             {image &&
                 <Image
                     src={urlFor(image).url()}

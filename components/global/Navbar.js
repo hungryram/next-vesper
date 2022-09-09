@@ -111,7 +111,7 @@ export default function Navbar({ logo, company_name, logoWidth, navItems, ctaTex
                 </div>
             </nav>
 
-            <div className="z-50 absolute left-0 right-0 md:hidden bg-white">
+            <div className={`z-50 absolute left-0 right-0 md:hidden ${Styles.navbar}`}>
                 <div className="nav px-4 py-6">
                     <div className="flex items-center">
                         <div className="flex-1">

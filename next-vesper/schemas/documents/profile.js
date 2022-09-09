@@ -61,6 +61,23 @@ export default {
                     validation: Rule => Rule.required().error('Needed for website configuration')
                 },
             ]
+        },
+        {
+            title: 'IDX Settings',
+            name: 'idxSettings',
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+            fields: [
+                {
+                    title: 'IDX ID',
+                    name: 'idxID',
+                    type: 'number',
+                    description: 'Please contact support@hungryram.com if you do not know your ID'
+                }
+            ]
         }
     ]
 }
