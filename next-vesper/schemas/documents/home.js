@@ -16,6 +16,7 @@ export default {
                 {type: 'banner'},
                 {type: 'imageBlocks'},
                 {type: 'activeListings'},
+                {type: 'idxListings'},
             ]
         }
     ]

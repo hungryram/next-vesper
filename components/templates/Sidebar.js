@@ -57,8 +57,8 @@ export default function Sidebar() {
     `
 
     const { data, error } = useSWR(side, fetcher);
-    if (error) return "An error has occurred.";
-    if (!data) return "Loading...";
+    if (error) return "undefined";
+    if (!data) return <Loading />;
     const sidebarSections = data.appearances.sidebar
     return (
         <div>

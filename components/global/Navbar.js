@@ -3,7 +3,6 @@ import useSWR from 'swr'
 import Link from "next/link";
 import { groq } from "next-sanity"
 import { sanityRes } from "../../lib/sanity";
-import Image from "next/image"
 
 import { HiOutlineMenuAlt4 } from "react-icons/hi"
 import { GrClose } from "react-icons/gr"
@@ -12,6 +11,7 @@ import { IconContext } from "react-icons/lib/cjs/iconContext";
 import urlFor from "../../lib/sanity";
 
 import Styles from "../../styles/header.module.css"
+import Loading from "../templates/Loading";
 
 export default function Navbar() {
     const [active, setActive] = useState(true);
@@ -63,8 +63,8 @@ export default function Navbar() {
 
     const { data, error } = useSWR(appearance, query => sanityRes.fetch(query));
 
-    if (error) return "An error has occurred.";
-    if (!data) return "Loading...";
+    if (error) return "undefined";
+    if (!data) return <Loading />;
 
     const desktopMenuParentItems = `relative inline-block mx-4 text-md`
 

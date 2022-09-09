@@ -2,7 +2,7 @@ import { groq } from "next-sanity";
 import Head from "next/head";
 import useSWR from "swr"
 import { sanityRes } from "../../lib/sanity";
-
+import Loading from "../templates/Loading";
 
 
 export default function Seo({ title, description, image, ogType = "website", robotIndex = "index,follow" }) {
@@ -16,8 +16,8 @@ export default function Seo({ title, description, image, ogType = "website", rob
     `
 
     const { data, error } = useSWR(profile, fetcher);
-    if (error) return "An error has occurred.";
-    if (!data) return "Loading...";
+    if (error) return "undefined";
+    if (!data) return <Loading />;
 
     const defaultTitle = data.profileSettings.company_name
     const DOMAIN = data.profileSettings.seo.websiteName || ''
@@ -73,8 +73,6 @@ export default function Seo({ title, description, image, ogType = "website", rob
                 property="twitter:description"
                 content={description}
             />
-
-
         </Head>
     );
 }

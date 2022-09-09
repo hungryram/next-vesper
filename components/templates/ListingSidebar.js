@@ -3,7 +3,7 @@ import urlFor from "../../lib/sanity";
 import Form from "./Form";
 import { AiOutlineDownload } from "react-icons/ai"
 
-export default function ListingSidebar({ image, name, position, phone, email, file, mlsName }) {
+export default function ListingSidebar({ image, name, position, phone, email, file, mlsName, dateImported }) {
     return (
         <>
             <div className="bg-white p-4">
@@ -47,6 +47,7 @@ export default function ListingSidebar({ image, name, position, phone, email, fi
             </div>
             <div className="p-4 my-4 bg-white">
                 <h2>Additional Details</h2>
+                <div className="mt-6">
                 {file &&
                     <div>
                         <ul>
@@ -60,6 +61,10 @@ export default function ListingSidebar({ image, name, position, phone, email, fi
                         </ul>
                     </div>
                 }
+                {dateImported &&
+                <p>Date Imported: {dateImported}</p>
+                }
+                </div>
             </div>
         </>
     )

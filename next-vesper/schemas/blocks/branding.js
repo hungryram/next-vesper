@@ -18,9 +18,14 @@ export default {
             type: 'number'
         },
         {
-            title: 'Favicon',
-            name: 'favicon',
+            title: 'Loading Screen Logo',
+            name: 'loadingLogo',
             type: 'image'
+        },
+        {
+            title: 'Loading Background Color',
+            name: 'loadingBackground',
+            type: 'color'
         }
     ]
 }

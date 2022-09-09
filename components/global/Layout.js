@@ -4,6 +4,7 @@ import Head from 'next/head'
 import useSWR from "swr"
 import {groq} from "next-sanity"
 import urlFor, { sanityRes } from "../../lib/sanity";
+import Loading from "../templates/Loading";
 
 export default function Layout({ children }) {
 
@@ -11,14 +12,27 @@ export default function Layout({ children }) {
 
     const appearances = groq`
     {
-       'appearances': *[_type == 'appearances'][0],
-       'homeDesign': *[_type == 'homeDesign'][0]
-    }
+        'appearances': *[_type == 'appearances'][0]{
+        'loader': branding.loadingLogo.asset->url,
+        'loaderColor': branding.loadingBackground.hex,
+        'loaderImage': branding.loadingLogo.asset->url,
+        'navColor': header.navColor.hex,
+        'navBgColor': header.headerColor.hex,
+        'primaryButtonBg': mainColors.buttonBackgroundColor.hex,
+        'primaryButtonText': mainColors.buttonTextColor.hex,
+        'footerHeader': footer.headerColor.hex,
+        'footerText': footer.textColor.hex,
+        'footerBg': footer.footerBackground.color.hex,
+        'primaryAccent': mainColors.primaryColor.hex
+      },
+      }
     `
 
     const { data, error } = useSWR(appearances, fetcher)
-    if (error) return "An error has occurred.";
-    if (!data) return "Loading...";
+    if (error) return "undefined";
+    if (!data) return <Loading />;
+
+    const bgLoader = data.appearances?.loaderImage
     return (
         <>
             <Head>
@@ -28,14 +42,17 @@ export default function Layout({ children }) {
 
                             --primary-accent: ${data.appearances.mainColors?.primaryColor.hex};
 
-                            --footer-background-color: ${data.appearances.footer.footerBackground.color.hex};
-                            --footer-header-color: ${data.appearances.footer.headerColor.hex};
-                            --footer-text-color: ${data.appearances.footer.textColor.hex};
-                            --primary-button-background: ${data.appearances.mainColors.buttonBackgroundColor.hex};
-                            --primary-button-text: ${data.appearances.mainColors.buttonTextColor.hex};
+                            --footer-background-color: ${data.appearances?.footerBg};
+                            --footer-header-color: ${data.appearances?.footerHeader};
+                            --footer-text-color: ${data.appearances?.footerText};
+                            --primary-button-background: ${data.appearances?.primaryButtonBg};
+                            --primary-button-text: ${data.appearances?.primaryButtonText};
 
-                            --header-background-color: ${data.appearances.header?.headerColor?.hex ? data.appearances.header?.headerColor?.hex : 'transparent'};
-                            --header-navigation-color: ${data.appearances.header.navColor.hex};
+                            --header-background-color: ${data.appearances?.navBgColor ? data.appearances?.navBgColor : 'transparent'};
+                            --header-navigation-color: ${data.appearances?.navColor};
+
+                            --loading-background-color: ${data.appearances?.loaderColor};
+                            --loading-image: url(${bgLoader});
                         
                         }
                     `}

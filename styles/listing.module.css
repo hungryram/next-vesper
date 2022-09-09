@@ -5,10 +5,13 @@
 
 .quickActions li {
     background: #F7F8F9;
-    @apply inline-block mx-1 w-14 h-10 text-center text-sm rounded-md border;
+    @apply inline-block mx-1 w-14 h-10 text-center text-sm rounded-md;
     line-height: 40px;
 }
 
+.quickActions {
+    @apply flex items-center
+}
 
 .cta {
     @apply rounded-md inline-block px-12 text-center;

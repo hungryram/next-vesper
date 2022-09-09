@@ -47,6 +47,7 @@ import homeIntro from './homeSections/intro'
 import banner from './homeSections/banner'
 import imageBlocks from './homeSections/image-blocks'
 import activeListings from './homeSections/activeListings'
+import idxListings from './homeSections/idxListings'
 
 //subblocks
 import subMenu from "./subBlocks/subMenu"
@@ -115,6 +116,7 @@ export default createSchema({
     // PAGEBUILDER
     testimonialblocks,
     // HOME SECTIONS
+    idxListings,
     hero,
     featured,
     teamSlider,

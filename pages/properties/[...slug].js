@@ -12,6 +12,7 @@ import 'swiper/css';
 // ICONS
 import ListingSidebar from "../../components/templates/ListingSidebar"
 import ListingDetail from "../../components/templates/ListingDetail"
+import { sanityRes } from "../../lib/sanity"
 
 export async function getStaticPaths() {
 
@@ -37,31 +38,46 @@ export async function getStaticProps(context) {
     const listingGallery = fetch(`https://www.idxhome.com/api/v1/client/listing/${context.params.slug[0]}/photos.json?fields=largeImageUrl,smallImageUrl`, idxConnection).then(value => value.json())
     const listingPropType = fetch(`https://www.idxhome.com/api/v1/client/listing/${context.params.slug[0]}/propertyType.json`, idxConnection).then(value => value.json())
     const listingFetchTour = fetch(`https://www.idxhome.com/api/v1/client/listing/${context.params.slug[0]}/virtualTour.json`, idxConnection).then(value => value.json())
+    const getDOMAIN= sanityRes.fetch(`*[_type == 'profileSettings'][0]{
+        'domain': seo.websiteName
+      }`)
 
-    const [listingInfo, listGallery, listProp, listingVirtualTour] = await Promise.all([listingDetail, listingGallery, listingPropType, listingFetchTour])
+    const [listingInfo, listGallery, listProp, listingVirtualTour, sanityDomain] = await Promise.all([listingDetail, listingGallery, listingPropType, listingFetchTour, getDOMAIN])
 
     return {
         props: {
             listingInfo,
             listGallery,
             listProp,
-            listingVirtualTour
+            listingVirtualTour,
+            sanityDomain
         }
     }
 }
 
 
-export default function PropertiesDetail({ listingInfo, listGallery, listProp, listingVirtualTour }) {
+export default function PropertiesDetail({ listingInfo, listGallery, listProp, listingVirtualTour, sanityDomain }) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     return (
         <>
+        <div className="h-[20rem] relative">
+            <div className="container">
+                <Image
+                    src={listGallery.results[1].largeImageUrl}
+                    layout="fill"
+                    objectFit="cover"
+                    placeholder="blur"
+                    blurDataURL={listGallery.results[1].largeImageUrl}
+                />
+            </div>
+        </div>
             <div className="pt-32 pb-0">
                 <div className="container">
                     <h1 className="text-slate-800 md:text-2xl font-medium">{listingInfo.address.externalDisplay}</h1>
                     <div className="gallery mt-10">
                         <Swiper
                             modules={[Thumbs, Pagination, Navigation]}
-                            thumbs={{ swiper: thumbsSwiper }}
+                            thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
                             navigation={true}
                         >
                             {listGallery?.results.map((node, i) => {
@@ -126,12 +142,16 @@ export default function PropertiesDetail({ listingInfo, listGallery, listProp, l
                                     city={listingInfo.address.city}
                                     state={listingInfo.address.state}
                                     price={listingInfo.listPrice}
+                                    virtualTour={listingVirtualTour.virtualTourUrl}
+                                    domain={sanityDomain.domain}
                                 />
                             </div>
                         </div>
                         <div className="md:w-1/3">
                             <ListingSidebar 
                                 name={listingInfo.listingAgent}
+                                dateImported={listingInfo.dateImported}
+
                             />
                         </div>
                     </div>

@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.embla {
-  overflow: hidden;
-}
-.embla__container {
-  display: flex;
-}
-.embla__slide {
-  flex: 0 0 25%;
-  @apply mx-4
-}
 
 @media (max-width:768px) {
   div.embla__slide {
@@ -57,11 +47,29 @@ div.home-image-overlay:after {
   right: 0;
 }
 
+
+/* LOADING SCREEN */
+
+div.loading {
+  @apply absolute top-0 bottom-0 left-0 right-0 z-50;
+  background-color: var(--loading-background-color);
+}
+
+div.loaderImage {
+  background-image: var(--loading-image);
+  background-size: contain;
+  width: 300px;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 /* CONTENT */
 
 body {
   background: #F7F8F9;
   color: #6d7175;
+  font-family: 'Lato', sans-serif;
 }
 
 body h1,
@@ -70,7 +78,7 @@ body h3,
 body h4,
 body h5,
 body h6 {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #222;
 }
 

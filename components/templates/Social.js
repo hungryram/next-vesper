@@ -5,7 +5,7 @@ import { AiFillInstagram, AiFillRedditCircle, AiFillTwitterCircle, AiFillYoutube
 import { FaYelp, FaTiktok } from "react-icons/fa"
 import { BsPinterest } from "react-icons/bs"
 import { SiZillow } from "react-icons/si"
-
+import Loading from "./Loading"
 // STYLES
 import Styles from "../../styles/social.module.css"
 
@@ -20,8 +20,8 @@ export default function Social() {
   `
 
     const { data, error } = useSWR(social, query => sanityRes.fetch(query))
-    if (error) return "An error has occurred.";
-    if (!data) return "Loading...";
+    if (error) return "undefined";
+    if (!data) return <Loading />;
 
     const socialProfile = data.profileSettings.social
     const size = 'text-2xl'

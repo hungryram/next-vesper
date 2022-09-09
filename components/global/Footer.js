@@ -6,6 +6,7 @@ import { PortableText } from "@portabletext/react"
 import Styles from "../../styles/footer.module.css"
 import Link from "next/link"
 import Social from "../templates/Social"
+import Loading from "../templates/Loading"
 
 // ICONS
 import { AiOutlineMobile, AiOutlinePhone, AiOutlineMail } from "react-icons/ai"
@@ -53,8 +54,8 @@ export default function Footer() {
 
     const { data, error } = useSWR(profile, fetcher);
 
-    if (error) return "An error has occurred.";
-    if (!data) return "Loading...";
+    if (error) return "undefined";
+    if (!data) return <Loading />;
     return (
         <footer className={Styles.footer}>
             <div className="section">

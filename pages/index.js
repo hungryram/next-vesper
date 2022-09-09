@@ -4,6 +4,8 @@ import { groq } from "next-sanity"
 import urlFor from "../lib/sanity"
 import { sanityRes } from "../lib/sanity";
 import { Thumbs, Pagination, Navigation } from 'swiper'
+import { formatPrice } from "../lib/client";
+import { useState } from "react"
 
 
 // HOME TEMPLATES
@@ -23,6 +25,9 @@ import "swiper/css/navigation";
 import 'swiper/css';
 // SLIDER
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { idxConnection } from "../lib/client";
+import Loading from "../components/templates/Loading";
+const slugify = require('slugify')
 
 
 const homeDesign = groq`
@@ -63,23 +68,66 @@ const homeDesign = groq`
 }
 `
 
-export async function getStaticProps() {
-  const res = await sanityRes.fetch(homeDesign)
+const fetchData = async (endpoint) => {
+  const res = await fetch(endpoint, idxConnection)
+  const data = await res.json();
+  return data.results
+}
 
+export async function getStaticProps() {
+
+  const sanityData = await sanityRes.fetch(homeDesign)
+  const listingData = await fetch('https://www.idxhome.com/api/v1/client/listings.json?fields=id,listingAgent,listingStatus,listPrice,status,description,squareFeet,bedrooms,fullBathrooms,partialBathrooms,address,latitude,longitude,photos', idxConnection)
+  const data = await listingData.json()
+
+
+  const listings = await Promise.all(data.results.map(async (listing) => {
+    const photosEndpoint = listing.photos.links.filter(link => link.rel === 'self').map(e => e.href).toString() + `?fields=largeImageUrl,displayOrder`
+    const photoData = await fetchData(photosEndpoint)
+    const featuredImage = photoData.filter(photo => photo.displayOrder === 0)[0]
+    const photos = photoData.map(url => (url.largeImageUrl))
+
+    const listingObject = {
+      slug: slugify(`${listing.address.houseNumber}-${listing.address.streetName}`, { lower: true }),
+      _id: listing.id,
+      city: listing.address.city,
+      state: listing.address.state,
+      zipCode: listing.address.postalCode,
+      listing_agent: listing.listingAgent,
+      externalDisplay: listing.address.externalDisplay,
+      price: listing.listPrice,
+      details: {
+        description: listing.description,
+        squareFeet: listing.squareFeet,
+        bedrooms: listing.bedrooms,
+        fullBathrooms: listing.fullBathrooms,
+        partialBathrooms: listing.partialBathrooms,
+        latitude: listing.latitude,
+        longitude: listing.longitude,
+      },
+      photos: {
+        featuredImage: featuredImage.largeImageUrl,
+        gallery: photos,
+      },
+    }
+    return listingObject
+  }))
 
   return {
     props: {
-      res,
+      res: sanityData,
+      idx: JSON.parse(JSON.stringify(listings)),
     }
   }
 }
 
-export default function Home({ res }) {
+export default function Home({ res, idx }) {
   const homeSection = res.homeDesign.pageBuilder
   const defaultText = '#e0e0e0'
   const defaultHeader = '#ffffff'
-  return (
+    return (
     <div className={Styles.homeSections}>
+      
       {homeSection.map((section, i) => {
 
         const headerColor = {
@@ -196,7 +244,7 @@ export default function Home({ res }) {
                     navigation={true}
                     slidesPerView={4}
                     spaceBetween={30}
-                    modules={[Pagination]}
+                    modules={[Pagination, Navigation]}
                   >
                     {res.team.map((node) => {
                       return (
@@ -346,6 +394,49 @@ export default function Home({ res }) {
             </div>
           )
         }
+
+
+        // IDX LISTINGS
+        if (section._type === 'idxListings') {
+          return (
+            <div className="section" key={section._key} style={backgroundStyles}>
+              <div className="container">
+                <Heading
+                  heading={section.heading}
+                  body={section.text}
+                  headerStyle={headerColor}
+                  bodyStyle={bodyColor}
+                />
+                <div className="mt-10">
+                  <Swiper
+                    navigation={true}
+                    slidesPerView={3}
+                    spaceBetween={30}
+                    modules={[Pagination, Navigation]}
+                  >
+                    {idx.map((listing) => {
+                      return (
+                        <SwiperSlide key={listing._id}>
+                          <ListingCard
+                            idxAddress={listing.externalDisplay}
+                            bedrooms={listing.details.bedrooms}
+                            bathrooms={listing.details.fullBathrooms}
+                            squareFootage={listing.details.squareFeet}
+                            price={formatPrice.format(listing.price)}
+                            idxImage={listing.photos.featuredImage}
+                            link={`/properties/${listing._id}/${listing.slug}`}
+                          />
+                        </SwiperSlide>
+                      )
+                    })}
+                  </Swiper>
+                </div>
+              </div>
+            </div>
+          )
+        }
+
+
       })
       }
     </div>
