@@ -1,8 +1,5 @@
 import { useState } from "react";
-import useSWR from 'swr'
 import Link from "next/link";
-import { groq } from "next-sanity"
-import { sanityRes } from "../../lib/sanity";
 
 import { HiOutlineMenuAlt4 } from "react-icons/hi"
 import { GrClose } from "react-icons/gr"
@@ -11,63 +8,14 @@ import { IconContext } from "react-icons/lib/cjs/iconContext";
 import urlFor from "../../lib/sanity";
 
 import Styles from "../../styles/header.module.css"
-import Loading from "../templates/Loading";
 
-export default function Navbar() {
+export default function Navbar({ logo, company_name, logoWidth, navItems, ctaText, ctaLink }) {
     const [active, setActive] = useState(true);
 
     const [dropdownActive, setDropdownActive] = useState(null);
     const [openMobileNav, setOpenMobileNav] = useState(false)
 
-    const appearance = groq`
-    {
-        'profileSettings': *[_type == 'profileSettings'][0],
-        'appearances': *[_type == 'appearances'][0]{
-            'branding': branding {
-                logo,
-                logoWidth
-            },
-            'header': header {
-                ctaLink,
-                ctaText,
-                '': mainNav->{
-                'navItems':items[]{
-                  'subMenu':subMenu[]{
-                  newTab,
-                  _key,
-                  linkType,
-                  externalUrl,
-                  text,
-                  internalLink->{
-                  title,
-                  'slug': slug.current,
-                  _type
-            }
-            },
-                  linkType,
-                  externalUrl,
-                  text,
-                  _key,
-                  newTab,
-                  internalLink->{
-                  title,
-                  'slug': slug.current,
-                  _type
-                }
-                }
-              }
-              }
-        }
-     }
-    `
-
-    const { data, error } = useSWR(appearance, query => sanityRes.fetch(query));
-
-    if (error) return "undefined";
-    if (!data) return <Loading />;
-
     const desktopMenuParentItems = `relative inline-block mx-4 text-md`
-
     return (
         <>
             <nav
@@ -78,19 +26,21 @@ export default function Navbar() {
                     <div className="flex-1">
                         <Link href="/" className="relative cursor-pointer">
                             <a>
-                                <picture>
-                                    <source srcSet={urlFor(data.appearances.branding.logo)} type="image" />
-                                    <img
-                                        src={urlFor(data.appearances.branding.logo).url()}
-                                        width={data.appearances.branding.logoWidth}
-                                        alt={data.profileSettings.company_name}
-                                    />
-                                </picture>
+                                {logo &&
+                                    <picture>
+                                        <source srcSet={urlFor(logo).url()} type="image" />
+                                        <img
+                                            src={urlFor(logo).url()}
+                                            width={logoWidth}
+                                            alt={company_name}
+                                        />
+                                    </picture>
+                                }
                             </a>
                         </Link>
                     </div>
                     <ul className="items-center text-right md:mr-10 justify-end">
-                        {data.appearances?.header?.navItems.map((link) => {
+                        {navItems?.map((link) => {
 
                             const menuLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) || (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) || (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) || (link.internalLink?._type === "author" && `/authors/${link.internalLink.slug}`) || (link.externalUrl && `${link.externalUrl}`)
 
@@ -148,11 +98,11 @@ export default function Navbar() {
                                 )
                             }
                         })}
-                        {data.appearances.header.ctaText &&
-                            <li className={desktopMenuParentItems}>
-                                <Link href={data.appearances.header?.ctaLink}>
+                        {ctaText &&
+                            <li className={desktopMenuParentItems} key="ctaButtonheadernavigation">
+                                <Link href={ctaLink}>
                                     <a className="primary-button">
-                                        <span>{data.appearances.header?.ctaText}</span>
+                                        <span>{ctaText}</span>
                                     </a>
                                 </Link>
                             </li>
@@ -167,14 +117,16 @@ export default function Navbar() {
                         <div className="flex-1">
                             <Link href="/" className="relative cursor-pointer">
                                 <a>
-                                    <picture>
-                                        <source srcSet={urlFor(data.appearances.branding.logo).url()} type="image" />
-                                        <img
-                                            src={urlFor(data.appearances.branding.logo).url()}
-                                            width={data.appearances.branding.logoWidth}
-                                            alt={data.profileSettings.company_name}
-                                        />
-                                    </picture>
+                                    {logo &&
+                                        <picture>
+                                            <source srcSet={urlFor(logo).url()} type="image" />
+                                            <img
+                                                src={urlFor(logo).url()}
+                                                width={logoWidth}
+                                                alt={company_name}
+                                            />
+                                        </picture>
+                                    }
                                 </a>
                             </Link>
                         </div>
@@ -201,7 +153,7 @@ export default function Navbar() {
                 <div>
                     <div className={`absolute bg-white w-full py-4 ${openMobileNav ? "visible" : "hidden"}`}>
                         <ul style={{ listStyle: "none", padding: "0" }} className="mt-5 flex flex-col">
-                            {data.appearances?.header?.navItems.map((link, i) => {
+                            {navItems?.map((link) => {
 
                                 const mobileMenuLinks = (link.internalLink?._type === "pages" && `/${link.internalLink.slug}`) || (link.internalLink?._type === "blog" && `/blog/${link.internalLink.slug}`) || (link.internalLink?._type === "legal" && `/legal/${link.internalLink.slug}`) || (link.internalLink?._type === "author" && `/authors/${link.internalLink.slug}`) || (link.externalUrl && `${link.externalUrl}`)
 
@@ -209,7 +161,7 @@ export default function Navbar() {
                                 if (link.subMenu?.length > 0) {
                                     return (
                                         <>
-                                            <li key={i} className="relative my-1" onClick={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
+                                            <li key={link._key} className="relative my-1" onClick={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
                                                 <Link href="/">
                                                     <a className="cursor-pointer flex flex-row items-center" onClick={() => setOpenMobileNav(false)}>
                                                         {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className="ml-1 text-lg" />
@@ -223,7 +175,7 @@ export default function Navbar() {
 
                                                         return (
                                                             <>
-                                                                <li className="block my-1">
+                                                                <li className="block my-1" key={sub._key}>
                                                                     <Link href={subMenuLinks}>
                                                                         <a aria-label={sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text} target={sub?.newTab && "_blank"} rel={sub?.externalUrl && "noreferrer"} onClick={() => setOpenMobileNav(false)}>
                                                                             {sub.internalLink?.name ?? sub.internalLink?.title ?? sub.text}
@@ -240,7 +192,7 @@ export default function Navbar() {
                                 }
                                 else {
                                     return (
-                                        <li key={i}>
+                                        <li key={link._key}>
                                             <Link className="my-1 block" href={mobileMenuLinks}>
                                                 <a rel={link?.externalUrl && "noreferrer"} aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text} onClick={() => setOpenMobileNav(false)}>
                                                     {link.internalLink?.name ?? link.internalLink?.title ?? link.text}

@@ -23,15 +23,78 @@ export default function Layout({ children }) {
         'footerHeader': footer.headerColor.hex,
         'footerText': footer.textColor.hex,
         'footerBg': footer.footerBackground.color.hex,
-        'primaryAccent': mainColors.primaryColor.hex
+        'primaryAccent': mainColors.primaryColor.hex,
+        'branding': branding {
+                logo,
+                logoWidth
+            },
+            'header': header {
+                ctaLink,
+                ctaText,
+                '': mainNav->{
+                'navItems':items[]{
+                  'subMenu':subMenu[]{
+                  newTab,
+                  _key,
+                  linkType,
+                  externalUrl,
+                  text,
+                  internalLink->{
+                  title,
+                  'slug': slug.current,
+                  _type
+            }
+            },
+                  linkType,
+                  externalUrl,
+                  text,
+                  _key,
+                  newTab,
+                  internalLink->{
+                  title,
+                  'slug': slug.current,
+                  _type
+                }
+                }
+              }
+              },
+       footer {
+        ...,
+       quickLinks[]{
+                   newTab,
+                   linkType,
+                   externalUrl,
+                   text,
+                   internalLink->{
+                   title,
+                   name,
+                   'slug': slug.current,
+                   _type
+       }
+     }
+     },
       },
+      'legal': *[_type == 'legal']{
+        title,
+        'slug': slug.current,
+        _id
+      },
+        'profileSettings': *[_type == 'profileSettings'][0]{
+            company_name,
+            contact_information {
+                ...
+            },
+            address {
+                ...
+            }
+        },
+
       }
     `
 
     const { data, error } = useSWR(appearances, fetcher)
     if (error) return "undefined";
     if (!data) return <Loading />;
-
     const bgLoader = data.appearances?.loaderImage
     return (
         <>
@@ -40,7 +103,7 @@ export default function Layout({ children }) {
                     {`
                         :root {
 
-                            --primary-accent: ${data.appearances.mainColors?.primaryColor.hex};
+                            --primary-accent: ${data.appearances?.primaryAccent};
 
                             --footer-background-color: ${data.appearances?.footerBg};
                             --footer-header-color: ${data.appearances?.footerHeader};
@@ -58,9 +121,31 @@ export default function Layout({ children }) {
                     `}
                 </style>
             </Head>
+            <Navbar 
+                logo={data.appearances?.branding?.logo}
+                logoWidth={data.appearances.branding?.logoWidth}
+                company_name={data.profileSettings?.company_name}
+                navItems={data.appearances?.header?.navItems}
+                ctaLink={data.appearances.header?.ctaLink}
+                ctaText={data.appearances.header?.ctaText}
+            />
             <main>
                 {children}
             </main>
+            <Footer 
+                image={data.appearances?.footer?.footerLogo}
+                links={data.appearances?.footer?.quickLinks}
+                legal={data.legal}
+                footerText={data.appearances.footer?.footerText}
+                phone_number={data.profileSettings.contact_information?.phone_number}
+                office_number={data.profileSettings.contact_information?.office_number}
+                email={data.profileSettings.contact_information?.email}
+                address={data.profileSettings.address?.address}
+                state={data.profileSettings.address?.state}
+                city={data.profileSettings.address?.city}
+                zipCode={data.profileSettings.address?.zip_code}
+                company_name="null"
+            />
         </>
     )
 }

@@ -128,7 +128,7 @@ export default function Home({ res, idx }) {
     return (
     <div className={Styles.homeSections}>
       
-      {homeSection.map((section, i) => {
+      {homeSection.map((section) => {
 
         const headerColor = {
           color: section.textColor?.headerColor?.hex ? section.textColor?.headerColor.hex : defaultHeader
@@ -165,16 +165,16 @@ export default function Home({ res, idx }) {
 
         if (section._type === 'hero') {
           return (
-            <div key={section._key}>
+            <div key={section?._key}>
               <Hero
-                heading={section.heading}
-                subtitle={section.subtitle}
-                image={section.image}
-                blurData={section.image}
+                heading={section?.heading}
+                subtitle={section?.subtitle}
+                image={section?.image}
+                blurData={section?.image}
                 headerColor={headerColor}
                 bodyColor={bodyColor}
-                buttonLink={section.button.buttonLink}
-                buttonText={section.button.buttonText}
+                buttonLink={section.button?.buttonLink}
+                buttonText={section.button?.buttonText}
               />
             </div>
           )
@@ -185,14 +185,14 @@ export default function Home({ res, idx }) {
           return (
             <div key={section._key} style={backgroundStyles}>
               <Intro
-                content={section.content}
-                heading={section.heading}
-                image={section.image}
-                altTag={section.altTag}
+                content={section?.content}
+                heading={section?.heading}
+                image={section?.image}
+                altTag={section?.altTag}
                 headerStyle={headerColor}
                 textColor={bodyColor}
-                buttonLink={section.button.buttonLink}
-                buttonText={section.button.buttonText}
+                buttonLink={section.button?.buttonLink}
+                buttonText={section.button?.buttonText}
               />
             </div>
           )
@@ -202,21 +202,21 @@ export default function Home({ res, idx }) {
         if (section._type === 'featured') {
           return (
             <>
-              <div key={section._key} style={backgroundStyles}>
+              <div key={section?._key} style={backgroundStyles}>
                 <div className="section">
                   <div className="container text-center">
                     <Heading
-                      heading={section.heading}
-                      body={section.text}
+                      heading={section?.heading}
+                      body={section?.text}
                       headerStyle={headerColor}
                       bodyStyle={bodyColor}
                     />
-                    <div className={`grid lg:grid-cols-${section.columns} md:grid-cols-2 grid-cols-1 mt-10 gap-3 justify-center`}>
-                      {section.blocks.map((node) => {
+                    <div className={`grid lg:grid-cols-${section?.columns} md:grid-cols-2 grid-cols-1 mt-10 gap-3 justify-center`}>
+                      {section?.blocks.map((node) => {
                         return (
-                          <div className="p-6" key={node._key} style={blockBackground}>
-                            {node.value && <h3 className="h3 mb-6" style={blockHeaderColor}>{node.value}</h3>}
-                            {node.text && <p style={blockBodyColor}>{node.text}</p>}
+                          <div className="p-6" key={node?._key} style={blockBackground}>
+                            {node?.value && <h3 className="h3 mb-6" style={blockHeaderColor}>{node?.value}</h3>}
+                            {node?.text && <p style={blockBodyColor}>{node?.text}</p>}
                           </div>
                         )
                       })}
@@ -231,11 +231,11 @@ export default function Home({ res, idx }) {
         // TEAM SLIDER
         if (section._type === 'teamSlider') {
           return (
-            <div className="section" key={section._key} style={backgroundStyles}>
+            <div className="section" key={section?._key} style={backgroundStyles}>
               <div className="container">
                 <Heading
-                  heading={section.heading}
-                  body={section.text}
+                  heading={section?.heading}
+                  body={section?.text}
                   headerStyle={headerColor}
                   bodyStyle={bodyColor}
                 />
@@ -248,12 +248,12 @@ export default function Home({ res, idx }) {
                   >
                     {res.team.map((node) => {
                       return (
-                        <SwiperSlide key={node._id}>
+                        <SwiperSlide key={node?._id}>
                           <div>
                             <Cards
-                              name={node.name}
-                              image={node.image}
-                              link={'/team/' + node.slug}
+                              name={node?.name}
+                              image={node?.image}
+                              link={'/team/' + node?.slug}
                             />
                           </div>
                         </SwiperSlide>
@@ -269,10 +269,10 @@ export default function Home({ res, idx }) {
         // BANNER
         if (section._type === 'banner') {
           return (
-            <div key={section._key} className={Styles.homeBanner} style={backgroundStyles}>
+            <div key={section?._key} className={Styles.homeBanner} style={backgroundStyles}>
               <Banner
-                heading={section.heading}
-                text={section.text}
+                heading={section?.heading}
+                text={section?.text}
                 textStyle={bodyColor}
                 headerStyle={headerColor}
                 buttonLink={section.button?.buttonLink}
@@ -286,33 +286,33 @@ export default function Home({ res, idx }) {
         // IMAGE BLOCKS
         if (section._type === 'imageBlocks') {
           return (
-            <div className="section" key={section._key} style={backgroundStyles}>
+            <div className="section" key={section?._key} style={backgroundStyles}>
               <div className="container">
                 <Heading
-                  heading={section.heading}
-                  body={section.text}
+                  heading={section?.heading}
+                  body={section?.text}
                   headerStyle={headerColor}
                   bodyStyle={bodyColor}
                 />
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10">
-                  {section.blocks.map((node) => {
+                  {section?.blocks.map((node) => {
                     return (
-                      <Link href={node.link ? node.link : ''} key={node._key}>
+                      <Link href={node.link ? node.link : ''} key={node?._key}>
                         <a>
-                          <div className="relative overflow-hidden" key={node._key}>
+                          <div className="relative overflow-hidden" key={node?._key}>
                             <Image
-                              src={urlFor(node.image).url()}
-                              alt={node.value}
+                              src={urlFor(node?.image).url()}
+                              alt={node?.value}
                               layout="fixed"
                               height="490"
                               width="450"
                               objectFit="cover"
                               placeholder="blur"
-                              blurDataURL={urlFor(node.image).width(50).height(50).quality(1).url()}
+                              blurDataURL={urlFor(node?.image).width(50).height(50).quality(1).url()}
                             />
                             <div className="home-image-overlay"></div>
                             <div className="absolute bottom-6 left-0 right-0 text-white px-6 py-4 justify-center text-center">
-                              <h3 className="h3 text-white">{node.value}</h3>
+                              <h3 className="h3 text-white">{node?.value}</h3>
                             </div>
                           </div>
                         </a>
@@ -328,22 +328,22 @@ export default function Home({ res, idx }) {
         // BLOG SLIDER
         if (section._type === 'blogSlider') {
           return (
-            <div className="section" key={i} style={backgroundStyles}>
+            <div className="section" key={section?._key} style={backgroundStyles}>
               <div className="container">
                 <Heading
-                  heading={section.heading}
-                  body={section.text}
+                  heading={section?.heading}
+                  body={section?.text}
                   headerStyle={headerColor}
                   bodyStyle={bodyColor}
                 />
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-10">
                   {res.blog.map((node) => {
                     return (
-                      <div key={node._id}>
+                      <div key={node?._id}>
                         <BlogCard
-                          title={node.title}
+                          title={node?.title}
                           image={node?.mainImage}
-                          link={'/blog/' + node.slug}
+                          link={'/blog/' + node?.slug}
                           excerpt={node?.excerpt}
                           altTag={node?.mainImage?.altTag}
                         />
@@ -359,32 +359,32 @@ export default function Home({ res, idx }) {
         // ACTIVE LISTINGS
         if (section._type === 'activeListings') {
           return (
-            <div className="section" key={section._key} style={backgroundStyles}>
+            <div className="section" key={section?._key} style={backgroundStyles}>
               <div className="container">
                 <Heading
-                  heading={section.heading}
-                  body={section.text}
+                  heading={section?.heading}
+                  body={section?.text}
                   headerStyle={headerColor}
                   bodyStyle={bodyColor}
                 />
                 <div className="grid grid-cols-3">
-                  {res.listings.map((node) => {
+                  {res?.listings.map((node) => {
                     return (
-                      <div key={node._id}>
+                      <div key={node?._id}>
                         <ListingCard
-                          address={node.address}
-                          city={node.city}
-                          state={node.state}
-                          zipCode={node.zipCode}
-                          link={'/listings/' + node.slug}
-                          image={node.thumbnail}
-                          bedrooms={node.details.bedrooms}
-                          bathrooms={node.details.bathrooms}
-                          squareFootage={node.details.squareFootage}
-                          price={node.price}
-                          shortTitle={node.shortTitle}
-                          propType={node.propType}
-                          status={node.status}
+                          address={node?.address}
+                          city={node?.city}
+                          state={node?.state}
+                          zipCode={node?.zipCode}
+                          link={'/listings/' + node?.slug}
+                          image={node?.thumbnail}
+                          bedrooms={node.details?.bedrooms}
+                          bathrooms={node.details?.bathrooms}
+                          squareFootage={node.details?.squareFootage}
+                          price={node?.price}
+                          shortTitle={node?.shortTitle}
+                          propType={node?.propType}
+                          status={node?.status}
                         />
                       </div>
                     )
@@ -399,11 +399,11 @@ export default function Home({ res, idx }) {
         // IDX LISTINGS
         if (section._type === 'idxListings') {
           return (
-            <div className="section" key={section._key} style={backgroundStyles}>
+            <div className="section" key={section?._key} style={backgroundStyles}>
               <div className="container">
                 <Heading
-                  heading={section.heading}
-                  body={section.text}
+                  heading={section?.heading}
+                  body={section?.text}
                   headerStyle={headerColor}
                   bodyStyle={bodyColor}
                 />
@@ -416,15 +416,15 @@ export default function Home({ res, idx }) {
                   >
                     {idx.map((listing) => {
                       return (
-                        <SwiperSlide key={listing._id}>
+                        <SwiperSlide key={listing?._id}>
                           <ListingCard
-                            idxAddress={listing.externalDisplay}
-                            bedrooms={listing.details.bedrooms}
-                            bathrooms={listing.details.fullBathrooms}
-                            squareFootage={listing.details.squareFeet}
-                            price={formatPrice.format(listing.price)}
-                            idxImage={listing.photos.featuredImage}
-                            link={`/properties/${listing._id}/${listing.slug}`}
+                            idxAddress={listing?.externalDisplay}
+                            bedrooms={listing.details?.bedrooms}
+                            bathrooms={listing.details?.fullBathrooms}
+                            squareFootage={listing.details?.squareFeet}
+                            price={formatPrice.format(listing?.price)}
+                            idxImage={listing?.photos?.featuredImage}
+                            link={`/properties/${listing?._id}/${listing?.slug}`}
                           />
                         </SwiperSlide>
                       )

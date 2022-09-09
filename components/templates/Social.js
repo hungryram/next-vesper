@@ -20,7 +20,7 @@ export default function Social() {
   `
 
     const { data, error } = useSWR(social, query => sanityRes.fetch(query))
-    if (error) return "undefined";
+    if (error) return "Error displaying social accounts";
     if (!data) return <Loading />;
 
     const socialProfile = data.profileSettings.social
