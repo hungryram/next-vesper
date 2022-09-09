@@ -12,7 +12,7 @@ import Cards from "./Cards"
 import Form from "./Form"
 import Heading from "../home/Heading"
 import Social from "./Social"
-
+import Loading from "./Loading"
 export default function Sidebar() {
 
     const fetcher = (...args) => sanityRes.fetch(...args)
