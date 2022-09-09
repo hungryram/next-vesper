@@ -68,6 +68,7 @@ export default function PropertiesDetail({ listingInfo, listGallery, listProp, l
                     objectFit="cover"
                     placeholder="blur"
                     blurDataURL={listGallery.results[1].largeImageUrl}
+                    alt={listingInfo.address.externalDisplay}
                 />
             </div>
         </div>

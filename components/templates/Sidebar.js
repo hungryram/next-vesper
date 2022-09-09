@@ -207,6 +207,7 @@ export default function Sidebar() {
                                                                         src={urlFor(node?.image).url()}
                                                                         layout="fill"
                                                                         objectFit="cover"
+                                                                        alt={node?.name}
                                                                         width={100}
                                                                         height={100}
                                                                         className="rounded-full"
@@ -221,6 +222,7 @@ export default function Sidebar() {
                                                                         width={100}
                                                                         height={100}
                                                                         className="rounded-full"
+                                                                        alt="avatar icon"
                                                                     />
                                                                 }
                                                             </div>
@@ -284,7 +286,7 @@ export default function Sidebar() {
                                     <Swiper>
                                         {data?.listings.map((node) => {
                                             return (
-                                                <SwiperSlide>
+                                                <SwiperSlide key={node._id}>
                                                     <div key={node?._id}>
                                                         <ListingCard
                                                             address={node?.address}
