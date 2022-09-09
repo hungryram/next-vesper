@@ -64,6 +64,7 @@ div.loaderImage {
   background-position: center;
 }
 
+
 /* CONTENT */
 
 body {
@@ -130,11 +131,20 @@ body h6 {
   @apply my-1;
 }
 
+/* SIDEBAR */
+
+.sidebar h2 {
+  @apply text-2xl
+}
 
 
+.sidebar div.swiper-button-next, 
+.sidebar div.swiper-button-prev {
+    color: var(--primary-accent);
+}
 
 /* LISTING GALLERY */
 
 .swiper-button-next, .swiper-button-prev {
-  color: #fff!important;
+  color: #fff;
 }

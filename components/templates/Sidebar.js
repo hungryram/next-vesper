@@ -4,6 +4,13 @@ import useSWR from 'swr'
 import Image from "next/image"
 import Link from "next/link"
 
+// SWIPER
+import { Pagination, Navigation } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import 'swiper/css';
+
 // TEMPLATES
 import PlainPage from "./PlainPage"
 import ListingCard from "./ListingCard"
@@ -13,6 +20,10 @@ import Form from "./Form"
 import Heading from "../home/Heading"
 import Social from "./Social"
 import Loading from "./Loading"
+
+// IMPORT STYLES
+import Styles from "../../styles/sidebar.module.css"
+
 export default function Sidebar() {
 
     const fetcher = (...args) => sanityRes.fetch(...args)
@@ -32,6 +43,7 @@ export default function Sidebar() {
           title,
           _id,
           excerpt,
+          publishedAt,
           date,
           mainImage
         },
@@ -60,9 +72,27 @@ export default function Sidebar() {
     if (error) return "undefined";
     if (!data) return <Loading />;
     const sidebarSections = data.appearances.sidebar
+
+    const defaultText = '#222'
+    const defaultHeader = '#7c7c7c'
+
     return (
-        <div>
+        <div className="sidebar">
             {sidebarSections.map((section, i) => {
+
+                const headerColor = {
+                    color: section.textColor?.headerColor?.hex ? section.textColor?.headerColor.hex : defaultHeader
+                }
+                const bodyColor = {
+                    color: section.textColor?.textColor?.hex ? section.textColor?.textColor.hex : defaultText
+                }
+
+                const backgroundStyles = {
+                    background: `${section.background?.backgroundType === 'color' && section?.background?.color?.hex || section.background?.backgroundType === 'image' && `url(${section.background.image ? urlFor(section?.background?.image).url() : undefined})`}`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover'
+                };
+
                 if (section._type === 'plainPage') {
                     return (
                         <div key={i}>
@@ -75,7 +105,7 @@ export default function Sidebar() {
 
                 if (section._type === 'contactPage') {
                     return (
-                        <div className="py-6"  key={i}>
+                        <div className="py-6" key={i}>
                             <div className="container">
                                 <Heading
                                     heading={section.heading}
@@ -90,7 +120,7 @@ export default function Sidebar() {
 
                 if (section._type === 'socialComponent') {
                     return (
-                        <div className="py-6"  key={i}>
+                        <div className="py-6" key={i}>
                             <div className="container">
                                 <Heading
                                     heading={section.heading}
@@ -149,26 +179,58 @@ export default function Sidebar() {
                 // TEAM SLIDER
                 if (section._type === 'teamSlider') {
                     return (
-                        <div className="py-6" key={i} style={backgroundStyles}>
+                        <div className="section" key={section?._key} style={backgroundStyles}>
                             <div className="container">
                                 <Heading
-                                    heading={section.heading}
-                                    body={section.text}
+                                    heading={section?.heading}
+                                    body={section?.text}
                                     headerStyle={headerColor}
                                     bodyStyle={bodyColor}
                                 />
-                                <div className="grid md:grid-cols-4 grid-cols-1 gap-4 mt-10">
-                                    {res.team.map((node) => {
-                                        return (
-                                            <div key={node._key}>
-                                                <Cards
-                                                    name={node.name}
-                                                    image={node.image}
-                                                    link={'/team/' + node.slug}
-                                                />
-                                            </div>
-                                        )
-                                    })}
+                                <div className="mt-10 text-center">
+                                    <Swiper
+                                        navigation={true}
+                                        slidesPerView={1}
+                                        modules={[Pagination, Navigation]}
+                                        style={{
+                                            "--swiper-navigation-size": "25px",
+                                        }}
+                                    >
+                                        {data.team.map((node) => {
+                                            return (
+                                                <SwiperSlide key={node?._id}>
+                                                    <Link href={`/team/${node.slug}`}>
+                                                        <a>
+                                                            <div className="text-center h-52 w-52 relative m-auto">
+                                                                {node?.image ?
+                                                                    <Image
+                                                                        src={urlFor(node?.image).url()}
+                                                                        layout="fill"
+                                                                        objectFit="cover"
+                                                                        width={100}
+                                                                        height={100}
+                                                                        className="rounded-full"
+                                                                        placeholder="blur"
+                                                                        blurDataURL={urlFor(node?.image).width(1).height(1).url()}
+                                                                    />
+                                                                    :
+                                                                    <Image
+                                                                        src="/user.jpg"
+                                                                        layout="fill"
+                                                                        objectFit="cover"
+                                                                        width={100}
+                                                                        height={100}
+                                                                        className="rounded-full"
+                                                                    />
+                                                                }
+                                                            </div>
+                                                            <h3 className="text-lg text-center pt-5">{node?.name}</h3>
+                                                        </a>
+                                                    </Link>
+                                                </SwiperSlide>
+                                            )
+                                        })}
+                                    </Swiper>
                                 </div>
                             </div>
                         </div>
@@ -185,17 +247,19 @@ export default function Sidebar() {
                                     body={section.text}
                                     headerStyle={headerColor}
                                     bodyStyle={bodyColor}
+                                    textAlign="text-left"
                                 />
-                                <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-10">
-                                    {res.blog.map((node, i) => {
+                                <div className="mt-10">
+                                    {data.blog.map((node) => {
                                         return (
-                                            <div key={node._id}>
-                                                <BlogCard
-                                                    title={node.title}
-                                                    image={node.mainImage}
-                                                    link={'/blog/' + node.slug}
-                                                    excerpt={node.excerpt}
-                                                />
+                                            <div className="border-b mt-6 pb-4" key={node._id}>
+                                                <Link href={`/blog/${node.slug}`}>
+                                                    <a>
+                                                        <h3 className="text-xl mb-4">{node.title}</h3>
+                                                        <p>{node.publishedAt}</p>
+                                                        <span className="accent italic">Read More</span>
+                                                    </a>
+                                                </Link>
                                             </div>
                                         )
                                     })}
@@ -208,36 +272,40 @@ export default function Sidebar() {
                 // ACTIVE LISTINGS
                 if (section._type === 'activeListings') {
                     return (
-                        <div className="py-6" key={i} style={backgroundStyles}>
+                        <div className="py-6" key={section?._key} style={backgroundStyles}>
                             <div className="container">
                                 <Heading
-                                    heading={section.heading}
-                                    body={section.text}
+                                    heading={section?.heading}
+                                    body={section?.text}
                                     headerStyle={headerColor}
                                     bodyStyle={bodyColor}
                                 />
-                                <div className="grid grid-cols-3">
-                                    {res.listings.map((node) => {
-                                        return (
-                                            <div key={node._id}>
-                                                <ListingCard
-                                                    address={node.address}
-                                                    city={node.city}
-                                                    state={node.state}
-                                                    zipCode={node.zipCode}
-                                                    link={'/listings/' + node.slug}
-                                                    image={node.thumbnail}
-                                                    bedrooms={node.details.bedrooms}
-                                                    bathrooms={node.details.bathrooms}
-                                                    squareFootage={node.details.squareFootage}
-                                                    price={node.price}
-                                                    shortTitle={node.shortTitle}
-                                                    propType={node.propType}
-                                                    status={node.status}
-                                                />
-                                            </div>
-                                        )
-                                    })}
+                                <div className="mt-10">
+                                    <Swiper>
+                                        {data?.listings.map((node) => {
+                                            return (
+                                                <SwiperSlide>
+                                                    <div key={node?._id}>
+                                                        <ListingCard
+                                                            address={node?.address}
+                                                            city={node?.city}
+                                                            state={node?.state}
+                                                            zipCode={node?.zipCode}
+                                                            link={'/listings/' + node?.slug}
+                                                            image={node?.thumbnail}
+                                                            bedrooms={node.details?.bedrooms}
+                                                            bathrooms={node.details?.bathrooms}
+                                                            squareFootage={node.details?.squareFootage}
+                                                            price={node?.price}
+                                                            shortTitle={node?.shortTitle}
+                                                            propType={node?.propType}
+                                                            status={node?.status}
+                                                        />
+                                                    </div>
+                                                </SwiperSlide>
+                                            )
+                                        })}
+                                    </Swiper>
                                 </div>
                             </div>
                         </div>

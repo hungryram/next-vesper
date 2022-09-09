@@ -3,9 +3,8 @@ import Image from "next/image";
 import { groq } from "next-sanity"
 import urlFor from "../lib/sanity"
 import { sanityRes } from "../lib/sanity";
-import { Thumbs, Pagination, Navigation } from 'swiper'
+import { Pagination, Navigation } from 'swiper'
 import { formatPrice } from "../lib/client";
-import { useState } from "react"
 
 
 // HOME TEMPLATES
@@ -26,7 +25,6 @@ import 'swiper/css';
 // SLIDER
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { idxConnection } from "../lib/client";
-import Loading from "../components/templates/Loading";
 const slugify = require('slugify')
 
 
