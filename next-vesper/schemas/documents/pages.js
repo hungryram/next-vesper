@@ -64,6 +64,7 @@ export default {
                 {type: 'activeListings'},
                 {type: 'plainPage'},
                 {type: 'contactPage'},
+                {type: 'codeBlock'},
             ]
         },
         {

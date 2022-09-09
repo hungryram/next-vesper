@@ -88,10 +88,10 @@ export default function Pages({ page }) {
     const defaultHeader = '#222222'
     return (
         <>
-        <Seo
-            title={page.pageDesign.seo?.title_tag}
-            description={page.pageDesign.seo?.meta_description}
-        />
+            <Seo
+                title={page.pageDesign.seo?.title_tag}
+                description={page.pageDesign.seo?.meta_description}
+            />
             <Header
                 title={page.pageDesign?.title}
                 image={page.pageDesign?.headerImage}
@@ -132,10 +132,10 @@ export default function Pages({ page }) {
 
                                     if (section._type === 'plainPage') {
                                         return (
-                                                <PlainPage
-                                                    content={section.content}
-                                                    key={section._key}
-                                                />
+                                            <PlainPage
+                                                content={section.content}
+                                                key={section._key}
+                                            />
                                         )
                                     }
 
@@ -154,12 +154,25 @@ export default function Pages({ page }) {
                                         return (
                                             <div className="section" key={section._key}>
                                                 <div className="container">
-                                                    <Heading 
+                                                    <Heading
                                                         heading={section.heading}
                                                         body={section.text}
                                                         textAlign="text-left"
                                                     />
                                                     <Form />
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+
+                                    // CODE BLOCK
+                                    if (section._type === 'codeBlock') {
+                                        return (
+                                            <div className="py-6" key={section._key}>
+                                                <div className="container">
+                                                    <div
+                                                        dangerouslySetInnerHTML={{ __html: `${section?.code}` }}
+                                                    />
                                                 </div>
                                             </div>
                                         )
@@ -198,28 +211,28 @@ export default function Pages({ page }) {
                                     // FEATURED BLOCKS
                                     if (section._type === 'featured') {
                                         return (
-                                                <div style={backgroundStyles} key={section._key}>
-                                                    <div className="section">
-                                                        <div className="container text-center">
-                                                            <Heading
-                                                                heading={section.heading}
-                                                                body={section.text}
-                                                                headerStyle={headerColor}
-                                                                bodyStyle={bodyColor}
-                                                            />
-                                                            <div className={`md:grid-cols-6 grid-cols-1 grid mt-10 gap-3 justify-items-center`}>
-                                                                {section.blocks.map((node) => {
-                                                                    return (
-                                                                        <div className="p-6" key={node._key} style={blockBackground}>
-                                                                            {node.value && <h3 className="h3 mb-6" style={blockHeaderColor}>{node.value}</h3>}
-                                                                            {node.text && <p style={blockBodyColor}>{node.text}</p>}
-                                                                        </div>
-                                                                    )
-                                                                })}
-                                                            </div>
+                                            <div style={backgroundStyles} key={section._key}>
+                                                <div className="section">
+                                                    <div className="container text-center">
+                                                        <Heading
+                                                            heading={section.heading}
+                                                            body={section.text}
+                                                            headerStyle={headerColor}
+                                                            bodyStyle={bodyColor}
+                                                        />
+                                                        <div className={`md:grid-cols-6 grid-cols-1 grid mt-10 gap-3 justify-items-center`}>
+                                                            {section.blocks.map((node) => {
+                                                                return (
+                                                                    <div className="p-6" key={node._key} style={blockBackground}>
+                                                                        {node.value && <h3 className="h3 mb-6" style={blockHeaderColor}>{node.value}</h3>}
+                                                                        {node.text && <p style={blockBodyColor}>{node.text}</p>}
+                                                                    </div>
+                                                                )
+                                                            })}
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         )
                                     }
 
