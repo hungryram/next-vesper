@@ -41,7 +41,7 @@ export default function Hero({ image, heading, subtitle, _key, blurData, bodyCol
             </div>
             <div className="absolute bottom-0 left-0 right-0 text-center bg-black py-10">
                 test
-                <script src="https://search.idxhome.com/site/listing/search/widget/132970?style=horizontal"/>
+                <script async src="https://search.idxhome.com/site/listing/search/widget/132970?style=horizontal"/>
             </div>
         </div>
     )
