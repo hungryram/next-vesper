@@ -3,7 +3,7 @@ import { groq } from 'next-sanity'
 import urlFor from "../lib/sanity"
 import Image from "next/image";
 import Link from "next/link";
-
+import Script from "next/script"
 // TEMPLATES
 import Intro from "../components/home/Intro";
 import Banner from "../components/home/Banner";
