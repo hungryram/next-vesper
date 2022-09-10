@@ -7,11 +7,7 @@ import Seo from '../components/global/Seo'
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Seo />
-      <Navbar />
-      <Layout>
         <Component {...pageProps} />
-      </Layout>
     </>
   )
 }
