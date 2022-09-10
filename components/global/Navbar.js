@@ -2,15 +2,13 @@ import { useState } from "react";
 import Link from "next/link";
 
 import { HiOutlineMenuAlt4 } from "react-icons/hi"
-import { GrClose } from "react-icons/gr"
+import { AiOutlineClose } from "react-icons/ai"
 import { BiCaretDown } from "react-icons/bi"
-import { IconContext } from "react-icons/lib/cjs/iconContext";
 import urlFor from "../../lib/sanity";
 
 import Styles from "../../styles/header.module.css"
 
 export default function Navbar({ logo, company_name, logoWidth, navItems, ctaText, ctaLink }) {
-    const [active, setActive] = useState(true);
 
     const [dropdownActive, setDropdownActive] = useState(null);
     const [openMobileNav, setOpenMobileNav] = useState(false)
@@ -133,17 +131,9 @@ export default function Navbar({ logo, company_name, logoWidth, navItems, ctaTex
                         <div className="flex-1 text-right">
                             <div id="toggle" className="cursor-pointer flex justify-end" onClick={openMobileNav ? () => setOpenMobileNav(false) : () => setOpenMobileNav(true)}>
                                 {openMobileNav ?
-                                    <IconContext.Provider value={{
-                                        size: '20px'
-                                    }}>
-                                        <GrClose />
-                                    </IconContext.Provider>
+                                        <AiOutlineClose className="text-xl text-white"/>
                                     :
-                                    <IconContext.Provider value={{
-                                        size: '30px'
-                                    }}>
-                                        <HiOutlineMenuAlt4 />
-                                    </IconContext.Provider>
+                                        <HiOutlineMenuAlt4 className="text-xl text-white"/>
                                 }
                             </div>
                         </div>
@@ -162,13 +152,13 @@ export default function Navbar({ logo, company_name, logoWidth, navItems, ctaTex
                                     return (
                                         <>
                                             <li key={link._key} className="relative my-1" onClick={dropdownActive === link ? () => setDropdownActive(null) : () => setDropdownActive(link)}>
-                                                <Link href="/">
-                                                    <a className="cursor-pointer flex flex-row items-center" onClick={() => setOpenMobileNav(false)}>
+                                                <Link href="#">
+                                                    <a className="cursor-pointer flex flex-row items-center" href="#" onClick={() => setOpenMobileNav(true)}>
                                                         {link.internalLink?.name ?? link.internalLink?.title ?? link.text} <BiCaretDown className="ml-1 text-lg" />
                                                     </a>
                                                 </Link>
 
-                                                <ul className={`relative w-full p-2 text-left ${dropdownActive === link ? "visible" : "hidden"}`}>
+                                                <ul className={`relative block w-full bg-white p-2 border text-left ${dropdownActive === link ? "visible" : "hidden"}`}>
                                                     {link.subMenu.map((sub) => {
 
                                                         const subMenuLinks = (sub.internalLink?._type === "blog" && `/blog/${sub.internalLink.slug}`) || (sub.internalLink?._type === "legal" && `/legal/${sub.internalLink.slug}`) || (sub.internalLink?._type === "author" && `/authors/${sub.internalLink.slug}`) || (sub.externalUrl && `${sub.externalUrl}`)
@@ -192,9 +182,9 @@ export default function Navbar({ logo, company_name, logoWidth, navItems, ctaTex
                                 }
                                 else {
                                     return (
-                                        <li key={link._key}>
+                                        <li key={link._key} onClick={() => setOpenMobileNav(false)}>
                                             <Link className="my-1 block" href={mobileMenuLinks}>
-                                                <a rel={link?.externalUrl && "noreferrer"} aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text} onClick={() => setOpenMobileNav(false)}>
+                                                <a rel={link?.externalUrl && "noreferrer"} aria-label={link.internalLink?.name ?? link.internalLink?.title ?? link.text}>
                                                     {link.internalLink?.name ?? link.internalLink?.title ?? link.text}
                                                 </a>
 
