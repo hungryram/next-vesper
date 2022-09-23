@@ -1,13 +1,49 @@
 import Link from "next/link"
+import { useRouter } from 'next/router'
 
 export default function Form({ formName, subject, source }) {
+
+    const router = useRouter()
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const data = {
+          name: e.target.fullName.value,
+          email: e.target.emailAddress.value,
+          phone: e.target.phone.value,
+          message: e.target.about.value
+        }
+        const JSONdata = JSON.stringify(data)
+        const endpoint = '/api/postmark'
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSONdata,
+        }
+        const submit = async () => {
+            if(e.target.name.value.length === 0 && e.target.email.value.length === 0){
+                const res = await fetch(endpoint, options)
+                return res;
+            }
+        }
+        const res = await submit()
+        if(res.status === 200){
+            router.push('/thank-you')
+        }
+        else {
+          // Add action for form submission error
+          console.log('Browser: Error with form submission')
+        }
+
+      }
+
     return (
         <>
-            <form name={formName} method="POST" netlify-honeypot="bot-field" data-netlify="true" action="/thank-you">
-                <input type="hidden" name="form-name" value={formName} />
-                <input name="bot-field" type="hidden" />
-                <input type="hidden" name="Subject" value={subject} />
-                <input type="hidden" name="Source" value={source} />
+            <form onSubmit={handleSubmit}>    
+                <input type="text" name="name" id="name" className="h-0 w-0 opacity-0" />   
+                <input type="email" name="email" id="email" className="h-0 w-0 opacity-0" />   
                 <div>
                     <div className="py-5">
                         <div>
@@ -16,8 +52,8 @@ export default function Form({ formName, subject, source }) {
                                     <div>
                                         <input
                                             type="text"
-                                            name="full-name"
-                                            id="full-name"
+                                            name="fullName"
+                                            id="fullName"
                                             autoComplete="given-name"
                                             className="mt-3 w-full border bg-transparent p-2 border-slate-300"
                                             placeholder="Full Name"
@@ -27,9 +63,9 @@ export default function Form({ formName, subject, source }) {
                                 <div className="w-1/2">
                                     <div>
                                         <input
-                                            type="text"
-                                            name="email-address"
-                                            id="email-address"
+                                            type="email"
+                                            name="emailAddress"
+                                            id="emailAddress"
                                             autoComplete="email"
                                             className="mt-3 w-full border bg-transparent p-2 border-slate-300"
                                             placeholder="Email"
