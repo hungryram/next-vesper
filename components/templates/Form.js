@@ -30,6 +30,7 @@ export default function Form({ formName, subject, source }) {
         }
         const res = await submit()
         if(res.status === 200){
+            console.log(res)
             router.push('/thank-you')
         }
         else {
