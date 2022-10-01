@@ -13,13 +13,14 @@ export default async function (req, res) {
         "email": req.body.email,
         "phone": req.body.phone,
         "message": req.body.message
-      }}.then(function(res) {
+      }
+    }).then(function(res) {
     return res
-  }, function(err) {
+    }, function(err) {
     return err
   })
-    res.end()
-    return submit
+   res.end()
+   return submit
 }
 
 
