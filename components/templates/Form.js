@@ -1,11 +1,16 @@
 import Link from "next/link"
 import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { FaSpinner } from 'react-icons/fa'
 
 export default function Form({ formName, subject, source }) {
+
+    const [ sending, setSending ] = useState('Idle')
 
     const router = useRouter()
 
     const handleSubmit = async (e) => {
+        setSending('Sending')
         e.preventDefault()
         const data = {
           name: e.target.fullName.value,
@@ -25,10 +30,12 @@ export default function Form({ formName, subject, source }) {
         const submit = await fetch(endpoint, options)
         const res = await submit.json()
         if(res.ErrorCode === 0) {
+          setSending('Sent')  
           console.log('Sent:', res)
           router.push('/thank-you')
         }
         else {
+          setSending('Error')  
           console.log('Error:', res)
         }
       }
@@ -97,7 +104,14 @@ export default function Form({ formName, subject, source }) {
                             type="submit"
                             className="primary-button px-20 w-1/2 hover:bg-black hover:text-white transition-all ease-in"
                         >
-                            Submit
+                            { sending === 'Idle' ?
+                                'Submit'
+                            : sending === 'Sending' ?
+                                <FaSpinner className="animate-spin mx-auto text-2xl" />
+                            : sending === 'Sent' ?
+                                'Sent'
+                            : 'Error' 
+                            }
                         </button>
                     </div>
                 </div>
