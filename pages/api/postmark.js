@@ -3,7 +3,8 @@ import { ServerClient } from 'postmark'
 export default async function (req, res) {
   const serverToken = process.env.NEXT_PUBLIC_POSTMARK_API_TOKEN;
   const client = new ServerClient(serverToken);
-  const submit = await client.sendEmailWithTemplate({
+  const submit = () => {
+    const postmarkApiRes = client.sendEmailWithTemplate({
       "From": process.env.NEXT_PUBLIC_POSTMARK_EMAIL,
       "To": process.env.NEXT_PUBLIC_POSTMARK_EMAIL,
       "ReplyTo": req.body.email,
@@ -14,13 +15,16 @@ export default async function (req, res) {
         "phone": req.body.phone,
         "message": req.body.message
       }
-    }).then(function(res) {
-    return res
-    }, function(err) {
-    return err
-  })
-   res.end()
-   return submit
+    })
+    return postmarkApiRes
+  }
+  try {
+    const submitRes = await submit()
+    res.status(200).json(submitRes)
+  }
+  catch(err) {
+    res.status(500).json(err)
+  }
 }
 
 

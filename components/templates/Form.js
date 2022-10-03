@@ -22,22 +22,15 @@ export default function Form({ formName, subject, source }) {
           },
           body: JSONdata,
         }
-        const submit = async () => {
-            if(e.target.name.value.length === 0 && e.target.email.value.length === 0){
-                const res = await fetch(endpoint, options)
-                return res;
-            }
-        }
-        const res = await submit()
-        if(res.status === 200){
-            console.log(res)
-            router.push('/thank-you')
+        const submit = await fetch(endpoint, options)
+        const res = await submit.json()
+        if(res.ErrorCode === 0) {
+          console.log('Sent:', res)
+          router.push('/thank-you')
         }
         else {
-          // Add action for form submission error
-          console.log('Browser: Error with form submission')
+          console.log('Error:', res)
         }
-
       }
 
     return (
