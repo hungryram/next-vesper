@@ -184,6 +184,11 @@ export default function Pages({ page, idx_body }) {
                                             <div className="py-6" key={section._key}>
                                                 <div className="container">
                                                     {idx_body}
+                                                    <div 
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: `{idx_body}`
+                                                        }}
+                                                    />
                                                 </div>
                                             </div>
                                         )
