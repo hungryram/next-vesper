@@ -63,6 +63,7 @@ import internalLinks from "./blocks/internalLinks"
 
 // PAGEBUILDER
 import testimonialblocks from './pagebuilder/testimonialblocks'
+import ihf from './pagebuilder/ihf'
 
 
 
@@ -115,6 +116,7 @@ export default createSchema({
     imageandText,
     // PAGEBUILDER
     testimonialblocks,
+    ihf,
     // HOME SECTIONS
     idxListings,
     hero,

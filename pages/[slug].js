@@ -82,7 +82,7 @@ export async function getStaticProps(context) {
     }
 }
 
-export default function Pages({ page }) {
+export default function Pages({ page, idx_body }) {
     const pageSection = page.pageDesign.pageBuilder
     const defaultText = '#e2e2e2'
     const defaultHeader = '#222222'
@@ -174,11 +174,17 @@ export default function Pages({ page }) {
                                                         dangerouslySetInnerHTML={{ __html: `${section?.code}` }}
                                                     />
                                                 </div>
-                                                <Script
-                                                    src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" />
-                                                <div
-                                                    dangerouslySetInnerHTML={{ __html: `<script>jQuery.noConflict();</script>` }}
-                                                />
+                                            </div>
+                                        )
+                                    }
+
+                                    // IHF
+                                    if (section._type === 'ihf') {
+                                        return (
+                                            <div className="py-6" key={section._key}>
+                                                <div className="container">
+                                                    {idx_body}
+                                                </div>
                                             </div>
                                         )
                                     }

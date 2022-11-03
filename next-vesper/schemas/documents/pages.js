@@ -57,6 +57,7 @@ export default {
                 {type: 'intro'},
                 {type: 'featured'},
                 {type: 'testimonialBlock'},
+                {type: 'ihf'},
                 {type: 'teamSlider'},
                 {type: 'blogSlider'},
                 {type: 'banner'},
